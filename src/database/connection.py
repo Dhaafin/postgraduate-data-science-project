@@ -54,6 +54,32 @@ async def insert_artist_data(spotify_id, artist_name):
             {"id": spotify_id, "name": artist_name}
         )
 
+async def get_all_artists():
+    """
+    Retrieves all artists from the music_data table that don't have a Spotify ID.
+    Returns a list of dicts with 'id' and 'artist_name'.
+    """
+    if not engine:
+        return []
+    async with engine.begin() as conn:
+        # Using IS NULL or spotify_id = '' so it matches empty IDs
+        result = await conn.execute(text("SELECT id, artist_name FROM music_data WHERE spotify_id IS NULL OR spotify_id = ''"))
+        # Fetching rows safely using mapping to dict
+        return [{"id": row[0], "artist_name": row[1]} for row in result.fetchall()]
+
+async def update_spotify_id(db_id, spotify_id):
+    """
+    Updates the spotify_id for a specific artist in the database.
+    """
+    if not engine:
+        return
+    async with engine.begin() as conn:
+        await conn.execute(
+            text("UPDATE music_data SET spotify_id = :spotify_id WHERE id = :id"),
+            {"spotify_id": spotify_id, "id": db_id}
+        )
+
+
 if __name__ == "__main__":
     import asyncio
     import sys
