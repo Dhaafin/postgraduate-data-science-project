@@ -34,24 +34,39 @@ async def init_db():
                 id SERIAL PRIMARY KEY,
                 spotify_id TEXT,
                 artist_name TEXT,
+                genre TEXT[],
+                followers INTEGER,
+                popularity INTEGER,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
         """))
+        # Migration: Add columns if they don't exist in the current table
+        await conn.execute(text("ALTER TABLE music_data ADD COLUMN IF NOT EXISTS genre TEXT[]"))
+        # Ensure genre is an array if it was previously created as TEXT
+        await conn.execute(text("ALTER TABLE music_data ALTER COLUMN genre TYPE TEXT[] USING CASE WHEN genre IS NULL THEN NULL ELSE ARRAY[genre] END"))
+        await conn.execute(text("ALTER TABLE music_data ADD COLUMN IF NOT EXISTS followers INTEGER"))
+        await conn.execute(text("ALTER TABLE music_data ADD COLUMN IF NOT EXISTS popularity INTEGER"))
 
-async def insert_artist_data(spotify_id, artist_name):
+
+async def insert_artist_data(spotify_id, artist_name, genre=None, followers=None, popularity=None):
     """
     Inserts a new artist record into the music_data table.
-
-    Args:
-        spotify_id (str): The unique Spotify ID for the artist.
-        artist_name (str): The display name of the artist.
     """
     if not engine:
         return
     async with engine.begin() as conn:
         await conn.execute(
-            text("INSERT INTO music_data (spotify_id, artist_name) VALUES (:id, :name)"),
-            {"id": spotify_id, "name": artist_name}
+            text("""
+                INSERT INTO music_data (spotify_id, artist_name, genre, followers, popularity) 
+                VALUES (:id, :name, :genre, :followers, :popularity)
+            """),
+            {
+                "id": spotify_id, 
+                "name": artist_name,
+                "genre": genre,
+                "followers": followers,
+                "popularity": popularity
+            }
         )
 
 async def get_all_artists():
@@ -67,16 +82,29 @@ async def get_all_artists():
         # Fetching rows safely using mapping to dict
         return [{"id": row[0], "artist_name": row[1]} for row in result.fetchall()]
 
-async def update_spotify_id(db_id, spotify_id):
+async def update_spotify_id(db_id, spotify_id, genre=None, followers=None, popularity=None):
     """
-    Updates the spotify_id for a specific artist in the database.
+    Updates the spotify_id and extra metadata for a specific artist in the database.
     """
     if not engine:
         return
     async with engine.begin() as conn:
         await conn.execute(
-            text("UPDATE music_data SET spotify_id = :spotify_id WHERE id = :id"),
-            {"spotify_id": spotify_id, "id": db_id}
+            text("""
+                UPDATE music_data 
+                SET spotify_id = :spotify_id, 
+                    genre = :genre, 
+                    followers = :followers, 
+                    popularity = :popularity 
+                WHERE id = :id
+            """),
+            {
+                "spotify_id": spotify_id, 
+                "genre": genre, 
+                "followers": followers, 
+                "popularity": popularity,
+                "id": db_id
+            }
         )
 
 
