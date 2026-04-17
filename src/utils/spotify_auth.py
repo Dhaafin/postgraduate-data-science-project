@@ -30,9 +30,10 @@ def create_spotify_token():
     if response.status_code == 200:
         token_data = response.json()
         
-        # Figure out where to save the token file (data folder at root)
+        # Store the token in a specific folder inside src/
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        data_dir = os.path.normpath(os.path.join(base_dir, "../../data"))
+        # This resolves to src/token_data/
+        data_dir = os.path.normpath(os.path.join(base_dir, "../token_data"))
         
         if not os.path.exists(data_dir):
             os.makedirs(data_dir)
