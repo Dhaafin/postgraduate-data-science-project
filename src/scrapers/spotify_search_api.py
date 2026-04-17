@@ -1,6 +1,14 @@
 """
 Spotify Search API Scraper.
-Retrieves artist names from the database, searches Spotify, and updates the Spotify IDs.
+
+This script automates the process of matching artists in the local database with 
+their official Spotify IDs using the Spotify Web API's search endpoint.
+
+Workflow:
+1. Prompts the user for a manual Spotify Bearer Token.
+2. Queries the database for all artists missing a 'spotify_id'.
+3. Searches Spotify for each artist name.
+4. Updates the database record with the first (most relevant) Spotify ID found.
 """
 
 import os
@@ -9,17 +17,25 @@ import asyncio
 import urllib.parse
 import requests
 
-# Ensure the root directory is in the path to import src modules
+# Add the project root to sys.path so we can import internal modules (src.*)
+# This allows running the script directly from the command line.
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 from src.database.connection import get_all_artists, update_spotify_id
 
 async def run_spotify_search():
+    """
+    Main orchestration function for searching and syncing Spotify IDs.
+    
+    Handles user input for authentication, database retrieval, 
+    API requests, and database updates.
+    """
     print("\n" + "="*40)
     print(" Spotify API Data Extractor (Search)")
     print("="*40)
     
-    # Ask the user for the bearer token
+    # We ask for the token manually as per user requirement to avoid 
+    # reliance on the automated auth script for this specific tool.
     token = input("\nPlease enter your Spotify Bearer Token: ").strip()
     if not token:
         print("Error: No token provided.")
@@ -29,12 +45,12 @@ async def run_spotify_search():
         "Authorization": f"Bearer {token}"
     }
 
-    # Fetch all artists that are missing a Spotify ID
+    # Pull only the records that actually need an ID update
     print("\nFetching artists from the database...")
     artists = await get_all_artists()
     
     if not artists:
-        print("No artists without a Spotify ID found in the database. Every artist is already linked!")
+        print("No artists without a Spotify ID found. Everything is already synced!")
         return
 
     print(f"Found {len(artists)} artists to search for on Spotify.\n")
@@ -45,14 +61,14 @@ async def run_spotify_search():
         
         print(f"Searching for: '{artist_name}'...")
         
-        # URI encode the artist name for the search query
+        # URI encoding is critical to handle names with spaces or special characters
         encoded_name = urllib.parse.quote(artist_name)
         url = f"https://api.spotify.com/v1/search?q={encoded_name}&type=artist&limit=1"
         
         try:
             response = requests.get(url, headers=headers)
             
-            # Stop if the token is invalid or expired
+            # Auth check: Stop early if the token expires during a mid-run
             if response.status_code == 401:
                 print("Error: Unauthorized. Your token might be expired or invalid.")
                 break
@@ -60,16 +76,17 @@ async def run_spotify_search():
             response.raise_for_status()
             data = response.json()
             
+            # Navigate the JSON response to find result items
             items = data.get("artists", {}).get("items", [])
             
             if items:
-                # Get the first result (usually the most relevant)
+                # We assume the first result is the best match
                 spotify_id = items[0].get("id")
                 spotify_name = items[0].get("name")
                 
                 print(f"  -> Found match: {spotify_name} (ID: {spotify_id})")
                 
-                # Update the ID in our database
+                # Perform the database update for this specific row
                 await update_spotify_id(db_id, spotify_id)
                 print(f"  -> Successfully updated database.")
             else:
@@ -81,7 +98,8 @@ async def run_spotify_search():
     print("\n--- Process Finished ---")
 
 if __name__ == "__main__":
-    # Fix for Windows asyncio loop policy with psycopg
+    # Windows fix: The default ProactorEventLoop doesn't work well 
+    # with certain networking/async libraries on Windows.
     if sys.platform == 'win32':
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         
