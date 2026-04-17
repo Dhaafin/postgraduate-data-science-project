@@ -1,0 +1,33 @@
+{
+  "external_urls": {
+    "spotify": "https://open.spotify.com/artist/0DgltpblEu7NBfAFAIirAU"
+  },
+  "followers": {
+    "href": null,
+    "total": 25
+  },
+  "genres": [],
+  "href": "https://api.spotify.com/v1/artists/0DgltpblEu7NBfAFAIirAU?locale=en-US%2Cen%3Bq%3D0.5",
+  "id": "0DgltpblEu7NBfAFAIirAU",
+  "images": [
+    {
+      "url": "https://i.scdn.co/image/ab67616d0000b27396114af0593a73fc86202599",
+      "height": 640,
+      "width": 640
+    },
+    {
+      "url": "https://i.scdn.co/image/ab67616d00001e0296114af0593a73fc86202599",
+      "height": 300,
+      "width": 300
+    },
+    {
+      "url": "https://i.scdn.co/image/ab67616d0000485196114af0593a73fc86202599",
+      "height": 64,
+      "width": 64
+    }
+  ],
+  "name": "Mahalini Raharja",
+  "popularity": 0,
+  "type": "artist",
+  "uri": "spotify:artist:0DgltpblEu7NBfAFAIirAU"
+}
