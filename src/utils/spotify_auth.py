@@ -1,16 +1,25 @@
+"""
+Spotify Authentication Helper.
+This script handles the OAuth2 client credentials flow to get an access token.
+Stored tokens are saved to data/spotify_token.json for other scripts to use.
+"""
+
 import os
 import json
 import requests
 
 def create_spotify_token():
+    """
+    Hits Spotify's token endpoint and saves the response locally.
+    """
     url = "https://accounts.spotify.com/api/token"
     
+    # Auth header uses the Base64 encoded 'client_id:client_secret'
     headers = {
         "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Basic NTMzNzAyNjE2NjViNDk1YWEzMDk5ZDFkZTJjNGNkODM6N2EzZWM5OGJiNDk4NGE4ZGI4OTFhNzhjZjFhNGE4YmM="
     }
     
-    # Note: The Spotify API expects "client_credentials" (with an 's' at the end)
     data = {
         "grant_type": "client_credentials"
     }
@@ -21,24 +30,25 @@ def create_spotify_token():
     if response.status_code == 200:
         token_data = response.json()
         
-        # Determine path relative to this script to store the token
+        # Figure out where to save the token file (data folder at root)
         base_dir = os.path.dirname(os.path.abspath(__file__))
         data_dir = os.path.normpath(os.path.join(base_dir, "../../data"))
         
-        # Ensure data directory exists
-        os.makedirs(data_dir, exist_ok=True)
+        if not os.path.exists(data_dir):
+            os.makedirs(data_dir)
         
-        # Store the token in a JSON file where it can be used later
+        # Dump the whole response so we can check 'expires_in' later if needed
         token_file_path = os.path.join(data_dir, "spotify_token.json")
         with open(token_file_path, "w") as f:
             json.dump(token_data, f, indent=4)
             
-        print(f"Success! Token successfully fetched and stored in: {token_file_path}")
-        print(f"Access Token: {token_data.get('access_token')[:15]}...")
+        print(f"Success! Token stored in: {token_file_path}")
+        print(f"Token snippet: {token_data.get('access_token')[:15]}...")
         
         return token_data
     else:
-        print(f"Failed to get token (Status {response.status_code}): {response.text}")
+        print(f"Failed to get token. Status: {response.status_code}")
+        print(f"Response: {response.text}")
         return None
 
 if __name__ == "__main__":
