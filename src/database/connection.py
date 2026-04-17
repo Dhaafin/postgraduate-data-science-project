@@ -53,3 +53,19 @@ async def insert_artist_data(spotify_id, artist_name):
             text("INSERT INTO music_data (spotify_id, artist_name) VALUES (:id, :name)"),
             {"id": spotify_id, "name": artist_name}
         )
+
+if __name__ == "__main__":
+    import asyncio
+    import sys
+    
+    # Fix for Windows: psycopg requires SelectorEventLoop
+    if sys.platform == 'win32':
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+    print("--- Database Initialization ---")
+    if engine:
+        asyncio.run(init_db())
+        print("Success: Database initialized and table 'music_data' is ready.")
+    else:
+        print("Error: Could not initialize database. Check your .env file.")
+

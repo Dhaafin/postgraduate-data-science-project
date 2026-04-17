@@ -37,6 +37,12 @@ async def main():
     print("\n--- Scraping Task Completed ---")
 
 if __name__ == "__main__":
+    import sys
+    # Fix for Windows: psycopg requires SelectorEventLoop
+    if sys.platform == 'win32':
+        import asyncio
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
