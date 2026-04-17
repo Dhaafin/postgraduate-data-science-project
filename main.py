@@ -8,6 +8,7 @@ import asyncio
 import sys
 import argparse
 from src.scrapers.spotify import run_spotify_scraper
+from src.scrapers.spotify_search_api import run_spotify_search
 from src.scrapers.viberate import fetch_viberate_artists
 from src.database.connection import init_db, insert_artist_data
 
@@ -23,21 +24,8 @@ async def run_viberate():
     print("Viberate data saved successfully.")
 
 async def run_spotify():
-    """Logic for the Spotify scraper task."""
-    print("\n--- Running Spotify Scraper ---")
-    # Using a sample artist ID for now (can be dynamic later)
-    spotify_data = await run_spotify_scraper("0tB33cNAVw1H2enMHpgFiP")
-    
-    if spotify_data and isinstance(spotify_data, dict):
-        artist_name = spotify_data.get("name")
-        spotify_id = spotify_data.get("id")
-        
-        if artist_name and spotify_id:
-            print(f"Saving to Database: {artist_name} ({spotify_id})")
-            await insert_artist_data(spotify_id, artist_name)
-            print("Successfully saved to database.")
-    else:
-        print("Spotify scraper failed or was interrupted.")
+    """Logic for the Spotify Search API task."""
+    await run_spotify_search()
 
 async def interactive_menu():
     """Displays an interactive console menu."""
@@ -46,7 +34,7 @@ async def interactive_menu():
         print("   MUSIC SCRAPER MAIN MENU")
         print("="*30)
         print("1. Run Viberate Scraper (Charts)")
-        print("2. Run Spotify Scraper (API Docs)")
+        print("2. Run Spotify Scraper (Search API Extractor)")
         print("3. Run Both Scrapers")
         print("4. Exit")
         print("-" * 30)
