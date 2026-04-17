@@ -28,18 +28,24 @@ async def run_spotify():
     await run_spotify_search()
 
 async def interactive_menu():
-    """Displays an interactive console menu."""
+    """Displays an interactive console menu with categories."""
     while True:
-        print("\n" + "="*30)
-        print("   MUSIC SCRAPER MAIN MENU")
-        print("="*30)
-        print("1. Run Viberate Scraper (Charts)")
-        print("2. Run Spotify Scraper (Search API Extractor)")
-        print("3. Run Both Scrapers")
-        print("4. Exit")
-        print("-" * 30)
+        print("\n" + "="*40)
+        print("      MUSIC SCRAPER MAIN MENU")
+        print("="*40)
         
-        choice = input("Select an option (1-4): ").strip()
+        print("\n [SCRAPING]")
+        print(" 1. Run Viberate Scraper (Charts)")
+        print(" 2. Run Spotify Scraper (Search API Extractor)")
+        print(" 3. Run Both Scrapers")
+        
+        print("\n [UTILS]")
+        print(" 4. Update Database (Run Migrations/Add Columns)")
+        
+        print("\n 5. Exit")
+        print("-" * 40)
+        
+        choice = input("Select an option (1-5): ").strip()
 
         if choice == '1':
             await run_viberate()
@@ -49,6 +55,10 @@ async def interactive_menu():
             await run_viberate()
             await run_spotify()
         elif choice == '4':
+            print("\n--- Running Database Migrations ---")
+            await init_db()
+            print("Database checked and updated successfully.")
+        elif choice == '5':
             print("Exiting...")
             break
         else:
