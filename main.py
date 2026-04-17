@@ -7,7 +7,7 @@ an Interactive Menu (for manual usage).
 import asyncio
 import sys
 import argparse
-from src.scrapers.spotify import run_spotify_scraper
+from src.scrapers.spotify_artist_scraper import run_spotify_scraper
 from src.scrapers.spotify_search_api import run_spotify_search
 from src.scrapers.viberate import fetch_viberate_artists
 from src.database.connection import init_db, insert_artist_data
