@@ -8,7 +8,7 @@ Workflow:
 1. Prompts the user for a manual Spotify Bearer Token.
 2. Queries the database for all artists missing a 'spotify_id'.
 3. Searches Spotify for each artist name.
-4. Updates the database record with the first (most relevant) Spotify ID found.
+4. Updates the database record with the best Spotify ID found and flags duplicates for review.
 """
 
 import os
@@ -63,7 +63,8 @@ async def run_spotify_search():
         
         # URI encoding is critical to handle names with spaces or special characters
         encoded_name = urllib.parse.quote(artist_name)
-        url = f"https://api.spotify.com/v1/search?q={encoded_name}&type=artist&limit=1"
+        # We increase the limit to check for multiple exact match duplicates
+        url = f"https://api.spotify.com/v1/search?q={encoded_name}&type=artist&limit=10"
         
         try:
             response = requests.get(url, headers=headers)
@@ -80,14 +81,41 @@ async def run_spotify_search():
             items = data.get("artists", {}).get("items", [])
             
             if items:
-                # We assume the first result is the best match
-                spotify_id = items[0].get("id")
-                spotify_name = items[0].get("name")
+                # 1. Check for exact name matches (case-insensitive) to identify potential duplicates
+                exact_matches = [
+                    item for item in items 
+                    if item.get("name", "").strip().lower() == artist_name.strip().lower()
+                ]
+                
+                # Flag for review if multiple exact matches are found
+                needs_review = len(exact_matches) >= 2
+                
+                # 2. Pick the best match (the most relevant one from Spotify)
+                best_match = items[0]
+                spotify_id = best_match.get("id")
+                spotify_name = best_match.get("name")
+                
+                # Extract extra metadata
+                spotify_link = best_match.get("external_urls", {}).get("spotify")
+                genres = best_match.get("genres", [])
+                followers = best_match.get("followers", {}).get("total")
+                popularity = best_match.get("popularity")
+                
+                if needs_review:
+                    print(f"  -> ALERT: Found {len(exact_matches)} exact matches for '{artist_name}'. Flagging for review.")
                 
                 print(f"  -> Found match: {spotify_name} (ID: {spotify_id})")
                 
-                # Perform the database update for this specific row
-                await update_spotify_id(db_id, spotify_id)
+                # 3. Perform the database update with all available metadata
+                await update_spotify_id(
+                    db_id, 
+                    spotify_id, 
+                    spotify_link=spotify_link, 
+                    genre=genres, 
+                    followers=followers, 
+                    popularity=popularity,
+                    needs_review=needs_review
+                )
                 print(f"  -> Successfully updated database.")
             else:
                 print(f"  -> No results found on Spotify for '{artist_name}'.")
