@@ -24,7 +24,7 @@ else:
 async def init_db():
     """
     Initializes/Refactors the database schema.
-    Desired order: id, spotify_id, spotify_link, artist_name, genre, followers, popularity
+    Desired order: id, spotify_id, spotify_link, artist_name, genre, followers, popularity, needs_review
     Removes: created_at
     """
     if not engine:
@@ -46,7 +46,8 @@ async def init_db():
                     artist_name TEXT,
                     genre TEXT[],
                     followers INTEGER,
-                    popularity INTEGER
+                    popularity INTEGER,
+                    needs_review BOOLEAN DEFAULT FALSE
                 );
             """))
         else:
@@ -55,8 +56,8 @@ async def init_db():
             current_cols = [row[0] for row in cols_query.fetchall()]
             
             # If 'created_at' exists or 'spotify_link' is missing, we refactor
-            if 'created_at' in current_cols or 'spotify_link' not in current_cols:
-                print("Refactoring table to requested structure (reordering and removing created_at)...")
+            if 'created_at' in current_cols or 'spotify_link' not in current_cols or 'needs_review' not in current_cols:
+                print("Refactoring table to requested structure (reordering and removing created_at, adding needs_review)...")
                 
                 # 1. Create the new table structure
                 await conn.execute(text("""
@@ -67,7 +68,8 @@ async def init_db():
                         artist_name TEXT,
                         genre TEXT[],
                         followers INTEGER,
-                        popularity INTEGER
+                        popularity INTEGER,
+                        needs_review BOOLEAN DEFAULT FALSE
                     );
                 """))
                 
@@ -77,6 +79,7 @@ async def init_db():
                 if 'genre' in current_cols: insert_cols.append("genre")
                 if 'followers' in current_cols: insert_cols.append("followers")
                 if 'popularity' in current_cols: insert_cols.append("popularity")
+                if 'needs_review' in current_cols: insert_cols.append("needs_review")
                 
                 cols_str = ", ".join(insert_cols)
                 await conn.execute(text(f"INSERT INTO music_data_new ({cols_str}) SELECT {cols_str} FROM music_data"))
@@ -89,7 +92,7 @@ async def init_db():
                 await conn.execute(text("SELECT setval(pg_get_serial_sequence('music_data', 'id'), (SELECT MAX(id) FROM music_data))"))
                 print("Refactor complete.")
 
-async def insert_artist_data(spotify_id, artist_name, spotify_link=None, genre=None, followers=None, popularity=None):
+async def insert_artist_data(spotify_id, artist_name, spotify_link=None, genre=None, followers=None, popularity=None, needs_review=False):
     """
     Inserts a new artist record into the music_data table.
     """
@@ -98,8 +101,8 @@ async def insert_artist_data(spotify_id, artist_name, spotify_link=None, genre=N
     async with engine.begin() as conn:
         await conn.execute(
             text("""
-                INSERT INTO music_data (spotify_id, spotify_link, artist_name, genre, followers, popularity) 
-                VALUES (:id, :link, :name, :genre, :followers, :popularity)
+                INSERT INTO music_data (spotify_id, spotify_link, artist_name, genre, followers, popularity, needs_review) 
+                VALUES (:id, :link, :name, :genre, :followers, :popularity, :needs_review)
             """),
             {
                 "id": spotify_id, 
@@ -107,7 +110,8 @@ async def insert_artist_data(spotify_id, artist_name, spotify_link=None, genre=N
                 "name": artist_name,
                 "genre": genre,
                 "followers": followers,
-                "popularity": popularity
+                "popularity": popularity,
+                "needs_review": needs_review
             }
         )
 
@@ -122,31 +126,39 @@ async def get_all_artists():
         result = await conn.execute(text("SELECT id, artist_name FROM music_data WHERE spotify_id IS NULL OR spotify_id = ''"))
         return [{"id": row[0], "artist_name": row[1]} for row in result.fetchall()]
 
-async def update_spotify_id(db_id, spotify_id, spotify_link=None, genre=None, followers=None, popularity=None):
+async def update_spotify_id(db_id, spotify_id, spotify_link=None, genre=None, followers=None, popularity=None, needs_review=None):
     """
     Updates the spotify_id and extra metadata for a specific artist in the database.
     """
     if not engine:
         return
     async with engine.begin() as conn:
+        # Dynamically build the UPDATE SET clause to only update columns that are not None
+        set_clauses = [
+            "spotify_id = :spotify_id",
+            "spotify_link = :spotify_link",
+            "genre = :genre",
+            "followers = :followers",
+            "popularity = :popularity"
+        ]
+        params = {
+            "spotify_id": spotify_id,
+            "spotify_link": spotify_link,
+            "genre": genre,
+            "followers": followers,
+            "popularity": popularity,
+            "id": db_id
+        }
+        
+        if needs_review is not None:
+            set_clauses.append("needs_review = :needs_review")
+            params["needs_review"] = needs_review
+            
+        set_str = ", ".join(set_clauses)
+        
         await conn.execute(
-            text("""
-                UPDATE music_data 
-                SET spotify_id = :spotify_id, 
-                    spotify_link = :spotify_link,
-                    genre = :genre, 
-                    followers = :followers, 
-                    popularity = :popularity 
-                WHERE id = :id
-            """),
-            {
-                "spotify_id": spotify_id, 
-                "spotify_link": spotify_link,
-                "genre": genre, 
-                "followers": followers, 
-                "popularity": popularity,
-                "id": db_id
-            }
+            text(f"UPDATE music_data SET {set_str} WHERE id = :id"),
+            params
         )
 
 if __name__ == "__main__":
