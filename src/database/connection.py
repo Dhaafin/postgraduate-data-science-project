@@ -24,7 +24,7 @@ else:
 async def init_db():
     """
     Initializes/Refactors the database schema.
-    Desired order: id, spotify_id, spotify_link, artist_name, genre, followers, popularity, needs_review
+    Desired order: id, needs_review, spotify_id, spotify_link, artist_name, genre, followers, popularity
     Removes: created_at
     """
     if not engine:
@@ -41,35 +41,37 @@ async def init_db():
             await conn.execute(text("""
                 CREATE TABLE music_data (
                     id SERIAL PRIMARY KEY,
+                    needs_review BOOLEAN DEFAULT FALSE,
                     spotify_id TEXT,
                     spotify_link TEXT,
                     artist_name TEXT,
                     genre TEXT[],
                     followers INTEGER,
-                    popularity INTEGER,
-                    needs_review BOOLEAN DEFAULT FALSE
+                    popularity INTEGER
                 );
             """))
         else:
-            # Check current columns to see if we need to refactor
-            cols_query = await conn.execute(text("SELECT column_name FROM information_schema.columns WHERE table_name = 'music_data'"))
+            # Check current columns to see if we need to refactor (order matters)
+            cols_query = await conn.execute(text("SELECT column_name FROM information_schema.columns WHERE table_name = 'music_data' ORDER BY ordinal_position"))
             current_cols = [row[0] for row in cols_query.fetchall()]
             
-            # If 'created_at' exists or 'spotify_link' is missing, we refactor
-            if 'created_at' in current_cols or 'spotify_link' not in current_cols or 'needs_review' not in current_cols:
-                print("Refactoring table to requested structure (reordering and removing created_at, adding needs_review)...")
+            desired_order = ["id", "needs_review", "spotify_id", "spotify_link", "artist_name", "genre", "followers", "popularity"]
+            
+            # If the current columns don't match the desired order, trigger a refactor
+            if current_cols != desired_order:
+                print("Refactoring table to requested structure (reordering columns and removing created_at)...")
                 
                 # 1. Create the new table structure
                 await conn.execute(text("""
                     CREATE TABLE music_data_new (
                         id SERIAL PRIMARY KEY,
+                        needs_review BOOLEAN DEFAULT FALSE,
                         spotify_id TEXT,
                         spotify_link TEXT,
                         artist_name TEXT,
                         genre TEXT[],
                         followers INTEGER,
-                        popularity INTEGER,
-                        needs_review BOOLEAN DEFAULT FALSE
+                        popularity INTEGER
                     );
                 """))
                 
