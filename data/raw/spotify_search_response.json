@@ -1,0 +1,640 @@
+{
+  "artists": {
+    "href": "https://api.spotify.com/v1/search?offset=0&limit=20&query=doxy&type=artist&locale=en-US,en;q%3D0.5",
+    "limit": 20,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 20,
+    "items": [
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/53cxhnmtnZSM1M1ueVRBYC"
+        },
+        "followers": {
+          "href": null,
+          "total": 54
+        },
+        "genres": ["breakcore", "idm"],
+        "href": "https://api.spotify.com/v1/artists/53cxhnmtnZSM1M1ueVRBYC",
+        "id": "53cxhnmtnZSM1M1ueVRBYC",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000b27390c9cfcff1ced1b8560b0131",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e0290c9cfcff1ced1b8560b0131",
+            "height": 300,
+            "width": 300
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000485190c9cfcff1ced1b8560b0131",
+            "height": 64,
+            "width": 64
+          }
+        ],
+        "name": "Doxy",
+        "popularity": 0,
+        "type": "artist",
+        "uri": "spotify:artist:53cxhnmtnZSM1M1ueVRBYC"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6rrUY5cHbAhWa2DZd2lcVx"
+        },
+        "followers": {
+          "href": null,
+          "total": 29
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/6rrUY5cHbAhWa2DZd2lcVx",
+        "id": "6rrUY5cHbAhWa2DZd2lcVx",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebea442e6234433e1500d25340",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174ea442e6234433e1500d25340",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178ea442e6234433e1500d25340",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Doxy Dolla",
+        "popularity": 0,
+        "type": "artist",
+        "uri": "spotify:artist:6rrUY5cHbAhWa2DZd2lcVx"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/1MVFEpYdHtdV3k8Bgs79Pl"
+        },
+        "followers": {
+          "href": null,
+          "total": 795
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/1MVFEpYdHtdV3k8Bgs79Pl",
+        "id": "1MVFEpYdHtdV3k8Bgs79Pl",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb4822fa407611bc13d44e046b",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab676161000051744822fa407611bc13d44e046b",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f1784822fa407611bc13d44e046b",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "DOXY",
+        "popularity": 1,
+        "type": "artist",
+        "uri": "spotify:artist:1MVFEpYdHtdV3k8Bgs79Pl"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6z1h7gbbpXd354AaOyoS64"
+        },
+        "followers": {
+          "href": null,
+          "total": 21
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/6z1h7gbbpXd354AaOyoS64",
+        "id": "6z1h7gbbpXd354AaOyoS64",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000b273574658a86867de58b89f5e5f",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e02574658a86867de58b89f5e5f",
+            "height": 300,
+            "width": 300
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00004851574658a86867de58b89f5e5f",
+            "height": 64,
+            "width": 64
+          }
+        ],
+        "name": "Doxy Sounds",
+        "popularity": 0,
+        "type": "artist",
+        "uri": "spotify:artist:6z1h7gbbpXd354AaOyoS64"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/7BiPPDMkYUVNZgqeBt2LiV"
+        },
+        "followers": {
+          "href": null,
+          "total": 51
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/7BiPPDMkYUVNZgqeBt2LiV",
+        "id": "7BiPPDMkYUVNZgqeBt2LiV",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebaa2db1243b2d915f079d0924",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174aa2db1243b2d915f079d0924",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178aa2db1243b2d915f079d0924",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Doxycodone",
+        "popularity": 0,
+        "type": "artist",
+        "uri": "spotify:artist:7BiPPDMkYUVNZgqeBt2LiV"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/3DBRYmclbm4Xe9tU1PnbSr"
+        },
+        "followers": {
+          "href": null,
+          "total": 23
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/3DBRYmclbm4Xe9tU1PnbSr",
+        "id": "3DBRYmclbm4Xe9tU1PnbSr",
+        "images": [],
+        "name": "DOXA (Saykoji & Gaby Cristy)",
+        "popularity": 10,
+        "type": "artist",
+        "uri": "spotify:artist:3DBRYmclbm4Xe9tU1PnbSr"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/7sIGEYfllS5VN2Fj0QCtX4"
+        },
+        "followers": {
+          "href": null,
+          "total": 36620
+        },
+        "genres": ["desi hip hop", "punjabi hip hop", "punjabi pop", "hindi hip hop"],
+        "href": "https://api.spotify.com/v1/artists/7sIGEYfllS5VN2Fj0QCtX4",
+        "id": "7sIGEYfllS5VN2Fj0QCtX4",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb1aeee0f28a924636429fed8b",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab676161000051741aeee0f28a924636429fed8b",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f1781aeee0f28a924636429fed8b",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "dox",
+        "popularity": 53,
+        "type": "artist",
+        "uri": "spotify:artist:7sIGEYfllS5VN2Fj0QCtX4"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/1HliyC4gHWRHHFy3CjR3Bp"
+        },
+        "followers": {
+          "href": null,
+          "total": 3
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/1HliyC4gHWRHHFy3CjR3Bp",
+        "id": "1HliyC4gHWRHHFy3CjR3Bp",
+        "images": [],
+        "name": "Doxy601",
+        "popularity": 1,
+        "type": "artist",
+        "uri": "spotify:artist:1HliyC4gHWRHHFy3CjR3Bp"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/3HmqqQJpGMYhSipApCheaA"
+        },
+        "followers": {
+          "href": null,
+          "total": 2289
+        },
+        "genres": ["future house", "bass house"],
+        "href": "https://api.spotify.com/v1/artists/3HmqqQJpGMYhSipApCheaA",
+        "id": "3HmqqQJpGMYhSipApCheaA",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb7ccfd3f433d8c9c7786702b5",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab676161000051747ccfd3f433d8c9c7786702b5",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f1787ccfd3f433d8c9c7786702b5",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Doxed",
+        "popularity": 14,
+        "type": "artist",
+        "uri": "spotify:artist:3HmqqQJpGMYhSipApCheaA"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/4ShkrXYWInKA0phxReDoAP"
+        },
+        "followers": {
+          "href": null,
+          "total": 2150
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/4ShkrXYWInKA0phxReDoAP",
+        "id": "4ShkrXYWInKA0phxReDoAP",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebd145a9a1f7ec92ebf316f3dc",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174d145a9a1f7ec92ebf316f3dc",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178d145a9a1f7ec92ebf316f3dc",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "doxplaya",
+        "popularity": 24,
+        "type": "artist",
+        "uri": "spotify:artist:4ShkrXYWInKA0phxReDoAP"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/7uzKFCBLb6SLQ5c4ML6fQw"
+        },
+        "followers": {
+          "href": null,
+          "total": 105307
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/7uzKFCBLb6SLQ5c4ML6fQw",
+        "id": "7uzKFCBLb6SLQ5c4ML6fQw",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb1f00966bc809b75714bc01b5",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab676161000051741f00966bc809b75714bc01b5",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f1781f00966bc809b75714bc01b5",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "DOXX",
+        "popularity": 37,
+        "type": "artist",
+        "uri": "spotify:artist:7uzKFCBLb6SLQ5c4ML6fQw"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/1TnpaTuImv8zdJTgREyZXm"
+        },
+        "followers": {
+          "href": null,
+          "total": 12
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/1TnpaTuImv8zdJTgREyZXm",
+        "id": "1TnpaTuImv8zdJTgREyZXm",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebdd2821bc6bb0bd56d05a0eb8",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174dd2821bc6bb0bd56d05a0eb8",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178dd2821bc6bb0bd56d05a0eb8",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Doxabeats",
+        "popularity": 7,
+        "type": "artist",
+        "uri": "spotify:artist:1TnpaTuImv8zdJTgREyZXm"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/4sdpIMXLYUaIThOkvaRp6L"
+        },
+        "followers": {
+          "href": null,
+          "total": 881
+        },
+        "genres": ["maluku"],
+        "href": "https://api.spotify.com/v1/artists/4sdpIMXLYUaIThOkvaRp6L",
+        "id": "4sdpIMXLYUaIThOkvaRp6L",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb99411702098c0efe6cbd2cae",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000517499411702098c0efe6cbd2cae",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f17899411702098c0efe6cbd2cae",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Doxz Musika",
+        "popularity": 28,
+        "type": "artist",
+        "uri": "spotify:artist:4sdpIMXLYUaIThOkvaRp6L"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6PzYc8xVsOpBgfGeGeUCEX"
+        },
+        "followers": {
+          "href": null,
+          "total": 10088
+        },
+        "genres": ["laïko"],
+        "href": "https://api.spotify.com/v1/artists/6PzYc8xVsOpBgfGeGeUCEX",
+        "id": "6PzYc8xVsOpBgfGeGeUCEX",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000b273e825b054b913f926d77cf4bf",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e02e825b054b913f926d77cf4bf",
+            "height": 300,
+            "width": 300
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00004851e825b054b913f926d77cf4bf",
+            "height": 64,
+            "width": 64
+          }
+        ],
+        "name": "Kostas Doxas",
+        "popularity": 39,
+        "type": "artist",
+        "uri": "spotify:artist:6PzYc8xVsOpBgfGeGeUCEX"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6y2aLcjFGcLA813TCEOFC4"
+        },
+        "followers": {
+          "href": null,
+          "total": 2241
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/6y2aLcjFGcLA813TCEOFC4",
+        "id": "6y2aLcjFGcLA813TCEOFC4",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb79da81ee0840676b5a11b723",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000517479da81ee0840676b5a11b723",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f17879da81ee0840676b5a11b723",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "DOXU",
+        "popularity": 40,
+        "type": "artist",
+        "uri": "spotify:artist:6y2aLcjFGcLA813TCEOFC4"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/4b2XoBURQbc9Ou4ZBmes91"
+        },
+        "followers": {
+          "href": null,
+          "total": 6766
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/4b2XoBURQbc9Ou4ZBmes91",
+        "id": "4b2XoBURQbc9Ou4ZBmes91",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebabe6fe7028223e09d6dc43fe",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174abe6fe7028223e09d6dc43fe",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178abe6fe7028223e09d6dc43fe",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "doxxxelll",
+        "popularity": 37,
+        "type": "artist",
+        "uri": "spotify:artist:4b2XoBURQbc9Ou4ZBmes91"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/5nk8TLI3DoGV9Fyaa7V9JL"
+        },
+        "followers": {
+          "href": null,
+          "total": 615
+        },
+        "genres": ["jazz"],
+        "href": "https://api.spotify.com/v1/artists/5nk8TLI3DoGV9Fyaa7V9JL",
+        "id": "5nk8TLI3DoGV9Fyaa7V9JL",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebc00012bc20dd6734ab79d2bb",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174c00012bc20dd6734ab79d2bb",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178c00012bc20dd6734ab79d2bb",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "The Dox Band",
+        "popularity": 40,
+        "type": "artist",
+        "uri": "spotify:artist:5nk8TLI3DoGV9Fyaa7V9JL"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/1rlz0TbW8EjjvvOxPxoVsr"
+        },
+        "followers": {
+          "href": null,
+          "total": 14530
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/1rlz0TbW8EjjvvOxPxoVsr",
+        "id": "1rlz0TbW8EjjvvOxPxoVsr",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb689b6f095c951c6119fda93d",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174689b6f095c951c6119fda93d",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178689b6f095c951c6119fda93d",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "DOXX",
+        "popularity": 27,
+        "type": "artist",
+        "uri": "spotify:artist:1rlz0TbW8EjjvvOxPxoVsr"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/72x1H3FSwlkD3x2hHQ0Fja"
+        },
+        "followers": {
+          "href": null,
+          "total": 239
+        },
+        "genres": ["vinahouse"],
+        "href": "https://api.spotify.com/v1/artists/72x1H3FSwlkD3x2hHQ0Fja",
+        "id": "72x1H3FSwlkD3x2hHQ0Fja",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000b2732eff93821372788938c36434",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e02bfc9eb17c2184dced0c4122f",
+            "height": 300,
+            "width": 300
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00004851bfc9eb17c2184dced0c4122f",
+            "height": 64,
+            "width": 64
+          }
+        ],
+        "name": "DoxMain 潇潇",
+        "popularity": 18,
+        "type": "artist",
+        "uri": "spotify:artist:72x1H3FSwlkD3x2hHQ0Fja"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/0biTnSm8mvEonGKDfCXbL0"
+        },
+        "followers": {
+          "href": null,
+          "total": 8
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/0biTnSm8mvEonGKDfCXbL0",
+        "id": "0biTnSm8mvEonGKDfCXbL0",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000b27399c7b5a9a9dc56e5c5226958",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e0299c7b5a9a9dc56e5c5226958",
+            "height": 300,
+            "width": 300
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000485199c7b5a9a9dc56e5c5226958",
+            "height": 64,
+            "width": 64
+          }
+        ],
+        "name": "doxiel",
+        "popularity": 18,
+        "type": "artist",
+        "uri": "spotify:artist:0biTnSm8mvEonGKDfCXbL0"
+      }
+    ]
+  }
+}
