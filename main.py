@@ -8,8 +8,12 @@ import asyncio
 import sys
 import argparse
 from src.scrapers.spotify_artist_scraper import run_spotify_scraper
-from src.scrapers.spotify_search_api import run_spotify_search
 from src.scrapers.viberate import fetch_viberate_artists
+from src.scrapers.spotify_search_scraper import (
+    run_spotify_search_scraper, 
+    get_search_targets_from_db, 
+    save_results_to_db
+)
 from src.database.connection import init_db, insert_artist_data
 
 async def run_viberate():
@@ -23,9 +27,35 @@ async def run_viberate():
         await insert_artist_data(None, artist_name)
     print("Viberate data saved successfully.")
 
-async def run_spotify():
-    """Logic for the Spotify Search API task."""
-    await run_spotify_search()
+async def run_spotify_search_workflow():
+    """Workflow for the Browser-based Spotify Search Scraper."""
+    print("\n--- Running Spotify Search Scraper (Browser) ---")
+    
+    # 1. Fetch targets
+    print("Fetching artists missing Spotify IDs from database...")
+    targets = await get_search_targets_from_db(limit=5) # Increased limit for menu usage
+    
+    if not targets:
+        print("No artists without a Spotify ID found.")
+        return
+
+    print(f"Found {len(targets)} artists to search.")
+    
+    # 2. Scrape
+    artist_names = [t['artist_name'] for t in targets]
+    results = await run_spotify_search_scraper(artist_names)
+    
+    # Re-attach database IDs
+    for i, res in enumerate(results):
+        if i < len(targets):
+            res["db_id"] = targets[i]["db_id"]
+
+    # 3. Save
+    if results:
+        print(f"\nSaving results back to database...")
+        await save_results_to_db(results)
+    else:
+        print("No results to save.")
 
 async def interactive_menu():
     """Displays an interactive console menu with categories."""
@@ -36,29 +66,25 @@ async def interactive_menu():
         
         print("\n [SCRAPING]")
         print(" 1. Run Viberate Scraper (Charts)")
-        print(" 2. Run Spotify Scraper (Search API Extractor)")
-        print(" 3. Run Both Scrapers")
+        print(" 2. Run Spotify Search Scraper (Browser Console)")
         
         print("\n [UTILS]")
-        print(" 4. Update Database (Run Migrations/Add Columns)")
+        print(" 3. Update Database (Run Migrations/Add Columns)")
         
-        print("\n 5. Exit")
+        print("\n 4. Exit")
         print("-" * 40)
         
-        choice = input("Select an option (1-5): ").strip()
+        choice = input("Select an option (1-4): ").strip()
 
         if choice == '1':
             await run_viberate()
         elif choice == '2':
-            await run_spotify()
+            await run_spotify_search_workflow()
         elif choice == '3':
-            await run_viberate()
-            await run_spotify()
-        elif choice == '4':
             print("\n--- Running Database Migrations ---")
             await init_db()
             print("Database checked and updated successfully.")
-        elif choice == '5':
+        elif choice == '4':
             print("Exiting...")
             break
         else:
@@ -81,19 +107,20 @@ async def main():
     # If any specific argument is passed, run non-interactively
     if args.all:
         await run_viberate()
-        await run_spotify()
+        await run_spotify_search_workflow()
     elif args.viberate:
         await run_viberate()
     elif args.spotify:
-        await run_spotify()
+        await run_spotify_search_workflow()
     else:
         # No arguments? Show the menu
         await interactive_menu()
 
 if __name__ == "__main__":
-    # Windows-specific fix for psycopg
+    # Windows-specific fix: Playwright requires ProactorEventLoop.
+    # Modern psycopg/sqlalchemy also supports Proactor.
     if sys.platform == 'win32':
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
         
     try:
         asyncio.run(main())
