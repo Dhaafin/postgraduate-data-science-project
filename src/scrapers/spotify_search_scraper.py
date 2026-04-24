@@ -18,6 +18,7 @@ from playwright.async_api import async_playwright
 # Add the project root to sys.path so we can import internal modules (src.*)
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
+from sqlalchemy import text
 from src.database.connection import engine, update_spotify_id
 
 async def run_spotify_search_scraper(artists_to_search):
