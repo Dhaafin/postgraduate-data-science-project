@@ -15,6 +15,11 @@ import sys
 import json
 from playwright.async_api import async_playwright
 
+# Add the project root to sys.path so we can import internal modules (src.*)
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+
+from src.database.connection import engine, update_spotify_id
+
 async def run_spotify_search_scraper(artists_to_search):
     """
     Orchestrates the browser automation for the Spotify Search console.
@@ -157,21 +162,85 @@ async def run_spotify_search_scraper(artists_to_search):
 
     return results
 
+# ─── Database Helpers ─────────────────────────────────────────────────────────
+
+async def get_search_targets_from_db(limit=3):
+    """Fetch the top N artists from the database who are missing a spotify_id."""
+    if not engine:
+        return []
+    async with engine.begin() as conn:
+        # We target the lowest IDs first as requested
+        result = await conn.execute(
+            text("SELECT id, artist_name FROM music_data WHERE spotify_id IS NULL OR spotify_id = '' ORDER BY id ASC LIMIT :limit"),
+            {"limit": limit}
+        )
+        return [{"db_id": row[0], "artist_name": row[1]} for row in result.fetchall()]
+
+async def save_results_to_db(results):
+    """Persist the scraped metadata back to the PostgreSQL database."""
+    for r in results:
+        # Avoid saving if no match was found (query_name is always present, but others might not be)
+        if not r.get("spotify_id"):
+            continue
+
+        print(f"  -> Saving '{r['artist_name']}' (ID: {r['db_id']}) to database...")
+        await update_spotify_id(
+            db_id=r["db_id"],
+            spotify_id=r["spotify_id"],
+            spotify_link=r["spotify_link"],
+            genre=r["genres"],
+            followers=r["followers"],
+            popularity=r["popularity"]
+        )
+    print("Database update complete.")
+
+# ─── Execution Logic ─────────────────────────────────────────────────────────
+
 if __name__ == "__main__":
-    import asyncio
+    from sqlalchemy import text
     
-    # Required for Playwright to spawn subprocesses correctly on Windows
+    # Requirement: Test with 3 artists with the lowest IDs
+    LIMIT = 3
+
+    # Step 1: Fetch targets (Requires SelectorEventLoop on Windows for psycopg)
+    print(f"Fetching artists with the lowest IDs missing Spotify data (Limit: {LIMIT})...")
+    
+    # Setup loop policy for DB operations
+    if sys.platform == 'win32':
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    
+    db_loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(db_loop)
+    targets = db_loop.run_until_complete(get_search_targets_from_db(limit=LIMIT))
+    db_loop.close()
+
+    if not targets:
+        print("No artists without a Spotify ID found in the database. Process complete!")
+        sys.exit(0)
+
+    print(f"Found {len(targets)} artists to process: {[t['artist_name'] for t in targets]}\n")
+
+    # Step 2: Scrape metadata (Requires ProactorEventLoop on Windows for Playwright)
     if sys.platform == 'win32':
         asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
 
-    # List of artists to process (can be expanded or linked to database)
-    test_artists = ["batas senja", "fourtwnty", "doxy"]
-    
-    print("--- Running Spotify Search Scraper ---\n")
-    print(f"Artists to search: {test_artists}\n")
-    
-    results = asyncio.run(run_spotify_search_scraper(test_artists))
-    
-    print("\n--- Final Extracted Summary ---")
-    for r in results:
-        print(f"{r['query_name']} -> {r['artist_name']} ({r['spotify_id']})")
+    # Map database records to a simple list of names for the scraper logic
+    artist_names = [t['artist_name'] for t in targets]
+    results = asyncio.run(run_spotify_search_scraper(artist_names))
+
+    # Re-attach database IDs to the results so we can save them
+    for i, res in enumerate(results):
+        res["db_id"] = targets[i]["db_id"]
+
+    # Step 3: Save results (Switch back to SelectorEventLoop)
+    if results:
+        print(f"\nSaving {len(results)} results back to the database...")
+        if sys.platform == 'win32':
+            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        
+        save_loop = asyncio.new_event_loop()
+        save_loop.run_until_complete(save_results_to_db(results))
+        save_loop.close()
+        print("Success: All artists processed.")
+    else:
+        print("No matches were found to save.")
