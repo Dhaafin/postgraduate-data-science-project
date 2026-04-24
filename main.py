@@ -31,9 +31,9 @@ async def run_spotify_search_workflow():
     """Workflow for the Browser-based Spotify Search Scraper."""
     print("\n--- Running Spotify Search Scraper (Browser) ---")
     
-    # 1. Fetch targets
+    # 1. Fetch targets from DB (Works on SelectorEventLoop)
     print("Fetching artists missing Spotify IDs from database...")
-    targets = await get_search_targets_from_db(limit=5) # Increased limit for menu usage
+    targets = await get_search_targets_from_db(limit=5)
     
     if not targets:
         print("No artists without a Spotify ID found.")
@@ -41,18 +41,26 @@ async def run_spotify_search_workflow():
 
     print(f"Found {len(targets)} artists to search.")
     
-    # 2. Scrape
+    # 2. Scrape (Playwright requires ProactorEventLoop on Windows)
+    # We run this in a separate thread to allow a different loop policy
+    def scraper_thread_runner(names):
+        import asyncio
+        if sys.platform == 'win32':
+             asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+        return asyncio.run(run_spotify_search_scraper(names))
+
+    print("Launching browser-based scraper in isolation...")
     artist_names = [t['artist_name'] for t in targets]
-    results = await run_spotify_search_scraper(artist_names)
+    results = await asyncio.to_thread(scraper_thread_runner, artist_names)
     
-    # Re-attach database IDs
+    # Re-attach database IDs to results
     for i, res in enumerate(results):
         if i < len(targets):
             res["db_id"] = targets[i]["db_id"]
 
-    # 3. Save
+    # 3. Save to DB (Works on SelectorEventLoop)
     if results:
-        print(f"\nSaving results back to database...")
+        print(f"\nSaving {len(results)} results back to database...")
         await save_results_to_db(results)
     else:
         print("No results to save.")
@@ -117,10 +125,10 @@ async def main():
         await interactive_menu()
 
 if __name__ == "__main__":
-    # Windows-specific fix: Playwright requires ProactorEventLoop.
-    # Modern psycopg/sqlalchemy also supports Proactor.
+    # Windows-specific fix: Psycopg requires SelectorEventLoop for async operations.
+    # We use this as the primary loop for DB and Menu interaction.
     if sys.platform == 'win32':
-        asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         
     try:
         asyncio.run(main())
