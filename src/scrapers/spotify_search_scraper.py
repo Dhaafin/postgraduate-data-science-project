@@ -1,11 +1,12 @@
 """
-Spotify Search API Scraper (Testing Version)
+Spotify Search Console Scraper
 
-This script automates the process of extracting API response data from the Spotify 
-for Developers documentation page (Search endpoint).
+This script automates the process of extracting artist metadata from the Spotify 
+for Developers Search endpoint console. 
 
-For testing purposes, this version uses a hardcoded list of artist names
-instead of fetching from the database, and simply prints the results.
+It uses Playwright to simulate browser interaction, allowing for data extraction
+without requiring direct API credential management for every run, by leveraging
+the interactive 'Try it' console.
 """
 
 import asyncio
@@ -16,9 +17,14 @@ from playwright.async_api import async_playwright
 
 async def run_spotify_search_scraper(artists_to_search):
     """
-    Opens Firefox, navigates to the Spotify docs console, sets up search filters,
-    loops through each artist query, and collects the response.
-    Returns a list of result dicts.
+    Orchestrates the browser automation for the Spotify Search console.
+
+    Args:
+        artists_to_search (list): A list of artist names (strings) to query.
+
+    Returns:
+        list: A list of dictionaries containing extracted artist metadata 
+              (ID, followers, genres, popularity, etc.).
     """
     base_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.join(base_dir, "../../")
@@ -44,7 +50,7 @@ async def run_spotify_search_scraper(artists_to_search):
         print(f"Navigating to {url}...")
         await page.goto(url, wait_until="load", timeout=60000)
 
-        # Selectors based on provided HTML
+        # DOM Selectors for the Spotify Developer Console
         remove_album_selector  = 'div[aria-label="Remove album"]'
         type_input_selector    = 'input#react-select-2-input'
         query_input_selector   = 'input[data-encore-id="formInput"]'
@@ -158,10 +164,10 @@ if __name__ == "__main__":
     if sys.platform == 'win32':
         asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
 
-    # Hardcoded list of artists to test with
+    # List of artists to process (can be expanded or linked to database)
     test_artists = ["batas senja", "fourtwnty", "doxy"]
     
-    print("--- Running Test Spotify Search Scraper ---\n")
+    print("--- Running Spotify Search Scraper ---\n")
     print(f"Artists to search: {test_artists}\n")
     
     results = asyncio.run(run_spotify_search_scraper(test_artists))
