@@ -13,6 +13,7 @@ import asyncio
 import os
 import sys
 import json
+import re
 from playwright.async_api import async_playwright
 
 # Add the project root to sys.path so we can import internal modules (src.*)
@@ -116,16 +117,42 @@ async def run_spotify_search_scraper(artists_to_search):
                 
                 artists_data = data.get("artists", {}).get("items", [])
                 if artists_data:
-                    # Just picking the first result for this test
-                    first_artist = artists_data[0]
-                    spotify_id   = first_artist.get("id")
-                    spotify_link = first_artist.get("external_urls", {}).get("spotify")
-                    followers    = first_artist.get("followers", {}).get("total", 0)
-                    genres       = first_artist.get("genres", [])
-                    popularity   = first_artist.get("popularity", 0)
-                    actual_name  = first_artist.get("name")
+                    # Logic: Filter results to ensure there is meaningful name overlap.
+                    # We want to pick 'Mahalini' when searching for 'Mahalini Raharja' (same person),
+                    # but ignore 'Hindia' when searching for 'Nadhif Basamalah' (unrelated).
+                    
+                    query_clean = query_name.lower().strip()
+                    query_words = set(re.findall(r'\w+', query_clean))
+                    # Ignore very short common words for matching if they are the only overlap
+                    stop_words = {"the", "and", "feat", "ft", "v", "vs"}
+                    significant_query_words = query_words - stop_words
+                    if not significant_query_words: # fallback to all words if query is only stop words
+                        significant_query_words = query_words
 
-                    print(f"  -> Best Match : {actual_name}")
+                    candidates = []
+                    for artist in artists_data:
+                        name_clean = artist.get("name", "").lower().strip()
+                        name_words = set(re.findall(r'\w+', name_clean))
+                        
+                        # Check for meaningful word overlap
+                        if significant_query_words & name_words:
+                            candidates.append(artist)
+                    
+                    if not candidates:
+                        print(f"  -> No valid matches found with common words for '{query_name}'.")
+                        continue
+
+                    # Logic: Among candidates with name overlap, take the one with the highest popularity
+                    best_match = max(candidates, key=lambda x: x.get("popularity", 0))
+
+                    spotify_id   = best_match.get("id")
+                    spotify_link = best_match.get("external_urls", {}).get("spotify")
+                    followers    = best_match.get("followers", {}).get("total", 0)
+                    genres       = best_match.get("genres", [])
+                    popularity   = best_match.get("popularity", 0)
+                    actual_name  = best_match.get("name")
+
+                    print(f"  -> Best Match : {actual_name} (Selection based on Word Overlap + Popularity)")
                     print(f"  -> Spotify ID : {spotify_id}")
                     print(f"  -> Followers  : {followers:,}")
                     print(f"  -> Genres     : {', '.join(genres) if genres else 'N/A'}")
