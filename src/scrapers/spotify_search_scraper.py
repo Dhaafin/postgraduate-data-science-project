@@ -24,7 +24,20 @@ from src.database.connection import engine, update_spotify_id
 
 async def scrape_single_artist(page, query_name, selectors, output_file):
     """
-    Scrapes metadata for a single artist using an existing browser page.
+    Handles the actual browser interaction for a single artist search.
+
+    This function fills the search box, clicks the 'Try it' button, waits for the
+    Spotify console to spit out a JSON response, and then parses it to find 
+    the best possible match.
+
+    Args:
+        page (Page): The Playwright page instance to use.
+        query_name (str): The name of the artist we're looking for.
+        selectors (dict): A map of CSS selectors for the Spotify console.
+        output_file (str): Path to save the raw JSON response for debugging.
+
+    Returns:
+        dict | None: A dictionary of artist metadata if a match is found, else None.
     """
     query_input_selector = selectors['query_input']
     button_selector = selectors['button']
@@ -33,19 +46,20 @@ async def scrape_single_artist(page, query_name, selectors, output_file):
     print(f"Processing: '{query_name}'")
 
     try:
-        # Clear and fill the search query
+        # First, clear the search box and type the artist name
         await page.fill(query_input_selector, "")
         await page.fill(query_input_selector, query_name)
         
+        # Smash that 'Try it' button
         await page.wait_for_selector(button_selector)
         await page.click(button_selector)
         
-        # Wait for JSON response in the console
+        # Wait for the JSON response to appear in the code block
         await page.wait_for_selector(response_selector, state='visible', timeout=15000)
-        await asyncio.sleep(1.5)  # Let response fully render
+        await asyncio.sleep(1.5)  # Give the UI a second to finish rendering
         response_text = await page.inner_text(response_selector)
 
-        # Save the raw JSON for sanity check
+        # Better save a copy of the raw JSON just in case we need to debug later
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(response_text)
 
@@ -53,10 +67,11 @@ async def scrape_single_artist(page, query_name, selectors, output_file):
         artists_data = data.get("artists", {}).get("items", [])
         
         if not artists_data:
-            print(f"  -> No artists found for '{query_name}'.")
+            print(f"  -> No luck. Spotify doesn't seem to have anyone for '{query_name}'.")
             return None
 
-        # Logic: Filter results for meaningful name overlap
+        # We need to be picky here. We only want results where the artist name 
+        # actually makes sense given our search query to avoid grabbing the wrong person.
         query_clean = query_name.lower().strip()
         query_words = set(re.findall(r'\w+', query_clean))
         stop_words = {"the", "and", "feat", "ft", "v", "vs"}
@@ -66,14 +81,15 @@ async def scrape_single_artist(page, query_name, selectors, output_file):
         for artist in artists_data:
             name_clean = artist.get("name", "").lower().strip()
             name_words = set(re.findall(r'\w+', name_clean))
+            # If they share at least one meaningful word, they're a candidate
             if significant_query_words & name_words:
                 candidates.append(artist)
         
         if not candidates:
-            print(f"  -> No valid matches found with common words for '{query_name}'.")
+            print(f"  -> Found some names, but none of them look like a good enough match for '{query_name}'.")
             return None
 
-        # Best match is the most popular among candidates
+        # If we have multiple candidates, we'll bet on the one with the highest popularity
         best_match = max(candidates, key=lambda x: x.get("popularity", 0))
 
         return {
@@ -86,18 +102,23 @@ async def scrape_single_artist(page, query_name, selectors, output_file):
         }
 
     except Exception as e:
-        print(f"  -> Error scraping '{query_name}': {e}")
+        print(f"  -> Oops! Something went wrong while scraping '{query_name}': {e}")
         return None
 
 async def run_spotify_search_scraper():
     """
-    Main orchestration for the continuous scraping loop.
+    The main engine that drives the whole scraping process.
+
+    It sets up the browser, navigates to the Spotify developer console, 
+    and enters a loop that keeps pulling artists from the database and 
+    processing them until there's nobody left to search for.
     """
     base_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.join(base_dir, "../../")
     user_data_dir = os.path.join(project_root, "data/user_data")
     output_file = os.path.join(project_root, "data/raw/spotify_search_response.json")
 
+    # Make sure we have somewhere to put our data
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     os.makedirs(user_data_dir, exist_ok=True)
 
@@ -110,6 +131,7 @@ async def run_spotify_search_scraper():
     }
 
     async with async_playwright() as playwright:
+        # We use a persistent context so we don't have to log in every single time
         print(f"Launching browser (user data: {user_data_dir})...")
         context = await playwright.firefox.launch_persistent_context(
             user_data_dir,
@@ -120,13 +142,14 @@ async def run_spotify_search_scraper():
         page = context.pages[0] if context.pages else await context.new_page()
         url = "https://developer.spotify.com/documentation/web-api/reference/search"
         
-        print(f"Navigating to {url}...")
+        print(f"Heading over to {url}...")
         await page.goto(url, wait_until="load", timeout=60000)
 
-        print("\nBrowser is open. Please log in to Spotify if prompted.")
-        input("Press Enter here once you're logged in and the page is ready to search...")
+        # Give the user a moment to log in or get the page ready
+        print("\nBrowser is open! Please log in to Spotify if you haven't already.")
+        input("Press Enter here once you're logged in and ready to roll...")
 
-        # Setup filters (remove 'album', add 'artist')
+        # Let's set up the filters first so we're only looking for 'artists'
         await page.wait_for_selector(selectors['query_input'], timeout=30000)
         try:
             if await page.locator(selectors['remove_album']).count() > 0:
@@ -135,23 +158,23 @@ async def run_spotify_search_scraper():
             await page.fill(selectors['type_input'], "artist")
             await page.keyboard.press("Enter")
             await asyncio.sleep(1)
-            print("Console filters configured (Artist only).\n")
+            print("Filters set to 'Artist' only. Starting the loop...\n")
         except Exception as e:
-            print(f"Warning: Could not setup filters: {e}")
+            print(f"Warning: Had some trouble setting the filters automatically: {e}")
 
         while True:
-            # Step 1: Fetch the next artist missing data
+            # Step 1: Who's next in the database?
             target = await get_next_target_from_db()
             if not target:
-                print("\nNo more artists to process. Finished!")
+                print("\nLooks like we're all caught up! No more artists to process.")
                 break
 
-            # Step 2: Scrape metadata
+            # Step 2: Try to find them on Spotify
             result = await scrape_single_artist(page, target['artist_name'], selectors, output_file)
             
-            # Step 3: Save results immediately
+            # Step 3: Write what we found straight back to the DB
             if result:
-                print(f"  -> Match found: {result['artist_name']}. Saving...")
+                print(f"  -> Score! Found {result['artist_name']}. Saving to database...")
                 await update_spotify_id(
                     db_id=target['db_id'],
                     spotify_id=result["spotify_id"],
@@ -162,8 +185,8 @@ async def run_spotify_search_scraper():
                     needs_review=False
                 )
             else:
-                print(f"  -> No results for '{target['artist_name']}'. Marking for review.")
-                # Mark it so we don't try it again next time
+                # If we couldn't find them, mark them for a manual review so we don't keep trying
+                print(f"  -> Couldn't find a match for '{target['artist_name']}'. Marking for review.")
                 await update_spotify_id(
                     db_id=target['db_id'],
                     spotify_id="", # Empty but not NULL
@@ -171,7 +194,8 @@ async def run_spotify_search_scraper():
                 )
 
             print("-" * 30)
-            await asyncio.sleep(2) # Modest jitter/delay 
+            # Take a small breather to avoid getting rate-limited or flagged
+            await asyncio.sleep(2)
 
         await context.close()
 
@@ -179,7 +203,12 @@ async def run_spotify_search_scraper():
 # ─── Database Helpers ─────────────────────────────────────────────────────────
 
 async def get_next_target_from_db():
-    """Fetch the next artist who is missing a spotify_id and hasn't failed review."""
+    """
+    Queries the database for the next artist that hasn't been processed yet.
+    
+    It looks for anyone where spotify_id is still NULL and we haven't 
+    already flagged them for review.
+    """
     if not engine:
         return None
     async with engine.begin() as conn:
@@ -201,15 +230,15 @@ async def get_next_target_from_db():
 # ─── Execution Logic ─────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    # Playwright requires ProactorEventLoop on Windows. 
-    # SQLAlchemy/psycopg also works fine with it.
+    # Playwright and SQLAlchemy are a bit finicky on Windows, 
+    # so we enforce the ProactorEventLoop to keep things stable.
     if sys.platform == 'win32':
         asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
     
-    print("--- Continuous Spotify Artist Scraper ---")
+    print("--- Spotify Artist Metadata Scraper ---")
     try:
         asyncio.run(run_spotify_search_scraper())
     except KeyboardInterrupt:
-        print("\nProcess stopped by user.")
+        print("\nStopping... See ya later!")
     except Exception as e:
-        print(f"\nFatal error: {e}")
+        print(f"\nFatal error crashed the scraper: {e}")
