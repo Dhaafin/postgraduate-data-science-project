@@ -22,16 +22,76 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'
 from sqlalchemy import text
 from src.database.connection import engine, update_spotify_id
 
-async def run_spotify_search_scraper(artists_to_search):
+async def scrape_single_artist(page, query_name, selectors, output_file):
     """
-    Orchestrates the browser automation for the Spotify Search console.
+    Scrapes metadata for a single artist using an existing browser page.
+    """
+    query_input_selector = selectors['query_input']
+    button_selector = selectors['button']
+    response_selector = selectors['response']
 
-    Args:
-        artists_to_search (list): A list of artist names (strings) to query.
+    print(f"Processing: '{query_name}'")
 
-    Returns:
-        list: A list of dictionaries containing extracted artist metadata 
-              (ID, followers, genres, popularity, etc.).
+    try:
+        # Clear and fill the search query
+        await page.fill(query_input_selector, "")
+        await page.fill(query_input_selector, query_name)
+        
+        await page.wait_for_selector(button_selector)
+        await page.click(button_selector)
+        
+        # Wait for JSON response in the console
+        await page.wait_for_selector(response_selector, state='visible', timeout=15000)
+        await asyncio.sleep(1.5)  # Let response fully render
+        response_text = await page.inner_text(response_selector)
+
+        # Save the raw JSON for sanity check
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write(response_text)
+
+        data = json.loads(response_text)
+        artists_data = data.get("artists", {}).get("items", [])
+        
+        if not artists_data:
+            print(f"  -> No artists found for '{query_name}'.")
+            return None
+
+        # Logic: Filter results for meaningful name overlap
+        query_clean = query_name.lower().strip()
+        query_words = set(re.findall(r'\w+', query_clean))
+        stop_words = {"the", "and", "feat", "ft", "v", "vs"}
+        significant_query_words = query_words - stop_words or query_words
+
+        candidates = []
+        for artist in artists_data:
+            name_clean = artist.get("name", "").lower().strip()
+            name_words = set(re.findall(r'\w+', name_clean))
+            if significant_query_words & name_words:
+                candidates.append(artist)
+        
+        if not candidates:
+            print(f"  -> No valid matches found with common words for '{query_name}'.")
+            return None
+
+        # Best match is the most popular among candidates
+        best_match = max(candidates, key=lambda x: x.get("popularity", 0))
+
+        return {
+            "artist_name":  best_match.get("name"),
+            "spotify_id":   best_match.get("id"),
+            "spotify_link": best_match.get("external_urls", {}).get("spotify"),
+            "followers":    best_match.get("followers", {}).get("total", 0),
+            "genres":       best_match.get("genres", []),
+            "popularity":   best_match.get("popularity", 0)
+        }
+
+    except Exception as e:
+        print(f"  -> Error scraping '{query_name}': {e}")
+        return None
+
+async def run_spotify_search_scraper():
+    """
+    Main orchestration for the continuous scraping loop.
     """
     base_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.join(base_dir, "../../")
@@ -41,234 +101,115 @@ async def run_spotify_search_scraper(artists_to_search):
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     os.makedirs(user_data_dir, exist_ok=True)
 
-    results = []
+    selectors = {
+        'remove_album': 'div[aria-label="Remove album"]',
+        'type_input': 'input#react-select-2-input',
+        'query_input': 'input[data-encore-id="formInput"]',
+        'button': 'button:has-text("Try it")',
+        'response': 'pre.sc-dcdedfe6-0.ePqgwR'
+    }
 
-    playwright = await async_playwright().start()
-    print(f"Launching browser (user data: {user_data_dir})...")
-    context = await playwright.firefox.launch_persistent_context(
-        user_data_dir,
-        headless=False,
-        args=["--start-maximized"]
-    )
-
-    try:
+    async with async_playwright() as playwright:
+        print(f"Launching browser (user data: {user_data_dir})...")
+        context = await playwright.firefox.launch_persistent_context(
+            user_data_dir,
+            headless=False,
+            args=["--start-maximized"]
+        )
+        
         page = context.pages[0] if context.pages else await context.new_page()
         url = "https://developer.spotify.com/documentation/web-api/reference/search"
+        
         print(f"Navigating to {url}...")
         await page.goto(url, wait_until="load", timeout=60000)
 
-        # DOM Selectors for the Spotify Developer Console
-        remove_album_selector  = 'div[aria-label="Remove album"]'
-        type_input_selector    = 'input#react-select-2-input'
-        query_input_selector   = 'input[data-encore-id="formInput"]'
-        button_selector        = 'button:has-text("Try it")'
-        response_selector      = 'pre.sc-dcdedfe6-0.ePqgwR'
-
         print("\nBrowser is open. Please log in to Spotify if prompted.")
-        print("(Press Ctrl+C at any time to cancel.)\n")
-        try:
-            input("Press Enter here once you're logged in and the page is ready...")
-        except KeyboardInterrupt:
-            print("\nCanceled.")
-            print("(Browser is still open. Close it manually.)")
-            await asyncio.sleep(float('inf'))
-
-        await page.wait_for_selector(query_input_selector, timeout=30000)
-        print("Console detected! Setting up filters...\n")
+        input("Press Enter here once you're logged in and the page is ready to search...")
 
         # Setup filters (remove 'album', add 'artist')
+        await page.wait_for_selector(selectors['query_input'], timeout=30000)
         try:
-            if await page.locator(remove_album_selector).count() > 0:
-                await page.click(remove_album_selector)
-                print("  -> Removed default 'album' filter.")
+            if await page.locator(selectors['remove_album']).count() > 0:
+                await page.click(selectors['remove_album'])
                 await asyncio.sleep(0.5)
-            
-            await page.fill(type_input_selector, "artist")
+            await page.fill(selectors['type_input'], "artist")
             await page.keyboard.press("Enter")
-            print("  -> Added 'artist' filter.")
             await asyncio.sleep(1)
+            print("Console filters configured (Artist only).\n")
         except Exception as e:
-            print(f"Warning: Could not setup filters automatically: {e}")
+            print(f"Warning: Could not setup filters: {e}")
 
-        print("\nStarting to process queries...\n")
+        while True:
+            # Step 1: Fetch the next artist missing data
+            target = await get_next_target_from_db()
+            if not target:
+                print("\nNo more artists to process. Finished!")
+                break
 
-        for query_name in artists_to_search:
-            print(f"Processing: '{query_name}'")
+            # Step 2: Scrape metadata
+            result = await scrape_single_artist(page, target['artist_name'], selectors, output_file)
+            
+            # Step 3: Save results immediately
+            if result:
+                print(f"  -> Match found: {result['artist_name']}. Saving...")
+                await update_spotify_id(
+                    db_id=target['db_id'],
+                    spotify_id=result["spotify_id"],
+                    spotify_link=result["spotify_link"],
+                    genre=result["genres"],
+                    followers=result["followers"],
+                    popularity=result["popularity"],
+                    needs_review=False
+                )
+            else:
+                print(f"  -> No results for '{target['artist_name']}'. Marking for review.")
+                # Mark it so we don't try it again next time
+                await update_spotify_id(
+                    db_id=target['db_id'],
+                    spotify_id="", # Empty but not NULL
+                    needs_review=True
+                )
 
-            # Empties the input using filling with empty string, but sometimes needs double check
-            await page.fill(query_input_selector, "")
-            await page.fill(query_input_selector, query_name)
-            print(f"  -> Filled search query.")
+            print("-" * 30)
+            await asyncio.sleep(2) # Modest jitter/delay 
 
-            await page.wait_for_selector(button_selector)
-            await page.click(button_selector)
-            print(f"  -> Clicked 'Try it'. Waiting for response...")
+        await context.close()
 
-            await page.wait_for_selector(response_selector, state='visible', timeout=15000)
-            await asyncio.sleep(1.5)  # let response fully render/update
-            response_text = await page.inner_text(response_selector)
-
-            # Save the raw JSON
-            with open(output_file, "w", encoding="utf-8") as f:
-                f.write(response_text)
-
-            try:
-                data = json.loads(response_text)
-                
-                artists_data = data.get("artists", {}).get("items", [])
-                if artists_data:
-                    # Logic: Filter results to ensure there is meaningful name overlap.
-                    # We want to pick 'Mahalini' when searching for 'Mahalini Raharja' (same person),
-                    # but ignore 'Hindia' when searching for 'Nadhif Basamalah' (unrelated).
-                    
-                    query_clean = query_name.lower().strip()
-                    query_words = set(re.findall(r'\w+', query_clean))
-                    # Ignore very short common words for matching if they are the only overlap
-                    stop_words = {"the", "and", "feat", "ft", "v", "vs"}
-                    significant_query_words = query_words - stop_words
-                    if not significant_query_words: # fallback to all words if query is only stop words
-                        significant_query_words = query_words
-
-                    candidates = []
-                    for artist in artists_data:
-                        name_clean = artist.get("name", "").lower().strip()
-                        name_words = set(re.findall(r'\w+', name_clean))
-                        
-                        # Check for meaningful word overlap
-                        if significant_query_words & name_words:
-                            candidates.append(artist)
-                    
-                    if not candidates:
-                        print(f"  -> No valid matches found with common words for '{query_name}'.")
-                        continue
-
-                    # Logic: Among candidates with name overlap, take the one with the highest popularity
-                    best_match = max(candidates, key=lambda x: x.get("popularity", 0))
-
-                    spotify_id   = best_match.get("id")
-                    spotify_link = best_match.get("external_urls", {}).get("spotify")
-                    followers    = best_match.get("followers", {}).get("total", 0)
-                    genres       = best_match.get("genres", [])
-                    popularity   = best_match.get("popularity", 0)
-                    actual_name  = best_match.get("name")
-
-                    print(f"  -> Best Match : {actual_name} (Selection based on Word Overlap + Popularity)")
-                    print(f"  -> Spotify ID : {spotify_id}")
-                    print(f"  -> Followers  : {followers:,}")
-                    print(f"  -> Genres     : {', '.join(genres) if genres else 'N/A'}")
-                    print(f"  -> Popularity : {popularity}")
-
-                    results.append({
-                        "query_name":   query_name,
-                        "artist_name":  actual_name,
-                        "spotify_id":   spotify_id,
-                        "spotify_link": spotify_link,
-                        "followers":    followers,
-                        "genres":       genres,
-                        "popularity":   popularity
-                    })
-                else:
-                    print("  -> No artists found in the JSON response.")
-
-            except json.JSONDecodeError:
-                print(f"  -> Could not parse response. Raw: {response_text[:200]}")
-
-            await asyncio.sleep(1.5)
-            print("-" * 40)
-
-    except Exception as e:
-        print(f"\nError: {e}")
-
-    print("\n--- Scraping done. ---")
-    try:
-        input("Press Enter to close browser and exit...")
-    except KeyboardInterrupt:
-        pass
-        
-    await context.close()
-    await playwright.stop()
-
-    return results
 
 # ─── Database Helpers ─────────────────────────────────────────────────────────
 
-async def get_search_targets_from_db(limit=3):
-    """Fetch the top N artists from the database who are missing a spotify_id."""
+async def get_next_target_from_db():
+    """Fetch the next artist who is missing a spotify_id and hasn't failed review."""
     if not engine:
-        return []
+        return None
     async with engine.begin() as conn:
-        # We target the lowest IDs first as requested
         result = await conn.execute(
-            text("SELECT id, artist_name FROM music_data WHERE spotify_id IS NULL OR spotify_id = '' ORDER BY id ASC LIMIT :limit"),
-            {"limit": limit}
+            text("""
+                SELECT id, artist_name 
+                FROM music_data 
+                WHERE (spotify_id IS NULL OR spotify_id = '') 
+                  AND (needs_review IS FALSE OR needs_review IS NULL)
+                ORDER BY id ASC 
+                LIMIT 1
+            """)
         )
-        return [{"db_id": row[0], "artist_name": row[1]} for row in result.fetchall()]
+        row = result.fetchone()
+        return {"db_id": row[0], "artist_name": row[1]} if row else None
 
-async def save_results_to_db(results):
-    """Persist the scraped metadata back to the PostgreSQL database."""
-    for r in results:
-        # Avoid saving if no match was found (query_name is always present, but others might not be)
-        if not r.get("spotify_id"):
-            continue
-
-        print(f"  -> Saving '{r['artist_name']}' (ID: {r['db_id']}) to database...")
-        await update_spotify_id(
-            db_id=r["db_id"],
-            spotify_id=r["spotify_id"],
-            spotify_link=r["spotify_link"],
-            genre=r["genres"],
-            followers=r["followers"],
-            popularity=r["popularity"]
-        )
-    print("Database update complete.")
+# Note: save_results_to_db is no longer needed as we save one-by-one inside run_spotify_search_scraper
 
 # ─── Execution Logic ─────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    from sqlalchemy import text
-    
-    # Requirement: Test with 3 artists with the lowest IDs
-    LIMIT = 3
-
-    # Step 1: Fetch targets (Requires SelectorEventLoop on Windows for psycopg)
-    print(f"Fetching artists with the lowest IDs missing Spotify data (Limit: {LIMIT})...")
-    
-    # Setup loop policy for DB operations
-    if sys.platform == 'win32':
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    
-    db_loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(db_loop)
-    targets = db_loop.run_until_complete(get_search_targets_from_db(limit=LIMIT))
-    db_loop.close()
-
-    if not targets:
-        print("No artists without a Spotify ID found in the database. Process complete!")
-        sys.exit(0)
-
-    print(f"Found {len(targets)} artists to process: {[t['artist_name'] for t in targets]}\n")
-
-    # Step 2: Scrape metadata (Requires ProactorEventLoop on Windows for Playwright)
+    # Playwright requires ProactorEventLoop on Windows. 
+    # SQLAlchemy/psycopg also works fine with it.
     if sys.platform == 'win32':
         asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
-
-    # Map database records to a simple list of names for the scraper logic
-    artist_names = [t['artist_name'] for t in targets]
-    results = asyncio.run(run_spotify_search_scraper(artist_names))
-
-    # Re-attach database IDs to the results so we can save them
-    for i, res in enumerate(results):
-        res["db_id"] = targets[i]["db_id"]
-
-    # Step 3: Save results (Switch back to SelectorEventLoop)
-    if results:
-        print(f"\nSaving {len(results)} results back to the database...")
-        if sys.platform == 'win32':
-            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-        
-        save_loop = asyncio.new_event_loop()
-        save_loop.run_until_complete(save_results_to_db(results))
-        save_loop.close()
-        print("Success: All artists processed.")
-    else:
-        print("No matches were found to save.")
+    
+    print("--- Continuous Spotify Artist Scraper ---")
+    try:
+        asyncio.run(run_spotify_search_scraper())
+    except KeyboardInterrupt:
+        print("\nProcess stopped by user.")
+    except Exception as e:
+        print(f"\nFatal error: {e}")

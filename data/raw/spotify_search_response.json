@@ -1,639 +1,671 @@
 {
   "artists": {
-    "href": "https://api.spotify.com/v1/search?offset=0&limit=20&query=doxy&type=artist&locale=en-US,en;q%3D0.5",
+    "href": "https://api.spotify.com/v1/search?offset=0&limit=20&query=Lyodra&type=artist&locale=en-US,en;q%3D0.5",
     "limit": 20,
-    "next": null,
+    "next": "https://api.spotify.com/v1/search?offset=20&limit=20&query=Lyodra&type=artist&locale=en-US,en;q%3D0.5",
     "offset": 0,
     "previous": null,
-    "total": 20,
+    "total": 37,
     "items": [
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/53cxhnmtnZSM1M1ueVRBYC"
+          "spotify": "https://open.spotify.com/artist/6Sv2jkzH9sWQjwghW5ArMG"
         },
         "followers": {
           "href": null,
-          "total": 54
+          "total": 8039413
         },
-        "genres": ["breakcore", "idm"],
-        "href": "https://api.spotify.com/v1/artists/53cxhnmtnZSM1M1ueVRBYC",
-        "id": "53cxhnmtnZSM1M1ueVRBYC",
+        "genres": ["indonesian pop", "batak", "malay"],
+        "href": "https://api.spotify.com/v1/artists/6Sv2jkzH9sWQjwghW5ArMG",
+        "id": "6Sv2jkzH9sWQjwghW5ArMG",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab67616d0000b27390c9cfcff1ced1b8560b0131",
+            "url": "https://i.scdn.co/image/ab6761610000e5eb8a3037f177ab9b5b306cdb89",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616d00001e0290c9cfcff1ced1b8560b0131",
+            "url": "https://i.scdn.co/image/ab676161000051748a3037f177ab9b5b306cdb89",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f1788a3037f177ab9b5b306cdb89",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Lyodra",
+        "popularity": 70,
+        "type": "artist",
+        "uri": "spotify:artist:6Sv2jkzH9sWQjwghW5ArMG"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/3wOsYKZM0zcKNasi3I7fP4"
+        },
+        "followers": {
+          "href": null,
+          "total": 20172678
+        },
+        "genres": ["indonesian pop", "malay"],
+        "href": "https://api.spotify.com/v1/artists/3wOsYKZM0zcKNasi3I7fP4",
+        "id": "3wOsYKZM0zcKNasi3I7fP4",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebd3564043a332daaa882853d6",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174d3564043a332daaa882853d6",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178d3564043a332daaa882853d6",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Mahalini",
+        "popularity": 73,
+        "type": "artist",
+        "uri": "spotify:artist:3wOsYKZM0zcKNasi3I7fP4"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/0kPb52ySN2k9P6wEZPTUzm"
+        },
+        "followers": {
+          "href": null,
+          "total": 9986922
+        },
+        "genres": ["indonesian pop", "malay"],
+        "href": "https://api.spotify.com/v1/artists/0kPb52ySN2k9P6wEZPTUzm",
+        "id": "0kPb52ySN2k9P6wEZPTUzm",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb12d698404d2d020c4212df6b",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000517412d698404d2d020c4212df6b",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f17812d698404d2d020c4212df6b",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Tiara Andini",
+        "popularity": 67,
+        "type": "artist",
+        "uri": "spotify:artist:0kPb52ySN2k9P6wEZPTUzm"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/13y29W8mEcA2gKqUr1SPLJ"
+        },
+        "followers": {
+          "href": null,
+          "total": 517647
+        },
+        "genres": ["indonesian pop"],
+        "href": "https://api.spotify.com/v1/artists/13y29W8mEcA2gKqUr1SPLJ",
+        "id": "13y29W8mEcA2gKqUr1SPLJ",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb6120e795b4df2d105f8e00da",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab676161000051746120e795b4df2d105f8e00da",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f1786120e795b4df2d105f8e00da",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Rony Parulian",
+        "popularity": 68,
+        "type": "artist",
+        "uri": "spotify:artist:13y29W8mEcA2gKqUr1SPLJ"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/2wZWkw5jo8P4NVonVanxYd"
+        },
+        "followers": {
+          "href": null,
+          "total": 3065834
+        },
+        "genres": ["indonesian pop", "malay"],
+        "href": "https://api.spotify.com/v1/artists/2wZWkw5jo8P4NVonVanxYd",
+        "id": "2wZWkw5jo8P4NVonVanxYd",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb5d26ae066df9306985e7e327",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab676161000051745d26ae066df9306985e7e327",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f1785d26ae066df9306985e7e327",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Ziva Magnolya",
+        "popularity": 61,
+        "type": "artist",
+        "uri": "spotify:artist:2wZWkw5jo8P4NVonVanxYd"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/1NjxFrpEGZTV2Ny0OJxeWu"
+        },
+        "followers": {
+          "href": null,
+          "total": 2283569
+        },
+        "genres": ["indonesian indie", "indonesian pop"],
+        "href": "https://api.spotify.com/v1/artists/1NjxFrpEGZTV2Ny0OJxeWu",
+        "id": "1NjxFrpEGZTV2Ny0OJxeWu",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb9851e03dd83ff72ee25bf8ca",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab676161000051749851e03dd83ff72ee25bf8ca",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f1789851e03dd83ff72ee25bf8ca",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Sal Priadi",
+        "popularity": 77,
+        "type": "artist",
+        "uri": "spotify:artist:1NjxFrpEGZTV2Ny0OJxeWu"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/3tMTXQyRrPmMyHv5SoC0TV"
+        },
+        "followers": {
+          "href": null,
+          "total": 3864994
+        },
+        "genres": ["indonesian pop", "indonesian indie"],
+        "href": "https://api.spotify.com/v1/artists/3tMTXQyRrPmMyHv5SoC0TV",
+        "id": "3tMTXQyRrPmMyHv5SoC0TV",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebd966b59ac3edc236b907b33e",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174d966b59ac3edc236b907b33e",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178d966b59ac3edc236b907b33e",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Juicy Luicy",
+        "popularity": 71,
+        "type": "artist",
+        "uri": "spotify:artist:3tMTXQyRrPmMyHv5SoC0TV"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/4xoK0HXFj0pCT3o3veUvGg"
+        },
+        "followers": {
+          "href": null,
+          "total": 2551
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/4xoK0HXFj0pCT3o3veUvGg",
+        "id": "4xoK0HXFj0pCT3o3veUvGg",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000b2733da97bfe6f8f4853daa87367",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e023da97bfe6f8f4853daa87367",
             "height": 300,
             "width": 300
           },
           {
-            "url": "https://i.scdn.co/image/ab67616d0000485190c9cfcff1ced1b8560b0131",
+            "url": "https://i.scdn.co/image/ab67616d000048513da97bfe6f8f4853daa87367",
             "height": 64,
             "width": 64
           }
         ],
-        "name": "Doxy",
-        "popularity": 0,
+        "name": "Lyodra Ginting",
+        "popularity": 3,
         "type": "artist",
-        "uri": "spotify:artist:53cxhnmtnZSM1M1ueVRBYC"
+        "uri": "spotify:artist:4xoK0HXFj0pCT3o3veUvGg"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/6rrUY5cHbAhWa2DZd2lcVx"
+          "spotify": "https://open.spotify.com/artist/4EiSzlOeMnJcp2U8ayCQ3a"
         },
         "followers": {
           "href": null,
-          "total": 29
+          "total": 4142033
         },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/6rrUY5cHbAhWa2DZd2lcVx",
-        "id": "6rrUY5cHbAhWa2DZd2lcVx",
+        "genres": ["indonesian pop", "malay"],
+        "href": "https://api.spotify.com/v1/artists/4EiSzlOeMnJcp2U8ayCQ3a",
+        "id": "4EiSzlOeMnJcp2U8ayCQ3a",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebea442e6234433e1500d25340",
+            "url": "https://i.scdn.co/image/ab6761610000e5ebd2eda3d4eaf6d9aec9226aea",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616100005174ea442e6234433e1500d25340",
+            "url": "https://i.scdn.co/image/ab67616100005174d2eda3d4eaf6d9aec9226aea",
             "height": 320,
             "width": 320
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f178ea442e6234433e1500d25340",
+            "url": "https://i.scdn.co/image/ab6761610000f178d2eda3d4eaf6d9aec9226aea",
             "height": 160,
             "width": 160
           }
         ],
-        "name": "Doxy Dolla",
-        "popularity": 0,
+        "name": "Keisya Levronka",
+        "popularity": 60,
         "type": "artist",
-        "uri": "spotify:artist:6rrUY5cHbAhWa2DZd2lcVx"
+        "uri": "spotify:artist:4EiSzlOeMnJcp2U8ayCQ3a"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/1MVFEpYdHtdV3k8Bgs79Pl"
+          "spotify": "https://open.spotify.com/artist/2iDVt6mFbtbDEZG5ax0dTi"
         },
         "followers": {
           "href": null,
-          "total": 795
+          "total": 20646880
         },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/1MVFEpYdHtdV3k8Bgs79Pl",
-        "id": "1MVFEpYdHtdV3k8Bgs79Pl",
+        "genres": ["indonesian pop", "indonesian jazz", "indonesian indie"],
+        "href": "https://api.spotify.com/v1/artists/2iDVt6mFbtbDEZG5ax0dTi",
+        "id": "2iDVt6mFbtbDEZG5ax0dTi",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb4822fa407611bc13d44e046b",
+            "url": "https://i.scdn.co/image/ab6761610000e5eb53462891ab7799f2934b568e",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab676161000051744822fa407611bc13d44e046b",
+            "url": "https://i.scdn.co/image/ab6761610000517453462891ab7799f2934b568e",
             "height": 320,
             "width": 320
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f1784822fa407611bc13d44e046b",
+            "url": "https://i.scdn.co/image/ab6761610000f17853462891ab7799f2934b568e",
             "height": 160,
             "width": 160
           }
         ],
-        "name": "DOXY",
-        "popularity": 1,
+        "name": "Tulus",
+        "popularity": 76,
         "type": "artist",
-        "uri": "spotify:artist:1MVFEpYdHtdV3k8Bgs79Pl"
+        "uri": "spotify:artist:2iDVt6mFbtbDEZG5ax0dTi"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/6z1h7gbbpXd354AaOyoS64"
+          "spotify": "https://open.spotify.com/artist/5OZXWMwDhlYBRvoOfcX0sk"
         },
         "followers": {
           "href": null,
-          "total": 21
+          "total": 4203514
         },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/6z1h7gbbpXd354AaOyoS64",
-        "id": "6z1h7gbbpXd354AaOyoS64",
+        "genres": ["indonesian pop", "indonesian r&b", "indonesian jazz"],
+        "href": "https://api.spotify.com/v1/artists/5OZXWMwDhlYBRvoOfcX0sk",
+        "id": "5OZXWMwDhlYBRvoOfcX0sk",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab67616d0000b273574658a86867de58b89f5e5f",
+            "url": "https://i.scdn.co/image/ab6761610000e5ebe7e88d24bae4d8bdebdf8ae4",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616d00001e02574658a86867de58b89f5e5f",
+            "url": "https://i.scdn.co/image/ab67616100005174e7e88d24bae4d8bdebdf8ae4",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178e7e88d24bae4d8bdebdf8ae4",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Raisa",
+        "popularity": 66,
+        "type": "artist",
+        "uri": "spotify:artist:5OZXWMwDhlYBRvoOfcX0sk"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/3qL7BzwJOXq3EzAio36aLX"
+        },
+        "followers": {
+          "href": null,
+          "total": 2461572
+        },
+        "genres": ["indonesian pop", "malay"],
+        "href": "https://api.spotify.com/v1/artists/3qL7BzwJOXq3EzAio36aLX",
+        "id": "3qL7BzwJOXq3EzAio36aLX",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb299912b504767b61b115792e",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174299912b504767b61b115792e",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178299912b504767b61b115792e",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Ghea Indrawari",
+        "popularity": 66,
+        "type": "artist",
+        "uri": "spotify:artist:3qL7BzwJOXq3EzAio36aLX"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/4cgBCGxtlfap2g6jveB7du"
+        },
+        "followers": {
+          "href": null,
+          "total": 3795051
+        },
+        "genres": ["indonesian pop", "malay", "indonesian r&b"],
+        "href": "https://api.spotify.com/v1/artists/4cgBCGxtlfap2g6jveB7du",
+        "id": "4cgBCGxtlfap2g6jveB7du",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb8d58eb4a3cd3941609327ec4",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab676161000051748d58eb4a3cd3941609327ec4",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f1788d58eb4a3cd3941609327ec4",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Afgan",
+        "popularity": 69,
+        "type": "artist",
+        "uri": "spotify:artist:4cgBCGxtlfap2g6jveB7du"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/7lXTU6VtJQWfiN2vuZyzqf"
+        },
+        "followers": {
+          "href": null,
+          "total": 206870
+        },
+        "genres": ["indonesian pop"],
+        "href": "https://api.spotify.com/v1/artists/7lXTU6VtJQWfiN2vuZyzqf",
+        "id": "7lXTU6VtJQWfiN2vuZyzqf",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb934677a1fdc1deb7492f26b0",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174934677a1fdc1deb7492f26b0",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178934677a1fdc1deb7492f26b0",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Anggis Devaki",
+        "popularity": 67,
+        "type": "artist",
+        "uri": "spotify:artist:7lXTU6VtJQWfiN2vuZyzqf"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/7qP8p338vhBcSyfSUcWN05"
+        },
+        "followers": {
+          "href": null,
+          "total": 19
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/7qP8p338vhBcSyfSUcWN05",
+        "id": "7qP8p338vhBcSyfSUcWN05",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000b273c93e8295c2cff313830250b1",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e02c93e8295c2cff313830250b1",
             "height": 300,
             "width": 300
           },
           {
-            "url": "https://i.scdn.co/image/ab67616d00004851574658a86867de58b89f5e5f",
+            "url": "https://i.scdn.co/image/ab67616d00004851c93e8295c2cff313830250b1",
             "height": 64,
             "width": 64
           }
         ],
-        "name": "Doxy Sounds",
+        "name": "Lyodra Mahalini",
         "popularity": 0,
         "type": "artist",
-        "uri": "spotify:artist:6z1h7gbbpXd354AaOyoS64"
+        "uri": "spotify:artist:7qP8p338vhBcSyfSUcWN05"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/7BiPPDMkYUVNZgqeBt2LiV"
+          "spotify": "https://open.spotify.com/artist/5LqtNIUYgOoVah4d7Q8RWP"
         },
         "followers": {
           "href": null,
-          "total": 51
+          "total": 6041
+        },
+        "genres": ["hipdut"],
+        "href": "https://api.spotify.com/v1/artists/5LqtNIUYgOoVah4d7Q8RWP",
+        "id": "5LqtNIUYgOoVah4d7Q8RWP",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb92ee8784511077aba484bee9",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000517492ee8784511077aba484bee9",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f17892ee8784511077aba484bee9",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "LyoraChay",
+        "popularity": 34,
+        "type": "artist",
+        "uri": "spotify:artist:5LqtNIUYgOoVah4d7Q8RWP"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/3FCaleXnXly79N8wtldaW8"
+        },
+        "followers": {
+          "href": null,
+          "total": 0
         },
         "genres": [],
-        "href": "https://api.spotify.com/v1/artists/7BiPPDMkYUVNZgqeBt2LiV",
-        "id": "7BiPPDMkYUVNZgqeBt2LiV",
+        "href": "https://api.spotify.com/v1/artists/3FCaleXnXly79N8wtldaW8",
+        "id": "3FCaleXnXly79N8wtldaW8",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebaa2db1243b2d915f079d0924",
+            "url": "https://i.scdn.co/image/ab67616d0000b27364ff0d9a32b73ea88cb87fd1",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616100005174aa2db1243b2d915f079d0924",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f178aa2db1243b2d915f079d0924",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Doxycodone",
-        "popularity": 0,
-        "type": "artist",
-        "uri": "spotify:artist:7BiPPDMkYUVNZgqeBt2LiV"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/3DBRYmclbm4Xe9tU1PnbSr"
-        },
-        "followers": {
-          "href": null,
-          "total": 23
-        },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/3DBRYmclbm4Xe9tU1PnbSr",
-        "id": "3DBRYmclbm4Xe9tU1PnbSr",
-        "images": [],
-        "name": "DOXA (Saykoji & Gaby Cristy)",
-        "popularity": 10,
-        "type": "artist",
-        "uri": "spotify:artist:3DBRYmclbm4Xe9tU1PnbSr"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/7sIGEYfllS5VN2Fj0QCtX4"
-        },
-        "followers": {
-          "href": null,
-          "total": 36620
-        },
-        "genres": ["desi hip hop", "punjabi hip hop", "punjabi pop", "hindi hip hop"],
-        "href": "https://api.spotify.com/v1/artists/7sIGEYfllS5VN2Fj0QCtX4",
-        "id": "7sIGEYfllS5VN2Fj0QCtX4",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb1aeee0f28a924636429fed8b",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab676161000051741aeee0f28a924636429fed8b",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f1781aeee0f28a924636429fed8b",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "dox",
-        "popularity": 53,
-        "type": "artist",
-        "uri": "spotify:artist:7sIGEYfllS5VN2Fj0QCtX4"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/1HliyC4gHWRHHFy3CjR3Bp"
-        },
-        "followers": {
-          "href": null,
-          "total": 3
-        },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/1HliyC4gHWRHHFy3CjR3Bp",
-        "id": "1HliyC4gHWRHHFy3CjR3Bp",
-        "images": [],
-        "name": "Doxy601",
-        "popularity": 1,
-        "type": "artist",
-        "uri": "spotify:artist:1HliyC4gHWRHHFy3CjR3Bp"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/3HmqqQJpGMYhSipApCheaA"
-        },
-        "followers": {
-          "href": null,
-          "total": 2289
-        },
-        "genres": ["future house", "bass house"],
-        "href": "https://api.spotify.com/v1/artists/3HmqqQJpGMYhSipApCheaA",
-        "id": "3HmqqQJpGMYhSipApCheaA",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb7ccfd3f433d8c9c7786702b5",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab676161000051747ccfd3f433d8c9c7786702b5",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f1787ccfd3f433d8c9c7786702b5",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Doxed",
-        "popularity": 14,
-        "type": "artist",
-        "uri": "spotify:artist:3HmqqQJpGMYhSipApCheaA"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/4ShkrXYWInKA0phxReDoAP"
-        },
-        "followers": {
-          "href": null,
-          "total": 2150
-        },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/4ShkrXYWInKA0phxReDoAP",
-        "id": "4ShkrXYWInKA0phxReDoAP",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebd145a9a1f7ec92ebf316f3dc",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616100005174d145a9a1f7ec92ebf316f3dc",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f178d145a9a1f7ec92ebf316f3dc",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "doxplaya",
-        "popularity": 24,
-        "type": "artist",
-        "uri": "spotify:artist:4ShkrXYWInKA0phxReDoAP"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/7uzKFCBLb6SLQ5c4ML6fQw"
-        },
-        "followers": {
-          "href": null,
-          "total": 105307
-        },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/7uzKFCBLb6SLQ5c4ML6fQw",
-        "id": "7uzKFCBLb6SLQ5c4ML6fQw",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb1f00966bc809b75714bc01b5",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab676161000051741f00966bc809b75714bc01b5",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f1781f00966bc809b75714bc01b5",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "DOXX",
-        "popularity": 37,
-        "type": "artist",
-        "uri": "spotify:artist:7uzKFCBLb6SLQ5c4ML6fQw"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/1TnpaTuImv8zdJTgREyZXm"
-        },
-        "followers": {
-          "href": null,
-          "total": 12
-        },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/1TnpaTuImv8zdJTgREyZXm",
-        "id": "1TnpaTuImv8zdJTgREyZXm",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebdd2821bc6bb0bd56d05a0eb8",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616100005174dd2821bc6bb0bd56d05a0eb8",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f178dd2821bc6bb0bd56d05a0eb8",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Doxabeats",
-        "popularity": 7,
-        "type": "artist",
-        "uri": "spotify:artist:1TnpaTuImv8zdJTgREyZXm"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/4sdpIMXLYUaIThOkvaRp6L"
-        },
-        "followers": {
-          "href": null,
-          "total": 881
-        },
-        "genres": ["maluku"],
-        "href": "https://api.spotify.com/v1/artists/4sdpIMXLYUaIThOkvaRp6L",
-        "id": "4sdpIMXLYUaIThOkvaRp6L",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb99411702098c0efe6cbd2cae",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000517499411702098c0efe6cbd2cae",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f17899411702098c0efe6cbd2cae",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Doxz Musika",
-        "popularity": 28,
-        "type": "artist",
-        "uri": "spotify:artist:4sdpIMXLYUaIThOkvaRp6L"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/6PzYc8xVsOpBgfGeGeUCEX"
-        },
-        "followers": {
-          "href": null,
-          "total": 10088
-        },
-        "genres": ["laïko"],
-        "href": "https://api.spotify.com/v1/artists/6PzYc8xVsOpBgfGeGeUCEX",
-        "id": "6PzYc8xVsOpBgfGeGeUCEX",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab67616d0000b273e825b054b913f926d77cf4bf",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616d00001e02e825b054b913f926d77cf4bf",
+            "url": "https://i.scdn.co/image/ab67616d00001e024e4a15547fcfd7191c165ac1",
             "height": 300,
             "width": 300
           },
           {
-            "url": "https://i.scdn.co/image/ab67616d00004851e825b054b913f926d77cf4bf",
+            "url": "https://i.scdn.co/image/ab67616d000048514e4a15547fcfd7191c165ac1",
             "height": 64,
             "width": 64
           }
         ],
-        "name": "Kostas Doxas",
-        "popularity": 39,
+        "name": "Lyodra Patrisa",
+        "popularity": 0,
         "type": "artist",
-        "uri": "spotify:artist:6PzYc8xVsOpBgfGeGeUCEX"
+        "uri": "spotify:artist:3FCaleXnXly79N8wtldaW8"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/6y2aLcjFGcLA813TCEOFC4"
+          "spotify": "https://open.spotify.com/artist/5i6KjwHi1zWjXvJG1SNaYw"
         },
         "followers": {
           "href": null,
-          "total": 2241
+          "total": 0
         },
         "genres": [],
-        "href": "https://api.spotify.com/v1/artists/6y2aLcjFGcLA813TCEOFC4",
-        "id": "6y2aLcjFGcLA813TCEOFC4",
+        "href": "https://api.spotify.com/v1/artists/5i6KjwHi1zWjXvJG1SNaYw",
+        "id": "5i6KjwHi1zWjXvJG1SNaYw",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb79da81ee0840676b5a11b723",
+            "url": "https://i.scdn.co/image/ab67616d0000b2735509a3952c5e66c96f07478e",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000517479da81ee0840676b5a11b723",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f17879da81ee0840676b5a11b723",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "DOXU",
-        "popularity": 40,
-        "type": "artist",
-        "uri": "spotify:artist:6y2aLcjFGcLA813TCEOFC4"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/4b2XoBURQbc9Ou4ZBmes91"
-        },
-        "followers": {
-          "href": null,
-          "total": 6766
-        },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/4b2XoBURQbc9Ou4ZBmes91",
-        "id": "4b2XoBURQbc9Ou4ZBmes91",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebabe6fe7028223e09d6dc43fe",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616100005174abe6fe7028223e09d6dc43fe",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f178abe6fe7028223e09d6dc43fe",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "doxxxelll",
-        "popularity": 37,
-        "type": "artist",
-        "uri": "spotify:artist:4b2XoBURQbc9Ou4ZBmes91"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/5nk8TLI3DoGV9Fyaa7V9JL"
-        },
-        "followers": {
-          "href": null,
-          "total": 615
-        },
-        "genres": ["jazz"],
-        "href": "https://api.spotify.com/v1/artists/5nk8TLI3DoGV9Fyaa7V9JL",
-        "id": "5nk8TLI3DoGV9Fyaa7V9JL",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebc00012bc20dd6734ab79d2bb",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616100005174c00012bc20dd6734ab79d2bb",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f178c00012bc20dd6734ab79d2bb",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "The Dox Band",
-        "popularity": 40,
-        "type": "artist",
-        "uri": "spotify:artist:5nk8TLI3DoGV9Fyaa7V9JL"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/1rlz0TbW8EjjvvOxPxoVsr"
-        },
-        "followers": {
-          "href": null,
-          "total": 14530
-        },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/1rlz0TbW8EjjvvOxPxoVsr",
-        "id": "1rlz0TbW8EjjvvOxPxoVsr",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb689b6f095c951c6119fda93d",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616100005174689b6f095c951c6119fda93d",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f178689b6f095c951c6119fda93d",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "DOXX",
-        "popularity": 27,
-        "type": "artist",
-        "uri": "spotify:artist:1rlz0TbW8EjjvvOxPxoVsr"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/72x1H3FSwlkD3x2hHQ0Fja"
-        },
-        "followers": {
-          "href": null,
-          "total": 239
-        },
-        "genres": ["vinahouse"],
-        "href": "https://api.spotify.com/v1/artists/72x1H3FSwlkD3x2hHQ0Fja",
-        "id": "72x1H3FSwlkD3x2hHQ0Fja",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab67616d0000b2732eff93821372788938c36434",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616d00001e02bfc9eb17c2184dced0c4122f",
+            "url": "https://i.scdn.co/image/ab67616d00001e025509a3952c5e66c96f07478e",
             "height": 300,
             "width": 300
           },
           {
-            "url": "https://i.scdn.co/image/ab67616d00004851bfc9eb17c2184dced0c4122f",
+            "url": "https://i.scdn.co/image/ab67616d000048515509a3952c5e66c96f07478e",
             "height": 64,
             "width": 64
           }
         ],
-        "name": "DoxMain 潇潇",
-        "popularity": 18,
+        "name": "Haikal Lyodra",
+        "popularity": 0,
         "type": "artist",
-        "uri": "spotify:artist:72x1H3FSwlkD3x2hHQ0Fja"
+        "uri": "spotify:artist:5i6KjwHi1zWjXvJG1SNaYw"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/0biTnSm8mvEonGKDfCXbL0"
+          "spotify": "https://open.spotify.com/artist/49r0kOeMLUsbKRkP6m2DeY"
         },
         "followers": {
           "href": null,
           "total": 8
         },
         "genres": [],
-        "href": "https://api.spotify.com/v1/artists/0biTnSm8mvEonGKDfCXbL0",
-        "id": "0biTnSm8mvEonGKDfCXbL0",
+        "href": "https://api.spotify.com/v1/artists/49r0kOeMLUsbKRkP6m2DeY",
+        "id": "49r0kOeMLUsbKRkP6m2DeY",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab67616d0000b27399c7b5a9a9dc56e5c5226958",
+            "url": "https://i.scdn.co/image/ab6761610000e5ebdf13759c47c72ef0730614bf",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616d00001e0299c7b5a9a9dc56e5c5226958",
-            "height": 300,
-            "width": 300
+            "url": "https://i.scdn.co/image/ab67616100005174df13759c47c72ef0730614bf",
+            "height": 320,
+            "width": 320
           },
           {
-            "url": "https://i.scdn.co/image/ab67616d0000485199c7b5a9a9dc56e5c5226958",
-            "height": 64,
-            "width": 64
+            "url": "https://i.scdn.co/image/ab6761610000f178df13759c47c72ef0730614bf",
+            "height": 160,
+            "width": 160
           }
         ],
-        "name": "doxiel",
-        "popularity": 18,
+        "name": "LYORA PRODUCTION",
+        "popularity": 6,
         "type": "artist",
-        "uri": "spotify:artist:0biTnSm8mvEonGKDfCXbL0"
+        "uri": "spotify:artist:49r0kOeMLUsbKRkP6m2DeY"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/0J62MOwu9QfheDw46bm7cj"
+        },
+        "followers": {
+          "href": null,
+          "total": 77
+        },
+        "genres": ["indonesian indie"],
+        "href": "https://api.spotify.com/v1/artists/0J62MOwu9QfheDw46bm7cj",
+        "id": "0J62MOwu9QfheDw46bm7cj",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebd1c1290285bbfb2edb5e758c",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174d1c1290285bbfb2edb5e758c",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178d1c1290285bbfb2edb5e758c",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "LYORAA",
+        "popularity": 24,
+        "type": "artist",
+        "uri": "spotify:artist:0J62MOwu9QfheDw46bm7cj"
       }
     ]
   }
