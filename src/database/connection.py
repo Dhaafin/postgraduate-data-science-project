@@ -5,7 +5,7 @@ Handles connection setup, table initialization, and data refactoring using SQLAl
 
 import os
 import re
-from sqlalchemy import text
+from sqlalchemy import text, create_engine
 from sqlalchemy.ext.asyncio import create_async_engine
 from dotenv import load_dotenv
 
@@ -19,13 +19,22 @@ if DATABASE_URL:
     ASYNC_DB_URL = re.sub(r'^postgresql:', 'postgresql+psycopg:', DATABASE_URL)
 
 def get_db_engine():
-    """Creates a fresh async engine. Useful for avoiding cross-loop pool issues."""
+    """Creates a fresh async engine."""
     if not ASYNC_DB_URL:
         return None
     return create_async_engine(ASYNC_DB_URL)
 
-# Global engine for the main thread/loop
+def get_sync_engine():
+    """Creates a fresh synchronous engine for thread-safe operations on Windows."""
+    if not DATABASE_URL:
+        return None
+    # Ensure it uses the standard psycopg driver for sync calls
+    sync_url = re.sub(r'^postgresql\+psycopg:', 'postgresql:', DATABASE_URL)
+    return create_engine(sync_url)
+
+# Global engines
 engine = get_db_engine()
+sync_engine = get_sync_engine()
 if not engine:
     print("Warning: DATABASE_URL not found in environment.")
 
@@ -168,6 +177,41 @@ async def update_spotify_id(db_id, spotify_id, spotify_link=None, genre=None, fo
         set_str = ", ".join(set_clauses)
         
         await conn.execute(
+            text(f"UPDATE music_data SET {set_str} WHERE id = :id"),
+            params
+        )
+
+def update_spotify_id_sync(db_id, spotify_id, spotify_link=None, genre=None, followers=None, popularity=None, needs_review=None, db_engine=None):
+    """
+    Synchronous version of update_spotify_id for use in threads/Proactor loops.
+    """
+    target_engine = db_engine or sync_engine
+    if not target_engine:
+        return
+    with target_engine.begin() as conn:
+        set_clauses = [
+            "spotify_id = :spotify_id",
+            "spotify_link = :spotify_link",
+            "genre = :genre",
+            "followers = :followers",
+            "popularity = :popularity"
+        ]
+        params = {
+            "spotify_id": spotify_id,
+            "spotify_link": spotify_link,
+            "genre": genre,
+            "followers": followers,
+            "popularity": popularity,
+            "id": db_id
+        }
+        
+        if needs_review is not None:
+            set_clauses.append("needs_review = :needs_review")
+            params["needs_review"] = needs_review
+            
+        set_str = ", ".join(set_clauses)
+        
+        conn.execute(
             text(f"UPDATE music_data SET {set_str} WHERE id = :id"),
             params
         )

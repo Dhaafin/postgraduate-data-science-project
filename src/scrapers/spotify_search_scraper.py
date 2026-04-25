@@ -20,7 +20,7 @@ from playwright.async_api import async_playwright
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 from sqlalchemy import text
-from src.database.connection import engine, update_spotify_id, get_db_engine
+from src.database.connection import engine, update_spotify_id, get_db_engine, sync_engine, update_spotify_id_sync, get_sync_engine
 
 async def scrape_single_artist(page, query_name, selectors, output_file):
     """
@@ -162,27 +162,27 @@ async def run_spotify_search_scraper():
         except Exception as e:
             print(f"Warning: Had some trouble setting the filters automatically: {e}")
 
-        # Use a fresh engine instance for this thread's event loop
-        scraper_engine = get_db_engine()
+        # Use a fresh synchronous engine for this thread
+        scraper_engine = get_sync_engine()
         if not scraper_engine:
             print("Error: Could not create a database engine for the scraper.")
             return
 
         try:
             while True:
-                # Step 1: Who's next in the database?
-                target = await get_next_target_from_db(scraper_engine)
+                # Step 1: Who's next? (Fetch synchronously to avoid Proactor conflict)
+                target = get_next_target_from_db_sync(scraper_engine)
                 if not target:
                     print("\nLooks like we're all caught up! No more artists to process.")
                     break
 
-                # Step 2: Try to find them on Spotify
+                # Step 2: Try to find them on Spotify (This remains async for Playwright)
                 result = await scrape_single_artist(page, target['artist_name'], selectors, output_file)
                 
-                # Step 3: Write what we found straight back to the DB
+                # Step 3: Write results back (Synchronously)
                 if result:
                     print(f"  -> Score! Found {result['artist_name']}. Saving to database...")
-                    await update_spotify_id(
+                    update_spotify_id_sync(
                         db_id=target['db_id'],
                         spotify_id=result["spotify_id"],
                         spotify_link=result["spotify_link"],
@@ -193,35 +193,33 @@ async def run_spotify_search_scraper():
                         db_engine=scraper_engine
                     )
                 else:
-                    # If we couldn't find them, mark them for a manual review so we don't keep trying
                     print(f"  -> Couldn't find a match for '{target['artist_name']}'. Marking for review.")
-                    await update_spotify_id(
+                    update_spotify_id_sync(
                         db_id=target['db_id'],
-                        spotify_id="", # Empty but not NULL
+                        spotify_id="", 
                         needs_review=True,
                         db_engine=scraper_engine
                     )
 
                 print("-" * 30)
-                # Take a small breather to avoid getting rate-limited or flagged
                 await asyncio.sleep(2)
         finally:
-            # Clean up the local engine
-            await scraper_engine.dispose()
+            # Clean up the sync engine if needed
+            scraper_engine.dispose()
 
         await context.close()
 
 
 # ─── Database Helpers ─────────────────────────────────────────────────────────
 
-async def get_next_target_from_db(db_engine):
+def get_next_target_from_db_sync(db_engine):
     """
-    Queries the database for the next artist that hasn't been processed yet.
+    Synchronous version of target fetching.
     """
     if not db_engine:
         return None
-    async with db_engine.begin() as conn:
-        result = await conn.execute(
+    with db_engine.begin() as conn:
+        result = conn.execute(
             text("""
                 SELECT id, artist_name 
                 FROM music_data 
@@ -239,10 +237,11 @@ async def get_next_target_from_db(db_engine):
 # ─── Execution Logic ─────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    # We use SelectorEventLoop because Psycopg requires it on Windows, 
-    # even though Playwright usually prefers Proactor.
+    # On Windows, Playwright REQUIRED the ProactorEventLoop to launch browsers.
+    # Since we now use synchronous database calls, we can safely use Proactor 
+    # without breaking any asynchronous DB drivers.
     if sys.platform == 'win32':
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
     
     print("--- Spotify Artist Metadata Scraper ---")
     try:
