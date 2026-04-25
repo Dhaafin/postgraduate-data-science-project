@@ -9,11 +9,7 @@ import sys
 import argparse
 from src.scrapers.spotify_artist_scraper import run_spotify_scraper
 from src.scrapers.viberate import fetch_viberate_artists
-from src.scrapers.spotify_search_scraper import (
-    run_spotify_search_scraper, 
-    get_search_targets_from_db, 
-    save_results_to_db
-)
+from src.scrapers.spotify_search_scraper import run_spotify_search_scraper
 from src.database.connection import init_db, insert_artist_data
 
 async def run_viberate():
@@ -31,39 +27,17 @@ async def run_spotify_search_workflow():
     """Workflow for the Browser-based Spotify Search Scraper."""
     print("\n--- Running Spotify Search Scraper (Browser) ---")
     
-    # 1. Fetch targets from DB (Works on SelectorEventLoop)
-    print("Fetching artists missing Spotify IDs from database...")
-    targets = await get_search_targets_from_db(limit=5)
-    
-    if not targets:
-        print("No artists without a Spotify ID found.")
-        return
-
-    print(f"Found {len(targets)} artists to search.")
-    
-    # 2. Scrape (Playwright requires ProactorEventLoop on Windows)
-    # We run this in a separate thread to allow a different loop policy
-    def scraper_thread_runner(names):
+    # We still run this in a separate thread because Playwright requires 
+    # the ProactorEventLoop on Windows, while our main loop uses SelectorEventLoop.
+    def scraper_thread_runner():
         import asyncio
         if sys.platform == 'win32':
              asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
-        return asyncio.run(run_spotify_search_scraper(names))
+        return asyncio.run(run_spotify_search_scraper())
 
-    print("Launching browser-based scraper in isolation...")
-    artist_names = [t['artist_name'] for t in targets]
-    results = await asyncio.to_thread(scraper_thread_runner, artist_names)
-    
-    # Re-attach database IDs to results
-    for i, res in enumerate(results):
-        if i < len(targets):
-            res["db_id"] = targets[i]["db_id"]
-
-    # 3. Save to DB (Works on SelectorEventLoop)
-    if results:
-        print(f"\nSaving {len(results)} results back to database...")
-        await save_results_to_db(results)
-    else:
-        print("No results to save.")
+    print("Launching the robust browser-based scraper...")
+    await asyncio.to_thread(scraper_thread_runner)
+    print("Spotify search process completed.")
 
 async def interactive_menu():
     """Displays an interactive console menu with categories."""
