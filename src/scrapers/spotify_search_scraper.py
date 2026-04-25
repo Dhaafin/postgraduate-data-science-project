@@ -239,10 +239,10 @@ async def get_next_target_from_db(db_engine):
 # ─── Execution Logic ─────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    # Playwright and SQLAlchemy are a bit finicky on Windows, 
-    # so we enforce the ProactorEventLoop to keep things stable.
+    # We use SelectorEventLoop because Psycopg requires it on Windows, 
+    # even though Playwright usually prefers Proactor.
     if sys.platform == 'win32':
-        asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     
     print("--- Spotify Artist Metadata Scraper ---")
     try:

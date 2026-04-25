@@ -27,12 +27,12 @@ async def run_spotify_search_workflow():
     """Workflow for the Browser-based Spotify Search Scraper."""
     print("\n--- Running Spotify Search Scraper (Browser) ---")
     
-    # We still run this in a separate thread because Playwright requires 
-    # the ProactorEventLoop on Windows, while our main loop uses SelectorEventLoop.
     def scraper_thread_runner():
         import asyncio
         if sys.platform == 'win32':
-             asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+             # We use SelectorEventLoop because Psycopg requires it on Windows, 
+             # even though Playwright usually prefers Proactor.
+             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         return asyncio.run(run_spotify_search_scraper())
 
     print("Launching the robust browser-based scraper...")
