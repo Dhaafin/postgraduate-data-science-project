@@ -14,11 +14,19 @@ load_dotenv(os.path.join(os.path.dirname(__file__), '../../.env'))
 
 DATABASE_URL = os.getenv('DATABASE_URL')
 # Convert to async psycopg
+ASYNC_DB_URL = None
 if DATABASE_URL:
     ASYNC_DB_URL = re.sub(r'^postgresql:', 'postgresql+psycopg:', DATABASE_URL)
-    engine = create_async_engine(ASYNC_DB_URL)
-else:
-    engine = None
+
+def get_db_engine():
+    """Creates a fresh async engine. Useful for avoiding cross-loop pool issues."""
+    if not ASYNC_DB_URL:
+        return None
+    return create_async_engine(ASYNC_DB_URL)
+
+# Global engine for the main thread/loop
+engine = get_db_engine()
+if not engine:
     print("Warning: DATABASE_URL not found in environment.")
 
 async def init_db():
@@ -117,24 +125,25 @@ async def insert_artist_data(spotify_id, artist_name, spotify_link=None, genre=N
             }
         )
 
-async def get_all_artists():
+async def get_all_artists(db_engine=None):
     """
     Retrieves all artists from the music_data table that don't have a Spotify ID.
-    Returns a list of dicts with 'id' and 'artist_name'.
     """
-    if not engine:
+    target_engine = db_engine or engine
+    if not target_engine:
         return []
-    async with engine.begin() as conn:
+    async with target_engine.begin() as conn:
         result = await conn.execute(text("SELECT id, artist_name FROM music_data WHERE spotify_id IS NULL OR spotify_id = ''"))
         return [{"id": row[0], "artist_name": row[1]} for row in result.fetchall()]
 
-async def update_spotify_id(db_id, spotify_id, spotify_link=None, genre=None, followers=None, popularity=None, needs_review=None):
+async def update_spotify_id(db_id, spotify_id, spotify_link=None, genre=None, followers=None, popularity=None, needs_review=None, db_engine=None):
     """
     Updates the spotify_id and extra metadata for a specific artist in the database.
     """
-    if not engine:
+    target_engine = db_engine or engine
+    if not target_engine:
         return
-    async with engine.begin() as conn:
+    async with target_engine.begin() as conn:
         # Dynamically build the UPDATE SET clause to only update columns that are not None
         set_clauses = [
             "spotify_id = :spotify_id",

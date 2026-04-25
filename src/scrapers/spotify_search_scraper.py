@@ -20,7 +20,7 @@ from playwright.async_api import async_playwright
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 from sqlalchemy import text
-from src.database.connection import engine, update_spotify_id
+from src.database.connection import engine, update_spotify_id, get_db_engine
 
 async def scrape_single_artist(page, query_name, selectors, output_file):
     """
@@ -162,56 +162,65 @@ async def run_spotify_search_scraper():
         except Exception as e:
             print(f"Warning: Had some trouble setting the filters automatically: {e}")
 
-        while True:
-            # Step 1: Who's next in the database?
-            target = await get_next_target_from_db()
-            if not target:
-                print("\nLooks like we're all caught up! No more artists to process.")
-                break
+        # Use a fresh engine instance for this thread's event loop
+        scraper_engine = get_db_engine()
+        if not scraper_engine:
+            print("Error: Could not create a database engine for the scraper.")
+            return
 
-            # Step 2: Try to find them on Spotify
-            result = await scrape_single_artist(page, target['artist_name'], selectors, output_file)
-            
-            # Step 3: Write what we found straight back to the DB
-            if result:
-                print(f"  -> Score! Found {result['artist_name']}. Saving to database...")
-                await update_spotify_id(
-                    db_id=target['db_id'],
-                    spotify_id=result["spotify_id"],
-                    spotify_link=result["spotify_link"],
-                    genre=result["genres"],
-                    followers=result["followers"],
-                    popularity=result["popularity"],
-                    needs_review=False
-                )
-            else:
-                # If we couldn't find them, mark them for a manual review so we don't keep trying
-                print(f"  -> Couldn't find a match for '{target['artist_name']}'. Marking for review.")
-                await update_spotify_id(
-                    db_id=target['db_id'],
-                    spotify_id="", # Empty but not NULL
-                    needs_review=True
-                )
+        try:
+            while True:
+                # Step 1: Who's next in the database?
+                target = await get_next_target_from_db(scraper_engine)
+                if not target:
+                    print("\nLooks like we're all caught up! No more artists to process.")
+                    break
 
-            print("-" * 30)
-            # Take a small breather to avoid getting rate-limited or flagged
-            await asyncio.sleep(2)
+                # Step 2: Try to find them on Spotify
+                result = await scrape_single_artist(page, target['artist_name'], selectors, output_file)
+                
+                # Step 3: Write what we found straight back to the DB
+                if result:
+                    print(f"  -> Score! Found {result['artist_name']}. Saving to database...")
+                    await update_spotify_id(
+                        db_id=target['db_id'],
+                        spotify_id=result["spotify_id"],
+                        spotify_link=result["spotify_link"],
+                        genre=result["genres"],
+                        followers=result["followers"],
+                        popularity=result["popularity"],
+                        needs_review=False,
+                        db_engine=scraper_engine
+                    )
+                else:
+                    # If we couldn't find them, mark them for a manual review so we don't keep trying
+                    print(f"  -> Couldn't find a match for '{target['artist_name']}'. Marking for review.")
+                    await update_spotify_id(
+                        db_id=target['db_id'],
+                        spotify_id="", # Empty but not NULL
+                        needs_review=True,
+                        db_engine=scraper_engine
+                    )
+
+                print("-" * 30)
+                # Take a small breather to avoid getting rate-limited or flagged
+                await asyncio.sleep(2)
+        finally:
+            # Clean up the local engine
+            await scraper_engine.dispose()
 
         await context.close()
 
 
 # ─── Database Helpers ─────────────────────────────────────────────────────────
 
-async def get_next_target_from_db():
+async def get_next_target_from_db(db_engine):
     """
     Queries the database for the next artist that hasn't been processed yet.
-    
-    It looks for anyone where spotify_id is still NULL and we haven't 
-    already flagged them for review.
     """
-    if not engine:
+    if not db_engine:
         return None
-    async with engine.begin() as conn:
+    async with db_engine.begin() as conn:
         result = await conn.execute(
             text("""
                 SELECT id, artist_name 
