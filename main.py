@@ -30,9 +30,8 @@ async def run_spotify_search_workflow():
     def scraper_thread_runner():
         import asyncio
         if sys.platform == 'win32':
-             # We use SelectorEventLoop because Psycopg requires it on Windows, 
-             # even though Playwright usually prefers Proactor.
-             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+             # Now that we use sync DB calls, we can use Proactor for Playwright stability.
+             asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
         return asyncio.run(run_spotify_search_scraper())
 
     print("Launching the robust browser-based scraper...")
