@@ -64,7 +64,11 @@ async def init_db():
                     artist_name TEXT,
                     genre TEXT[],
                     followers INTEGER,
-                    popularity INTEGER
+                    popularity INTEGER,
+                    origin_city TEXT,
+                    origin_province TEXT,
+                    latitude DECIMAL,
+                    longitude DECIMAL
                 );
             """))
         else:
@@ -72,7 +76,11 @@ async def init_db():
             cols_query = await conn.execute(text("SELECT column_name FROM information_schema.columns WHERE table_name = 'music_data' ORDER BY ordinal_position"))
             current_cols = [row[0] for row in cols_query.fetchall()]
             
-            desired_order = ["id", "needs_review", "spotify_id", "spotify_link", "artist_name", "genre", "followers", "popularity"]
+            desired_order = [
+                "id", "needs_review", "spotify_id", "spotify_link", "artist_name", 
+                "genre", "followers", "popularity", "origin_city", "origin_province", 
+                "latitude", "longitude"
+            ]
             
             # If the current columns don't match the desired order, trigger a refactor
             if current_cols != desired_order:
@@ -88,17 +96,26 @@ async def init_db():
                         artist_name TEXT,
                         genre TEXT[],
                         followers INTEGER,
-                        popularity INTEGER
+                        popularity INTEGER,
+                        origin_city TEXT,
+                        origin_province TEXT,
+                        latitude DECIMAL,
+                        longitude DECIMAL
                     );
                 """))
                 
                 # 2. Map existing columns to the new table
-                # We handle columns that might be missing in older versions (like genre/followers)
+                # We handle columns that might be missing in older versions (like genre/followers/geo fields)
                 insert_cols = ["id", "spotify_id", "artist_name"]
                 if 'genre' in current_cols: insert_cols.append("genre")
                 if 'followers' in current_cols: insert_cols.append("followers")
                 if 'popularity' in current_cols: insert_cols.append("popularity")
                 if 'needs_review' in current_cols: insert_cols.append("needs_review")
+                if 'origin_city' in current_cols: insert_cols.append("origin_city")
+                if 'origin_province' in current_cols: insert_cols.append("origin_province")
+                if 'latitude' in current_cols: insert_cols.append("latitude")
+                if 'longitude' in current_cols: insert_cols.append("longitude")
+                if 'spotify_link' in current_cols: insert_cols.append("spotify_link")
                 
                 cols_str = ", ".join(insert_cols)
                 await conn.execute(text(f"INSERT INTO music_data_new ({cols_str}) SELECT {cols_str} FROM music_data"))

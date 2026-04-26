@@ -27,7 +27,7 @@
 ## 🛠️ ACTIVE FEATURE: M4 - Wikipedia/Wikidata Geo-Coding
 > **Objective**: Identify the "Origin City" for each artist to provide the geospatial basis for analysis.
 
-- [ ] **DB Schema Expansion**: Add `origin_city`, `latitude`, and `longitude` columns.
+- [x] **DB Schema Expansion**: Add `origin_city`, `origin_province`, `latitude`, and `longitude` columns.
 - [ ] **Wiki Scraper Prototype**: Extraction of "Asal" or "Tempat lahir" from inflection boxes.
 - [ ] **Geocoding Pipeline**: Integration with OpenStreetMap/Nominatim for coordinate mapping.
 
@@ -45,6 +45,7 @@
 ## 📝 CHRONOLOGICAL ACTIVITY LOG
 | Timestamp | Persona | Action | Impact |
 |:---|:---:|:---|:---|
+| 2026-04-26 | Dev | feat: db schema expansion | Refactored `music_data` table to include geospatial and province fields. |
 | 2026-04-26 | PM | Pivot to Spatial Analysis | Updated Ledger to align with PRD focused on "Jakarta-centrism". |
 | 2026-04-26 | Dev | fix: spotify event loop | Resolved Windows-specific async concurrency issues. |
 | 2026-04-26 | Dev | feat: spotify_search_scraper.py | Added browser-based popularity extraction. |
