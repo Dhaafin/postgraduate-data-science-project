@@ -18,29 +18,32 @@ class WikiGeoScraper:
     def _search_artist_sync(self, artist_name):
         url = "https://id.wikipedia.org/w/api.php"
         
-        # We try multiple disambiguation suffixes
-        suffixes = [" (penyanyi)", " (grup musik)", " (musisi)", ""]
+        # We try standard Wikipedia disambiguation titles
+        titles_to_try = [
+            f"{artist_name} (penyanyi)",
+            f"{artist_name} (grup musik)",
+            f"{artist_name} (musisi)",
+            artist_name
+        ]
         
-        for suffix in suffixes:
+        for title in titles_to_try:
             params = {
                 "action": "query",
-                "list": "search",
-                "srsearch": f'"{artist_name}"{suffix}',
-                "format": "json"
+                "titles": title,
+                "format": "json",
+                "redirects": "true"
             }
             try:
                 response = requests.get(url, params=params, headers=self.headers, timeout=10)
                 data = response.json()
                 
-                if data.get("query", {}).get("search"):
-                    top_result = data["query"]["search"][0]["title"]
-                    # We MUST ensure the core artist name is actually in the page title
-                    # to prevent "Superman Is Dead" searching for "(musisi)" and returning "Jerinx"
-                    if artist_name.lower() not in top_result.lower():
-                        continue
-                    return top_result
+                pages = data.get("query", {}).get("pages", {})
+                for page_id, page_info in pages.items():
+                    # If page_id > 0, the page exists.
+                    if int(page_id) > 0 and "missing" not in page_info:
+                        return page_info["title"]
             except Exception as e:
-                print(f"Error searching Wikipedia for {artist_name}: {e}")
+                print(f"Error checking title {title}: {e}")
                 
         return None
 
@@ -98,8 +101,6 @@ class WikiGeoScraper:
     def parse_origin_string(self, origin_string, is_birthplace=False):
         """
         Splits string into City and Province.
-        If is_birthplace=True (from "Lahir"), it often contains Name and Date first.
-        (e.g., "Didik Prasetyo, 31 Desember 1966 (umur 59), Surakarta, Jawa Tengah")
         """
         # Remove parentheticals like (umur 38)
         origin_string = re.sub(r'\(.*?\)', '', str(origin_string))
@@ -118,20 +119,24 @@ class WikiGeoScraper:
         if not cleaned_parts:
             return None, None
             
-        # If it's a birthplace, the actual location is usually at the END of the list.
-        # e.g. [Name, City, Province] or [Name, City]
-        if is_birthplace and len(cleaned_parts) >= 2:
-            # If the first part looks like a name (not a city), we take the last ones
-            city = cleaned_parts[-2] if len(cleaned_parts) > 2 else cleaned_parts[-1]
-            province = cleaned_parts[-1] if len(cleaned_parts) > 2 else None
-            # If the length is exactly 2, it might be [Name, City] or [City, Province]. 
-            # We'll assume the last is the city if we aren't sure.
-            if len(cleaned_parts) == 2:
-                city = cleaned_parts[1]
-                province = None
+        city, province = None, None
+        
+        if is_birthplace:
+            if len(cleaned_parts) >= 3:
+                # [Name, City, Province] -> Take last two
+                city = cleaned_parts[-2]
+                province = cleaned_parts[-1]
+            elif len(cleaned_parts) == 2:
+                # Usually [City, Province] if they stripped the name
+                city = cleaned_parts[0]
+                province = cleaned_parts[1]
+            elif len(cleaned_parts) == 1:
+                # If there's only 1 part left, are we sure it's a city? Could be a name.
+                # We'll set it to None to be safe, requiring manual review.
+                city = None
         else:
             # "Asal" fields are usually just [City, Province]
-            city = cleaned_parts[0]
+            city = cleaned_parts[0] if cleaned_parts else None
             province = cleaned_parts[1] if len(cleaned_parts) > 1 else None
         
         # Edge Cases
