@@ -19,26 +19,25 @@ class WikiGeoScraper:
         url = "https://id.wikipedia.org/w/api.php"
         
         # We try multiple disambiguation suffixes
-        suffixes = [" (penyanyi)", " (musisi)", " (grup musik)", ""]
+        suffixes = [" (penyanyi)", " (grup musik)", " (musisi)", ""]
         
         for suffix in suffixes:
             params = {
                 "action": "query",
                 "list": "search",
-                "srsearch": f"{artist_name}{suffix}",
+                "srsearch": f'"{artist_name}"{suffix}',
                 "format": "json"
             }
             try:
                 response = requests.get(url, params=params, headers=self.headers, timeout=10)
                 data = response.json()
                 
-                # If we get a result and the title exactly matches our intent, or if it's the bare name fallback
                 if data.get("query", {}).get("search"):
                     top_result = data["query"]["search"][0]["title"]
-                    # To avoid crazy matches like "Gempa bumi" for "Hindia", if we are using the bare name fallback (""),
-                    # we only accept it if the artist name is actually in the title, or we just trust the first result for now.
-                    if suffix == "" and artist_name.lower() not in top_result.lower():
-                        continue # Skip bad bare matches
+                    # We MUST ensure the core artist name is actually in the page title
+                    # to prevent "Superman Is Dead" searching for "(musisi)" and returning "Jerinx"
+                    if artist_name.lower() not in top_result.lower():
+                        continue
                     return top_result
             except Exception as e:
                 print(f"Error searching Wikipedia for {artist_name}: {e}")
@@ -72,7 +71,7 @@ class WikiGeoScraper:
             for row in infobox.find_all("tr"):
                 th = row.find("th")
                 if th:
-                    th_text = th.text.lower()
+                    th_text = th.text.lower().strip()
                     td = row.find("td")
                     if td:
                         # Clean out references
@@ -83,10 +82,11 @@ class WikiGeoScraper:
                         for br in td.find_all("br"):
                             br.replace_with(", ")
                             
-                        if "asal" in th_text:
+                        # STRICT MATCHING to prevent catching "nama lahir"
+                        if th_text in ["asal", "kota asal"]:
                             origin = td.get_text(separator=", ", strip=True)
                             return self.parse_origin_string(origin, is_birthplace=False)
-                        elif "lahir" in th_text:
+                        elif th_text in ["lahir", "tempat lahir"]:
                             origin = td.get_text(separator=", ", strip=True)
                             return self.parse_origin_string(origin, is_birthplace=True)
                             
