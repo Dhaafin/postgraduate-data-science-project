@@ -17,28 +17,32 @@ class WikiGeoScraper:
         
     def _search_artist_sync(self, artist_name):
         url = "https://id.wikipedia.org/w/api.php"
-        # Try with disambiguation first (e.g. "Tulus (musisi)")
-        params = {
-            "action": "query",
-            "list": "search",
-            "srsearch": f"{artist_name} (musisi)",
-            "format": "json"
-        }
-        try:
-            response = requests.get(url, params=params, headers=self.headers, timeout=10)
-            data = response.json()
-            if data.get("query", {}).get("search"):
-                return data["query"]["search"][0]["title"]
+        
+        # We try multiple disambiguation suffixes
+        suffixes = [" (penyanyi)", " (musisi)", " (grup musik)", ""]
+        
+        for suffix in suffixes:
+            params = {
+                "action": "query",
+                "list": "search",
+                "srsearch": f"{artist_name}{suffix}",
+                "format": "json"
+            }
+            try:
+                response = requests.get(url, params=params, headers=self.headers, timeout=10)
+                data = response.json()
                 
-            # Fallback: Plain Name
-            params["srsearch"] = artist_name
-            response = requests.get(url, params=params, headers=self.headers, timeout=10)
-            data = response.json()
-            if data.get("query", {}).get("search"):
-                return data["query"]["search"][0]["title"]
-        except Exception as e:
-            print(f"Error searching Wikipedia for {artist_name}: {e}")
-            
+                # If we get a result and the title exactly matches our intent, or if it's the bare name fallback
+                if data.get("query", {}).get("search"):
+                    top_result = data["query"]["search"][0]["title"]
+                    # To avoid crazy matches like "Gempa bumi" for "Hindia", if we are using the bare name fallback (""),
+                    # we only accept it if the artist name is actually in the title, or we just trust the first result for now.
+                    if suffix == "" and artist_name.lower() not in top_result.lower():
+                        continue # Skip bad bare matches
+                    return top_result
+            except Exception as e:
+                print(f"Error searching Wikipedia for {artist_name}: {e}")
+                
         return None
 
     def _get_infobox_data_sync(self, page_title):
@@ -67,44 +71,71 @@ class WikiGeoScraper:
             origin = None
             for row in infobox.find_all("tr"):
                 th = row.find("th")
-                if th and any(keyword in th.text.lower() for keyword in ["asal", "tempat lahir", "lahir"]):
+                if th:
+                    th_text = th.text.lower()
                     td = row.find("td")
                     if td:
-                        # Clean out references like [1]
+                        # Clean out references
                         for sup in td.find_all("sup"):
                             sup.decompose()
-                        origin = td.get_text(separator=", ", strip=True)
-                        break
-                        
-            if origin:
-                return self.parse_origin_string(origin)
+                            
+                        # Replace <br> with commas so we can split easily
+                        for br in td.find_all("br"):
+                            br.replace_with(", ")
+                            
+                        if "asal" in th_text:
+                            origin = td.get_text(separator=", ", strip=True)
+                            return self.parse_origin_string(origin, is_birthplace=False)
+                        elif "lahir" in th_text:
+                            origin = td.get_text(separator=", ", strip=True)
+                            return self.parse_origin_string(origin, is_birthplace=True)
+                            
         except Exception as e:
             print(f"Error extracting infobox for {page_title}: {e}")
             
         return None, None
         
-    def parse_origin_string(self, origin_string):
+    def parse_origin_string(self, origin_string, is_birthplace=False):
         """
-        Splits 'City, Province, Country' into just City and Province.
+        Splits string into City and Province.
+        If is_birthplace=True (from "Lahir"), it often contains Name and Date first.
+        (e.g., "Didik Prasetyo, 31 Desember 1966 (umur 59), Surakarta, Jawa Tengah")
         """
-        parts = [p.strip() for p in str(origin_string).split(",")]
+        # Remove parentheticals like (umur 38)
+        origin_string = re.sub(r'\(.*?\)', '', str(origin_string))
+        
+        parts = [p.strip() for p in origin_string.split(",")]
         
         cleaned_parts = []
         for p in parts:
-            # Common Wikipedia debris cleanup (remove exact birthdates if present in 'Tempat lahir' field)
-            p = re.sub(r'^[0-9]+\s+[A-Za-z]+\s+[0-9]+', '', p).strip()
-            # Ignore country names as we already know they are Indonesian
+            # Ignore purely numeric/date parts (e.g. 31 Desember 1966)
+            if re.search(r'\d{4}', p): 
+                continue
+            # Ignore country names
             if p and p.lower() not in ["indonesia", "hindia belanda"]:
                 cleaned_parts.append(p)
                 
         if not cleaned_parts:
             return None, None
             
-        city = cleaned_parts[0]
-        province = cleaned_parts[1] if len(cleaned_parts) > 1 else None
+        # If it's a birthplace, the actual location is usually at the END of the list.
+        # e.g. [Name, City, Province] or [Name, City]
+        if is_birthplace and len(cleaned_parts) >= 2:
+            # If the first part looks like a name (not a city), we take the last ones
+            city = cleaned_parts[-2] if len(cleaned_parts) > 2 else cleaned_parts[-1]
+            province = cleaned_parts[-1] if len(cleaned_parts) > 2 else None
+            # If the length is exactly 2, it might be [Name, City] or [City, Province]. 
+            # We'll assume the last is the city if we aren't sure.
+            if len(cleaned_parts) == 2:
+                city = cleaned_parts[1]
+                province = None
+        else:
+            # "Asal" fields are usually just [City, Province]
+            city = cleaned_parts[0]
+            province = cleaned_parts[1] if len(cleaned_parts) > 1 else None
         
-        # Hardcode the Jakarta Edge Case
-        if "jakarta" in city.lower():
+        # Edge Cases
+        if city and "jakarta" in city.lower():
             province = "DKI Jakarta"
             
         return city, province
