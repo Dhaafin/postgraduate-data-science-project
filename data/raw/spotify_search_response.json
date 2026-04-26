@@ -1,671 +1,655 @@
 {
   "artists": {
-    "href": "https://api.spotify.com/v1/search?offset=0&limit=20&query=Lyodra&type=artist&locale=en-US,en;q%3D0.5",
+    "href": "https://api.spotify.com/v1/search?offset=0&limit=20&query=Aura%20Kasih&type=artist&locale=en-US,en;q%3D0.5",
     "limit": 20,
-    "next": "https://api.spotify.com/v1/search?offset=20&limit=20&query=Lyodra&type=artist&locale=en-US,en;q%3D0.5",
+    "next": "https://api.spotify.com/v1/search?offset=20&limit=20&query=Aura%20Kasih&type=artist&locale=en-US,en;q%3D0.5",
     "offset": 0,
     "previous": null,
-    "total": 37,
+    "total": 806,
     "items": [
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/6Sv2jkzH9sWQjwghW5ArMG"
+          "spotify": "https://open.spotify.com/artist/5ivfg0F79kMFPsxUcbR9bG"
         },
         "followers": {
           "href": null,
-          "total": 8039413
+          "total": 93439
         },
-        "genres": ["indonesian pop", "batak", "malay"],
-        "href": "https://api.spotify.com/v1/artists/6Sv2jkzH9sWQjwghW5ArMG",
-        "id": "6Sv2jkzH9sWQjwghW5ArMG",
+        "genres": ["dangdut", "indonesian pop"],
+        "href": "https://api.spotify.com/v1/artists/5ivfg0F79kMFPsxUcbR9bG",
+        "id": "5ivfg0F79kMFPsxUcbR9bG",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb8a3037f177ab9b5b306cdb89",
+            "url": "https://i.scdn.co/image/ab6761610000e5ebde348a7b17345766eac26fc8",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab676161000051748a3037f177ab9b5b306cdb89",
+            "url": "https://i.scdn.co/image/ab67616100005174de348a7b17345766eac26fc8",
             "height": 320,
             "width": 320
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f1788a3037f177ab9b5b306cdb89",
+            "url": "https://i.scdn.co/image/ab6761610000f178de348a7b17345766eac26fc8",
             "height": 160,
             "width": 160
           }
         ],
-        "name": "Lyodra",
-        "popularity": 70,
+        "name": "Aura Kasih",
+        "popularity": 41,
         "type": "artist",
-        "uri": "spotify:artist:6Sv2jkzH9sWQjwghW5ArMG"
+        "uri": "spotify:artist:5ivfg0F79kMFPsxUcbR9bG"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/3wOsYKZM0zcKNasi3I7fP4"
+          "spotify": "https://open.spotify.com/artist/611ajYp7fMbkU5CYF08tje"
         },
         "followers": {
           "href": null,
-          "total": 20172678
-        },
-        "genres": ["indonesian pop", "malay"],
-        "href": "https://api.spotify.com/v1/artists/3wOsYKZM0zcKNasi3I7fP4",
-        "id": "3wOsYKZM0zcKNasi3I7fP4",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebd3564043a332daaa882853d6",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616100005174d3564043a332daaa882853d6",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f178d3564043a332daaa882853d6",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Mahalini",
-        "popularity": 73,
-        "type": "artist",
-        "uri": "spotify:artist:3wOsYKZM0zcKNasi3I7fP4"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/0kPb52ySN2k9P6wEZPTUzm"
-        },
-        "followers": {
-          "href": null,
-          "total": 9986922
-        },
-        "genres": ["indonesian pop", "malay"],
-        "href": "https://api.spotify.com/v1/artists/0kPb52ySN2k9P6wEZPTUzm",
-        "id": "0kPb52ySN2k9P6wEZPTUzm",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb12d698404d2d020c4212df6b",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000517412d698404d2d020c4212df6b",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f17812d698404d2d020c4212df6b",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Tiara Andini",
-        "popularity": 67,
-        "type": "artist",
-        "uri": "spotify:artist:0kPb52ySN2k9P6wEZPTUzm"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/13y29W8mEcA2gKqUr1SPLJ"
-        },
-        "followers": {
-          "href": null,
-          "total": 517647
-        },
-        "genres": ["indonesian pop"],
-        "href": "https://api.spotify.com/v1/artists/13y29W8mEcA2gKqUr1SPLJ",
-        "id": "13y29W8mEcA2gKqUr1SPLJ",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb6120e795b4df2d105f8e00da",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab676161000051746120e795b4df2d105f8e00da",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f1786120e795b4df2d105f8e00da",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Rony Parulian",
-        "popularity": 68,
-        "type": "artist",
-        "uri": "spotify:artist:13y29W8mEcA2gKqUr1SPLJ"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/2wZWkw5jo8P4NVonVanxYd"
-        },
-        "followers": {
-          "href": null,
-          "total": 3065834
-        },
-        "genres": ["indonesian pop", "malay"],
-        "href": "https://api.spotify.com/v1/artists/2wZWkw5jo8P4NVonVanxYd",
-        "id": "2wZWkw5jo8P4NVonVanxYd",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb5d26ae066df9306985e7e327",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab676161000051745d26ae066df9306985e7e327",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f1785d26ae066df9306985e7e327",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Ziva Magnolya",
-        "popularity": 61,
-        "type": "artist",
-        "uri": "spotify:artist:2wZWkw5jo8P4NVonVanxYd"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/1NjxFrpEGZTV2Ny0OJxeWu"
-        },
-        "followers": {
-          "href": null,
-          "total": 2283569
-        },
-        "genres": ["indonesian indie", "indonesian pop"],
-        "href": "https://api.spotify.com/v1/artists/1NjxFrpEGZTV2Ny0OJxeWu",
-        "id": "1NjxFrpEGZTV2Ny0OJxeWu",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb9851e03dd83ff72ee25bf8ca",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab676161000051749851e03dd83ff72ee25bf8ca",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f1789851e03dd83ff72ee25bf8ca",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Sal Priadi",
-        "popularity": 77,
-        "type": "artist",
-        "uri": "spotify:artist:1NjxFrpEGZTV2Ny0OJxeWu"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/3tMTXQyRrPmMyHv5SoC0TV"
-        },
-        "followers": {
-          "href": null,
-          "total": 3864994
-        },
-        "genres": ["indonesian pop", "indonesian indie"],
-        "href": "https://api.spotify.com/v1/artists/3tMTXQyRrPmMyHv5SoC0TV",
-        "id": "3tMTXQyRrPmMyHv5SoC0TV",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebd966b59ac3edc236b907b33e",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616100005174d966b59ac3edc236b907b33e",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f178d966b59ac3edc236b907b33e",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Juicy Luicy",
-        "popularity": 71,
-        "type": "artist",
-        "uri": "spotify:artist:3tMTXQyRrPmMyHv5SoC0TV"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/4xoK0HXFj0pCT3o3veUvGg"
-        },
-        "followers": {
-          "href": null,
-          "total": 2551
-        },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/4xoK0HXFj0pCT3o3veUvGg",
-        "id": "4xoK0HXFj0pCT3o3veUvGg",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab67616d0000b2733da97bfe6f8f4853daa87367",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616d00001e023da97bfe6f8f4853daa87367",
-            "height": 300,
-            "width": 300
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616d000048513da97bfe6f8f4853daa87367",
-            "height": 64,
-            "width": 64
-          }
-        ],
-        "name": "Lyodra Ginting",
-        "popularity": 3,
-        "type": "artist",
-        "uri": "spotify:artist:4xoK0HXFj0pCT3o3veUvGg"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/4EiSzlOeMnJcp2U8ayCQ3a"
-        },
-        "followers": {
-          "href": null,
-          "total": 4142033
-        },
-        "genres": ["indonesian pop", "malay"],
-        "href": "https://api.spotify.com/v1/artists/4EiSzlOeMnJcp2U8ayCQ3a",
-        "id": "4EiSzlOeMnJcp2U8ayCQ3a",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebd2eda3d4eaf6d9aec9226aea",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616100005174d2eda3d4eaf6d9aec9226aea",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f178d2eda3d4eaf6d9aec9226aea",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Keisya Levronka",
-        "popularity": 60,
-        "type": "artist",
-        "uri": "spotify:artist:4EiSzlOeMnJcp2U8ayCQ3a"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/2iDVt6mFbtbDEZG5ax0dTi"
-        },
-        "followers": {
-          "href": null,
-          "total": 20646880
-        },
-        "genres": ["indonesian pop", "indonesian jazz", "indonesian indie"],
-        "href": "https://api.spotify.com/v1/artists/2iDVt6mFbtbDEZG5ax0dTi",
-        "id": "2iDVt6mFbtbDEZG5ax0dTi",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb53462891ab7799f2934b568e",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000517453462891ab7799f2934b568e",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f17853462891ab7799f2934b568e",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Tulus",
-        "popularity": 76,
-        "type": "artist",
-        "uri": "spotify:artist:2iDVt6mFbtbDEZG5ax0dTi"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/5OZXWMwDhlYBRvoOfcX0sk"
-        },
-        "followers": {
-          "href": null,
-          "total": 4203514
+          "total": 433317
         },
         "genres": ["indonesian pop", "indonesian r&b", "indonesian jazz"],
-        "href": "https://api.spotify.com/v1/artists/5OZXWMwDhlYBRvoOfcX0sk",
-        "id": "5OZXWMwDhlYBRvoOfcX0sk",
+        "href": "https://api.spotify.com/v1/artists/611ajYp7fMbkU5CYF08tje",
+        "id": "611ajYp7fMbkU5CYF08tje",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebe7e88d24bae4d8bdebdf8ae4",
+            "url": "https://i.scdn.co/image/ab6761610000e5eb57e03ee8e4a5acd8415f8cd3",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616100005174e7e88d24bae4d8bdebdf8ae4",
+            "url": "https://i.scdn.co/image/ab6761610000517457e03ee8e4a5acd8415f8cd3",
             "height": 320,
             "width": 320
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f178e7e88d24bae4d8bdebdf8ae4",
+            "url": "https://i.scdn.co/image/ab6761610000f17857e03ee8e4a5acd8415f8cd3",
             "height": 160,
             "width": 160
           }
         ],
-        "name": "Raisa",
-        "popularity": 66,
+        "name": "Audy",
+        "popularity": 62,
         "type": "artist",
-        "uri": "spotify:artist:5OZXWMwDhlYBRvoOfcX0sk"
+        "uri": "spotify:artist:611ajYp7fMbkU5CYF08tje"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/3qL7BzwJOXq3EzAio36aLX"
+          "spotify": "https://open.spotify.com/artist/5auFhdM0ZgtH6cXwncgZ4m"
         },
         "followers": {
           "href": null,
-          "total": 2461572
+          "total": 1753751
         },
-        "genres": ["indonesian pop", "malay"],
-        "href": "https://api.spotify.com/v1/artists/3qL7BzwJOXq3EzAio36aLX",
-        "id": "3qL7BzwJOXq3EzAio36aLX",
+        "genres": ["indonesian pop", "malay", "malay pop", "indonesian r&b"],
+        "href": "https://api.spotify.com/v1/artists/5auFhdM0ZgtH6cXwncgZ4m",
+        "id": "5auFhdM0ZgtH6cXwncgZ4m",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb299912b504767b61b115792e",
+            "url": "https://i.scdn.co/image/ab6761610000e5eb09160e5ffdc256e65713a8a9",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616100005174299912b504767b61b115792e",
+            "url": "https://i.scdn.co/image/ab6761610000517409160e5ffdc256e65713a8a9",
             "height": 320,
             "width": 320
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f178299912b504767b61b115792e",
+            "url": "https://i.scdn.co/image/ab6761610000f17809160e5ffdc256e65713a8a9",
             "height": 160,
             "width": 160
           }
         ],
-        "name": "Ghea Indrawari",
-        "popularity": 66,
+        "name": "Agnes Monica",
+        "popularity": 59,
         "type": "artist",
-        "uri": "spotify:artist:3qL7BzwJOXq3EzAio36aLX"
+        "uri": "spotify:artist:5auFhdM0ZgtH6cXwncgZ4m"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/4cgBCGxtlfap2g6jveB7du"
+          "spotify": "https://open.spotify.com/artist/6reQVU3OFzQdP0NqZCwrCz"
         },
         "followers": {
           "href": null,
-          "total": 3795051
-        },
-        "genres": ["indonesian pop", "malay", "indonesian r&b"],
-        "href": "https://api.spotify.com/v1/artists/4cgBCGxtlfap2g6jveB7du",
-        "id": "4cgBCGxtlfap2g6jveB7du",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb8d58eb4a3cd3941609327ec4",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab676161000051748d58eb4a3cd3941609327ec4",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f1788d58eb4a3cd3941609327ec4",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Afgan",
-        "popularity": 69,
-        "type": "artist",
-        "uri": "spotify:artist:4cgBCGxtlfap2g6jveB7du"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/7lXTU6VtJQWfiN2vuZyzqf"
-        },
-        "followers": {
-          "href": null,
-          "total": 206870
+          "total": 260601
         },
         "genres": ["indonesian pop"],
-        "href": "https://api.spotify.com/v1/artists/7lXTU6VtJQWfiN2vuZyzqf",
-        "id": "7lXTU6VtJQWfiN2vuZyzqf",
+        "href": "https://api.spotify.com/v1/artists/6reQVU3OFzQdP0NqZCwrCz",
+        "id": "6reQVU3OFzQdP0NqZCwrCz",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb934677a1fdc1deb7492f26b0",
+            "url": "https://i.scdn.co/image/ab67616d0000b273b93bbf42e2f7a05f9ab04c5b",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616100005174934677a1fdc1deb7492f26b0",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f178934677a1fdc1deb7492f26b0",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Anggis Devaki",
-        "popularity": 67,
-        "type": "artist",
-        "uri": "spotify:artist:7lXTU6VtJQWfiN2vuZyzqf"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/7qP8p338vhBcSyfSUcWN05"
-        },
-        "followers": {
-          "href": null,
-          "total": 19
-        },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/7qP8p338vhBcSyfSUcWN05",
-        "id": "7qP8p338vhBcSyfSUcWN05",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab67616d0000b273c93e8295c2cff313830250b1",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616d00001e02c93e8295c2cff313830250b1",
+            "url": "https://i.scdn.co/image/ab67616d00001e02b93bbf42e2f7a05f9ab04c5b",
             "height": 300,
             "width": 300
           },
           {
-            "url": "https://i.scdn.co/image/ab67616d00004851c93e8295c2cff313830250b1",
+            "url": "https://i.scdn.co/image/ab67616d00004851b93bbf42e2f7a05f9ab04c5b",
             "height": 64,
             "width": 64
           }
         ],
-        "name": "Lyodra Mahalini",
-        "popularity": 0,
+        "name": "Tata Janeeta",
+        "popularity": 49,
         "type": "artist",
-        "uri": "spotify:artist:7qP8p338vhBcSyfSUcWN05"
+        "uri": "spotify:artist:6reQVU3OFzQdP0NqZCwrCz"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/5LqtNIUYgOoVah4d7Q8RWP"
+          "spotify": "https://open.spotify.com/artist/1jWIP5sLhDZttQeR0mPffn"
         },
         "followers": {
           "href": null,
-          "total": 6041
+          "total": 180851
         },
-        "genres": ["hipdut"],
-        "href": "https://api.spotify.com/v1/artists/5LqtNIUYgOoVah4d7Q8RWP",
-        "id": "5LqtNIUYgOoVah4d7Q8RWP",
+        "genres": ["indonesian pop", "indonesian jazz", "worship", "indonesian r&b"],
+        "href": "https://api.spotify.com/v1/artists/1jWIP5sLhDZttQeR0mPffn",
+        "id": "1jWIP5sLhDZttQeR0mPffn",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb92ee8784511077aba484bee9",
+            "url": "https://i.scdn.co/image/ab6761610000e5eb6b80f30ab9610eb08bfa80df",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000517492ee8784511077aba484bee9",
+            "url": "https://i.scdn.co/image/ab676161000051746b80f30ab9610eb08bfa80df",
             "height": 320,
             "width": 320
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f17892ee8784511077aba484bee9",
+            "url": "https://i.scdn.co/image/ab6761610000f1786b80f30ab9610eb08bfa80df",
             "height": 160,
             "width": 160
           }
         ],
-        "name": "LyoraChay",
-        "popularity": 34,
+        "name": "Citra Scholastika",
+        "popularity": 49,
         "type": "artist",
-        "uri": "spotify:artist:5LqtNIUYgOoVah4d7Q8RWP"
+        "uri": "spotify:artist:1jWIP5sLhDZttQeR0mPffn"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/3FCaleXnXly79N8wtldaW8"
+          "spotify": "https://open.spotify.com/artist/0dycqOerM3RKuAFLARysza"
         },
         "followers": {
           "href": null,
-          "total": 0
+          "total": 3234
         },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/3FCaleXnXly79N8wtldaW8",
-        "id": "3FCaleXnXly79N8wtldaW8",
+        "genres": ["indonesian pop"],
+        "href": "https://api.spotify.com/v1/artists/0dycqOerM3RKuAFLARysza",
+        "id": "0dycqOerM3RKuAFLARysza",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab67616d0000b27364ff0d9a32b73ea88cb87fd1",
+            "url": "https://i.scdn.co/image/ab6761610000e5ebe907d94ee2259653df8e910b",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616d00001e024e4a15547fcfd7191c165ac1",
-            "height": 300,
-            "width": 300
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616d000048514e4a15547fcfd7191c165ac1",
-            "height": 64,
-            "width": 64
-          }
-        ],
-        "name": "Lyodra Patrisa",
-        "popularity": 0,
-        "type": "artist",
-        "uri": "spotify:artist:3FCaleXnXly79N8wtldaW8"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/5i6KjwHi1zWjXvJG1SNaYw"
-        },
-        "followers": {
-          "href": null,
-          "total": 0
-        },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/5i6KjwHi1zWjXvJG1SNaYw",
-        "id": "5i6KjwHi1zWjXvJG1SNaYw",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab67616d0000b2735509a3952c5e66c96f07478e",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616d00001e025509a3952c5e66c96f07478e",
-            "height": 300,
-            "width": 300
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616d000048515509a3952c5e66c96f07478e",
-            "height": 64,
-            "width": 64
-          }
-        ],
-        "name": "Haikal Lyodra",
-        "popularity": 0,
-        "type": "artist",
-        "uri": "spotify:artist:5i6KjwHi1zWjXvJG1SNaYw"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/49r0kOeMLUsbKRkP6m2DeY"
-        },
-        "followers": {
-          "href": null,
-          "total": 8
-        },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/49r0kOeMLUsbKRkP6m2DeY",
-        "id": "49r0kOeMLUsbKRkP6m2DeY",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebdf13759c47c72ef0730614bf",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616100005174df13759c47c72ef0730614bf",
+            "url": "https://i.scdn.co/image/ab67616100005174e907d94ee2259653df8e910b",
             "height": 320,
             "width": 320
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f178df13759c47c72ef0730614bf",
+            "url": "https://i.scdn.co/image/ab6761610000f178e907d94ee2259653df8e910b",
             "height": 160,
             "width": 160
           }
         ],
-        "name": "LYORA PRODUCTION",
-        "popularity": 6,
+        "name": "Ariel Tatum",
+        "popularity": 36,
         "type": "artist",
-        "uri": "spotify:artist:49r0kOeMLUsbKRkP6m2DeY"
+        "uri": "spotify:artist:0dycqOerM3RKuAFLARysza"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/0J62MOwu9QfheDw46bm7cj"
+          "spotify": "https://open.spotify.com/artist/6AfqiFjK8GRp8ZcFWoYFgZ"
         },
         "followers": {
           "href": null,
-          "total": 77
+          "total": 2
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/6AfqiFjK8GRp8ZcFWoYFgZ",
+        "id": "6AfqiFjK8GRp8ZcFWoYFgZ",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000b273d397d0a19543af782f1f638d",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e02d397d0a19543af782f1f638d",
+            "height": 300,
+            "width": 300
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00004851d397d0a19543af782f1f638d",
+            "height": 64,
+            "width": 64
+          }
+        ],
+        "name": "Aura Kasih",
+        "popularity": 0,
+        "type": "artist",
+        "uri": "spotify:artist:6AfqiFjK8GRp8ZcFWoYFgZ"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/3cQdhbZkEXAamhOiwrCELG"
+        },
+        "followers": {
+          "href": null,
+          "total": 3371
+        },
+        "genres": ["indonesian pop", "malay", "dangdut"],
+        "href": "https://api.spotify.com/v1/artists/3cQdhbZkEXAamhOiwrCELG",
+        "id": "3cQdhbZkEXAamhOiwrCELG",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebdd7c23316641654ceb1d83b7",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174dd7c23316641654ceb1d83b7",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178dd7c23316641654ceb1d83b7",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Vicky Shu",
+        "popularity": 12,
+        "type": "artist",
+        "uri": "spotify:artist:3cQdhbZkEXAamhOiwrCELG"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/327ipGIr9bD3MkLb2eucqC"
+        },
+        "followers": {
+          "href": null,
+          "total": 626417
+        },
+        "genres": ["indonesian pop", "indonesian indie"],
+        "href": "https://api.spotify.com/v1/artists/327ipGIr9bD3MkLb2eucqC",
+        "id": "327ipGIr9bD3MkLb2eucqC",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebd9b504eeee43c549f91e7c34",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174d9b504eeee43c549f91e7c34",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178d9b504eeee43c549f91e7c34",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Suara Kayu",
+        "popularity": 62,
+        "type": "artist",
+        "uri": "spotify:artist:327ipGIr9bD3MkLb2eucqC"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/2sLMAueZdLQjrYoRhXGedz"
+        },
+        "followers": {
+          "href": null,
+          "total": 654
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/2sLMAueZdLQjrYoRhXGedz",
+        "id": "2sLMAueZdLQjrYoRhXGedz",
+        "images": [],
+        "name": "Aura",
+        "popularity": 20,
+        "type": "artist",
+        "uri": "spotify:artist:2sLMAueZdLQjrYoRhXGedz"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/2wGBQNmrYOrruN58zNdSuH"
+        },
+        "followers": {
+          "href": null,
+          "total": 25316
         },
         "genres": ["indonesian indie"],
-        "href": "https://api.spotify.com/v1/artists/0J62MOwu9QfheDw46bm7cj",
-        "id": "0J62MOwu9QfheDw46bm7cj",
+        "href": "https://api.spotify.com/v1/artists/2wGBQNmrYOrruN58zNdSuH",
+        "id": "2wGBQNmrYOrruN58zNdSuH",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebd1c1290285bbfb2edb5e758c",
+            "url": "https://i.scdn.co/image/ab6761610000e5eb0e767f50be46caa085b43a87",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616100005174d1c1290285bbfb2edb5e758c",
+            "url": "https://i.scdn.co/image/ab676161000051740e767f50be46caa085b43a87",
             "height": 320,
             "width": 320
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f178d1c1290285bbfb2edb5e758c",
+            "url": "https://i.scdn.co/image/ab6761610000f1780e767f50be46caa085b43a87",
             "height": 160,
             "width": 160
           }
         ],
-        "name": "LYORAA",
-        "popularity": 24,
+        "name": "Aurélie",
+        "popularity": 43,
         "type": "artist",
-        "uri": "spotify:artist:0J62MOwu9QfheDw46bm7cj"
+        "uri": "spotify:artist:2wGBQNmrYOrruN58zNdSuH"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/175PwHedjMlt2ujXwfX64A"
+        },
+        "followers": {
+          "href": null,
+          "total": 203785
+        },
+        "genres": ["indonesian indie", "indonesian jazz", "pop kreatif"],
+        "href": "https://api.spotify.com/v1/artists/175PwHedjMlt2ujXwfX64A",
+        "id": "175PwHedjMlt2ujXwfX64A",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebd9daf5d7180a23ce9ce4741f",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174d9daf5d7180a23ce9ce4741f",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178d9daf5d7180a23ce9ce4741f",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Sore",
+        "popularity": 52,
+        "type": "artist",
+        "uri": "spotify:artist:175PwHedjMlt2ujXwfX64A"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6mJII5SJlWEYnf7DY4Uywl"
+        },
+        "followers": {
+          "href": null,
+          "total": 8278
+        },
+        "genres": ["indonesian indie"],
+        "href": "https://api.spotify.com/v1/artists/6mJII5SJlWEYnf7DY4Uywl",
+        "id": "6mJII5SJlWEYnf7DY4Uywl",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb4ba78db3257658dceb5d4ef8",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab676161000051744ba78db3257658dceb5d4ef8",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f1784ba78db3257658dceb5d4ef8",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Rara Sekar",
+        "popularity": 59,
+        "type": "artist",
+        "uri": "spotify:artist:6mJII5SJlWEYnf7DY4Uywl"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/5puPe9ODwSfnmqy5cx90TC"
+        },
+        "followers": {
+          "href": null,
+          "total": 565022
+        },
+        "genres": ["indonesian pop", "indonesian jazz"],
+        "href": "https://api.spotify.com/v1/artists/5puPe9ODwSfnmqy5cx90TC",
+        "id": "5puPe9ODwSfnmqy5cx90TC",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebf6cc0d7858be84ed4d387a77",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174f6cc0d7858be84ed4d387a77",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178f6cc0d7858be84ed4d387a77",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Adera",
+        "popularity": 53,
+        "type": "artist",
+        "uri": "spotify:artist:5puPe9ODwSfnmqy5cx90TC"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/0xpXe6uTTpqn2Xwbt4jBRM"
+        },
+        "followers": {
+          "href": null,
+          "total": 96534
+        },
+        "genres": ["worship"],
+        "href": "https://api.spotify.com/v1/artists/0xpXe6uTTpqn2Xwbt4jBRM",
+        "id": "0xpXe6uTTpqn2Xwbt4jBRM",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb907828f42ee3c336d65e98b0",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174907828f42ee3c336d65e98b0",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178907828f42ee3c336d65e98b0",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Maria Shandi",
+        "popularity": 49,
+        "type": "artist",
+        "uri": "spotify:artist:0xpXe6uTTpqn2Xwbt4jBRM"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/0p8hh2OM0WjsT772VC1Mgj"
+        },
+        "followers": {
+          "href": null,
+          "total": 148558
+        },
+        "genres": ["worship"],
+        "href": "https://api.spotify.com/v1/artists/0p8hh2OM0WjsT772VC1Mgj",
+        "id": "0p8hh2OM0WjsT772VC1Mgj",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebb0c8a2e4f8f5bf438db4cb8f",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174b0c8a2e4f8f5bf438db4cb8f",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178b0c8a2e4f8f5bf438db4cb8f",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Symphony Worship",
+        "popularity": 56,
+        "type": "artist",
+        "uri": "spotify:artist:0p8hh2OM0WjsT772VC1Mgj"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/2xlEdRN74IYuAOrLjSNnjT"
+        },
+        "followers": {
+          "href": null,
+          "total": 18215
+        },
+        "genres": ["malay", "indonesian pop", "indonesian indie"],
+        "href": "https://api.spotify.com/v1/artists/2xlEdRN74IYuAOrLjSNnjT",
+        "id": "2xlEdRN74IYuAOrLjSNnjT",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb1163d1d3deba0ee0c4280abe",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab676161000051741163d1d3deba0ee0c4280abe",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f1781163d1d3deba0ee0c4280abe",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Nuh...",
+        "popularity": 47,
+        "type": "artist",
+        "uri": "spotify:artist:2xlEdRN74IYuAOrLjSNnjT"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/1KManG7vhvMuL6FhkgRi1E"
+        },
+        "followers": {
+          "href": null,
+          "total": 215129
+        },
+        "genres": ["worship"],
+        "href": "https://api.spotify.com/v1/artists/1KManG7vhvMuL6FhkgRi1E",
+        "id": "1KManG7vhvMuL6FhkgRi1E",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb5d7ab02cfbe8322fc769d7b9",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab676161000051745d7ab02cfbe8322fc769d7b9",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f1785d7ab02cfbe8322fc769d7b9",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "NDC Worship",
+        "popularity": 56,
+        "type": "artist",
+        "uri": "spotify:artist:1KManG7vhvMuL6FhkgRi1E"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/60X7K2bIpjUiuCDX7lk19b"
+        },
+        "followers": {
+          "href": null,
+          "total": 156714
+        },
+        "genres": ["worship"],
+        "href": "https://api.spotify.com/v1/artists/60X7K2bIpjUiuCDX7lk19b",
+        "id": "60X7K2bIpjUiuCDX7lk19b",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb034f70b31146ef47be28c12f",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174034f70b31146ef47be28c12f",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178034f70b31146ef47be28c12f",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "GMS Live",
+        "popularity": 55,
+        "type": "artist",
+        "uri": "spotify:artist:60X7K2bIpjUiuCDX7lk19b"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/1Oaod2BEUHCaRav5EH1dva"
+        },
+        "followers": {
+          "href": null,
+          "total": 191642
+        },
+        "genres": ["indonesian pop", "malay"],
+        "href": "https://api.spotify.com/v1/artists/1Oaod2BEUHCaRav5EH1dva",
+        "id": "1Oaod2BEUHCaRav5EH1dva",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebb845b84872bca0c79d550b4a",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174b845b84872bca0c79d550b4a",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178b845b84872bca0c79d550b4a",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Aurelie Hermansyah",
+        "popularity": 43,
+        "type": "artist",
+        "uri": "spotify:artist:1Oaod2BEUHCaRav5EH1dva"
       }
     ]
   }
