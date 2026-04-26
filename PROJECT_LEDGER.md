@@ -29,7 +29,7 @@
 
 - [x] **DB Schema Expansion**: Add `origin_city`, `origin_province`, `latitude`, and `longitude` columns.
 - [x] **Wiki Scraper Prototype**: Extraction of "Asal" or "Tempat lahir" from inflection boxes.
-- [ ] **Geocoding Pipeline**: Integration with OpenStreetMap/Nominatim for coordinate mapping.
+- [x] **Geocoding Pipeline**: Integration with OpenStreetMap/Nominatim for coordinate mapping.
 
 ---
 
@@ -45,6 +45,7 @@
 ## 📝 CHRONOLOGICAL ACTIVITY LOG
 | Timestamp | Persona | Action | Impact |
 |:---|:---:|:---|:---|
+| 2026-04-26 | Dev | feat: geocoding pipeline | Built `geo_pipeline.py` fusing Wikipedia scraper with Nominatim coordinates. |
 | 2026-04-26 | Dev | feat: wiki scraper prototype | Developed MediaWiki API integration for city/province extraction. |
 | 2026-04-26 | Dev | feat: db schema expansion | Refactored `music_data` table to include geospatial and province fields. |
 | 2026-04-26 | PM | Pivot to Spatial Analysis | Updated Ledger to align with PRD focused on "Jakarta-centrism". |
