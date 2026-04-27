@@ -31,6 +31,7 @@
 - [x] **Wiki Scraper Prototype**: Extraction of "Asal" or "Tempat lahir" from inflection boxes.
 - [x] **Geocoding Pipeline**: Integration with OpenStreetMap/Nominatim for coordinate mapping.
 - [ ] **Fix Extraction Bug**: Refine `parse_origin_string` to properly filter out remaining full names (e.g., "Daniel Baskara Putra") when length is 3.
+- [ ] **Entity Classification**: Implement logic to flag corporate IPs (e.g., Baba Lili Tata) vs. human artists to maintain data integrity.
 
 ---
 
@@ -40,12 +41,14 @@
 - [ ] **The "Migration" Disambiguation**: Define logic to handle artists who were born in Region A but moved/formed in Jakarta.
 - [ ] **Temporal Correlation**: Correlate "Spotify Breakthrough" date with "Migration Year" to assess digital democratization vs. legacy networks.
 - [ ] **Genre-Location Variance**: Analyze if certain genres (e.g., Koplo) are more resistant to Jakarta migration than others (e.g., Pop).
+- [ ] **Industrial Artifacts vs Talent**: Define exclusionary criteria for "Brand Artists" (children's IPs, corporate lo-fi) to refine the spatial inequality signal.
 
 ---
 
 ## 📝 CHRONOLOGICAL ACTIVITY LOG
 | Timestamp | Persona | Action | Impact |
 |:---|:---:|:---|:---|
+| 2026-04-27 | PM | Strategic Pivot: Entity Type | Flagged corporate IPs (Baba Lili Tata) as data noise; added task to distinguish human talent from brands. |
 | 2026-04-26 | PM | End of Session Briefing | Logged remaining parsing bugs; pipeline architecture is operational for M4. |
 | 2026-04-26 | Dev | feat: geocoding pipeline | Built `geo_pipeline.py` fusing Wikipedia scraper with Nominatim coordinates. |
 | 2026-04-26 | Dev | feat: wiki scraper prototype | Developed MediaWiki API integration for city/province extraction. |
@@ -57,4 +60,4 @@
 ---
 
 ## 🚩 PM STATUS: GREEN
-**Next Immediate Step**: Update the database schema to support origin geospatial data and initiate research on Wikipedia extraction for Indonesian artist bios.
+**Next Immediate Step**: Finalize M4 parsing bug fixes and research Wikidata/MusicBrainz integration for automated Entity Classification.

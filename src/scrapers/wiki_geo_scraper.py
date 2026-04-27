@@ -116,31 +116,49 @@ class WikiGeoScraper:
             if p and p.lower() not in ["indonesia", "hindia belanda"]:
                 cleaned_parts.append(p)
                 
+        KNOWN_PROVINCES = {
+            "aceh", "sumatra utara", "sumatera utara", "sumatra barat", "sumatera barat",
+            "riau", "jambi", "sumatra selatan", "sumatera selatan", "bengkulu", "lampung",
+            "kepulauan bangka belitung", "bangka belitung", "kepulauan riau", "dki jakarta", "jakarta",
+            "jawa barat", "jawa tengah", "daerah istimewa yogyakarta", "di yogyakarta", "yogyakarta", 
+            "jawa timur", "banten", "bali", "nusa tenggara barat", "ntb", "nusa tenggara timur", "ntt",
+            "kalimantan barat", "kalimantan tengah", "kalimantan selatan", "kalimantan timur",
+            "kalimantan utara", "sulawesi utara", "sulawesi tengah", "sulawesi selatan",
+            "sulawesi tenggara", "gorontalo", "sulawesi barat", "maluku", "maluku utara",
+            "papua barat", "papua", "papua selatan", "papua tengah", "papua pegunungan", "papua barat daya"
+        }
+
+        temp_cleaned = []
+        for p in cleaned_parts:
+            # If a part has 3 or more words and is not a known 3+ word province, it's highly likely to be a person's name
+            if len(p.split()) >= 3 and p.lower() not in KNOWN_PROVINCES:
+                continue
+            temp_cleaned.append(p)
+        cleaned_parts = temp_cleaned
+                
         if not cleaned_parts:
             return None, None
             
         city, province = None, None
         
-        if is_birthplace:
-            if len(cleaned_parts) >= 3:
-                # [Name, City, Province] -> Take last two
+        if len(cleaned_parts) >= 2:
+            if cleaned_parts[-1].lower() in KNOWN_PROVINCES:
+                province = cleaned_parts[-1]
+                city = cleaned_parts[-2]
+            else:
                 city = cleaned_parts[-2]
                 province = cleaned_parts[-1]
-            elif len(cleaned_parts) == 2:
-                # Usually [City, Province] if they stripped the name
-                city = cleaned_parts[0]
-                province = cleaned_parts[1]
-            elif len(cleaned_parts) == 1:
-                # If there's only 1 part left, are we sure it's a city? Could be a name.
-                # We'll set it to None to be safe, requiring manual review.
-                city = None
-        else:
-            # "Asal" fields are usually just [City, Province]
-            city = cleaned_parts[0] if cleaned_parts else None
-            province = cleaned_parts[1] if len(cleaned_parts) > 1 else None
+        elif len(cleaned_parts) == 1:
+            val = cleaned_parts[0]
+            if val.lower() in KNOWN_PROVINCES:
+                province = val
+            else:
+                city = val
         
         # Edge Cases
         if city and "jakarta" in city.lower():
+            province = "DKI Jakarta"
+        if province and "jakarta" in province.lower():
             province = "DKI Jakarta"
             
         return city, province
