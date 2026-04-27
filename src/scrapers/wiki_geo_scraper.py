@@ -67,31 +67,39 @@ class WikiGeoScraper:
             soup = BeautifulSoup(html_content, "html.parser")
             
             infobox = soup.find("table", class_="infobox")
-            if not infobox:
-                return None, None
-                
-            origin = None
-            for row in infobox.find_all("tr"):
-                th = row.find("th")
-                if th:
-                    th_text = th.text.lower().strip()
-                    td = row.find("td")
-                    if td:
-                        # Clean out references
-                        for sup in td.find_all("sup"):
-                            sup.decompose()
-                            
-                        # Replace <br> with commas so we can split easily
-                        for br in td.find_all("br"):
-                            br.replace_with(", ")
-                            
-                        # STRICT MATCHING to prevent catching "nama lahir"
-                        if th_text in ["asal", "kota asal"]:
-                            origin = td.get_text(separator=", ", strip=True)
-                            return self.parse_origin_string(origin, is_birthplace=False)
-                        elif th_text in ["lahir", "tempat lahir"]:
-                            origin = td.get_text(separator=", ", strip=True)
-                            return self.parse_origin_string(origin, is_birthplace=True)
+            if infobox:
+                for row in infobox.find_all("tr"):
+                    th = row.find("th")
+                    if th:
+                        th_text = th.text.lower().strip()
+                        td = row.find("td")
+                        if td:
+                            # Clean out references
+                            for sup in td.find_all("sup"):
+                                sup.decompose()
+                                
+                            # Replace <br> with commas so we can split easily
+                            for br in td.find_all("br"):
+                                br.replace_with(", ")
+                                
+                            # STRICT MATCHING to prevent catching "nama lahir"
+                            if th_text in ["asal", "kota asal"]:
+                                origin = td.get_text(separator=", ", strip=True)
+                                return self.parse_origin_string(origin, is_birthplace=False)
+                            elif th_text in ["lahir", "tempat lahir"]:
+                                origin = td.get_text(separator=", ", strip=True)
+                                return self.parse_origin_string(origin, is_birthplace=True)
+            
+            # --- FALLBACK: DOM SCANNING ---
+            # If no infobox or no origin found in infobox, scan the first few paragraphs
+            for p_tag in soup.find_all("p", limit=5):
+                text = p_tag.get_text()
+                match = re.search(r'(?:berasal dari|asal|lahir di|tempat lahir)\s+([^,.\(<]+(?:,\s*[^,.\(<]+)?)', text, re.IGNORECASE)
+                if match:
+                    origin_str = match.group(1).strip()
+                    city, province = self.parse_origin_string(origin_str, is_birthplace=False)
+                    if city or province:
+                        return city, province
                             
         except Exception as e:
             print(f"Error extracting infobox for {page_title}: {e}")
