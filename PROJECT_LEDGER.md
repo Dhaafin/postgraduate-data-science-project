@@ -48,6 +48,7 @@
 ## 📝 CHRONOLOGICAL ACTIVITY LOG
 | Timestamp | Persona | Action | Impact |
 |:---|:---:|:---|:---|
+| 2026-04-27 | Dev | fix: province-only fallback | Implemented fallback assigning province values to city nulls for isolated geodata (e.g., Bali). |
 | 2026-04-27 | PM | Strategic Pivot: Entity Type | Flagged corporate IPs (Baba Lili Tata) as data noise; added task to distinguish human talent from brands. |
 | 2026-04-26 | PM | End of Session Briefing | Logged remaining parsing bugs; pipeline architecture is operational for M4. |
 | 2026-04-26 | Dev | feat: geocoding pipeline | Built `geo_pipeline.py` fusing Wikipedia scraper with Nominatim coordinates. |

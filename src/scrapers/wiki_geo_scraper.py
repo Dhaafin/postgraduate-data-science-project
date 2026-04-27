@@ -152,14 +152,18 @@ class WikiGeoScraper:
             val = cleaned_parts[0]
             if val.lower() in KNOWN_PROVINCES:
                 province = val
+                city = val
             else:
                 city = val
         
         # Edge Cases
         if city and "jakarta" in city.lower():
             province = "DKI Jakarta"
+            city = "Jakarta"
         if province and "jakarta" in province.lower():
             province = "DKI Jakarta"
+            if not city:
+                city = "Jakarta"
             
         return city, province
 
