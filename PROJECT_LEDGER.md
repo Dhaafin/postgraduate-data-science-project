@@ -55,6 +55,7 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 
 | Timestamp  | Persona | Action                               | Impact                                                                                                    |
 | :--------- | :-----: | :----------------------------------- | :-------------------------------------------------------------------------------------------------------- |
+| 2026-04-30 | Dev | fix: validator rate limits & genres | Added delay to prevent HTTP 429 and moved `sholawat` to valid Indonesian genres. |
 | 2026-04-30 | Dev | feat: implement hybrid metadata validator v3 | Replaced NLP-first approach with Spotify genre-first logic, improving accuracy to ~80% instantly. |
 | 2026-04-30 | Dev | feat: limit validator prototype to 100 | Capping nationality scan at 100 records for initial high-accuracy testing. |
 | 2026-04-30 | Dev | fix: enhance nationality validator v2 | Expanded keywords, added multi-paragraph scan, and robust JSON error handling. |

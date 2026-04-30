@@ -25,14 +25,14 @@ class NationalityValidator:
         # TIER 1: Spotify Indonesian Genres
         self.SPOTIFY_INDO_GENRES = [
             "indonesian", "indo", "jawa", "dangdut", "koplo", "sunda", 
-            "minang", "batak", "maluku", "timur", "funkot", "hipdut"
+            "minang", "batak", "maluku", "timur", "funkot", "hipdut",
+            "sholawat"
         ]
         
         # TIER 2: Spotify Foreign/Corporate Genres
         self.SPOTIFY_FOREIGN_GENRES = [
             "k-pop", "k-ballad", "k-rock", "mollywood", "brazilian", 
-            "norwegian", "children's music", "white noise", "lullaby",
-            "sholawat" # While common in ID, often not standard pop artists.
+            "norwegian", "children's music", "white noise", "lullaby"
         ]
         
         # TIER 3: Wikipedia Fallback Keywords
@@ -70,6 +70,8 @@ class NationalityValidator:
 
     def search_wikipedia_title(self, artist_name):
         """Uses the Search API to find the closest actual page title."""
+        # Add a delay here to prevent 429 errors during the search phase
+        time.sleep(0.5)
         params = {
             "action": "query",
             "list": "search",
