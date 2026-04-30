@@ -15,23 +15,23 @@
 | ID | Milestone | Status | Details |
 |:---|:---|:---:|:---|
 | M1 | Core ETL Engine | [Complete] | Async infrastructure & DB Schema. |
-| M2 | Source 1: Viberate | [Complete] | Extraction of top ~300 Indonesian candidates. |
+| M2 | Source 1: Viberate | [Active] | Expanding pool to 600 candidates (Pages 0 & 1). |
 | M3 | Source 2: Spotify | [Complete] | Hybrid API/Scraper pipeline for popularity & metadata. |
-| M4 | Geo-Enrichment | [Active] | Wikipedia/Wikidata origin city mapping. |
+| M4 | Geo-Enrichment | [Active] | Validation Gate & "The Purge" (Deleting non-Indonesian/Corporate). |
 | M5 | Spatial Analytics | [Pending] | GeoPandas analysis of regional density & genre hubs. |
 | M6 | Web Dashboard | [Pending] | Next.js / Express interactive spatial map. |
 | M7 | Deployment | [Pending] | Dockerization and Cloud Infrastructure setup. |
 
 ---
 
-## 🛠️ ACTIVE FEATURE: M4 - Wikipedia/Wikidata Geo-Coding
-> **Objective**: Identify the "Origin City" for each artist to provide the geospatial basis for analysis.
+## 🛠️ ACTIVE FEATURE: M4 - Wikipedia/Wikidata Geo-Coding & Validation
+> **Objective**: Identify "Origin City" and enforce strict data hygiene by purging non-Indonesian and corporate records.
 
 - [x] **DB Schema Expansion**: Add `origin_city`, `origin_province`, `latitude`, and `longitude` columns.
-- [x] **Wiki Scraper Prototype**: Extraction of "Asal" or "Tempat lahir" from inflection boxes.
-- [x] **Geocoding Pipeline**: Integration with OpenStreetMap/Nominatim for coordinate mapping.
-- [ ] **Fix Extraction Bug**: Refine `parse_origin_string` to properly filter out remaining full names (e.g., "Daniel Baskara Putra") when length is 3.
-- [ ] **Entity Classification**: Implement logic to flag corporate IPs (e.g., Baba Lili Tata) vs. human artists to maintain data integrity.
+- [x] **Viberate Expansion**: Refactor `viberate.py` to collect 600 candidates.
+- [ ] **Nationality Validator**: Build Regex/NLP check for "Indonesian" keywords in Wikipedia intros.
+- [ ] **The Purge Logic**: Implement hard-deletion for records failing the Nationality/Corporate gate.
+- [ ] **Target Target**: Reach 350-400 "Clean" records for final spatial analysis.
 
 ---
 
@@ -48,6 +48,9 @@
 ## 📝 CHRONOLOGICAL ACTIVITY LOG
 | Timestamp | Persona | Action | Impact |
 |:---|:---:|:---|:---|
+| 2026-04-30 | Dev | feat: target viberate page 1 for incremental expansion | Updated scraper to focus exclusively on ranks 300-600 to avoid duplicates. |
+| 2026-04-30 | Dev | feat: multi-page viberate extraction | Scaled Viberate pool to 600 candidates by integrating Page 0 and Page 1. |
+| 2026-04-30 | PM | Strategic Pivot: Purge & Expand | Re-opened M2; pivoting M4 to include "The Purge" (deletion of noise) to target 350-400 clean records. |
 | 2026-04-27 | Dev | feat: NLP dom scanning fallback | Built `re` based NLP extraction parsing the first 5 paragraphs if the infobox is missing or empty. |
 | 2026-04-27 | Dev | fix: province-only fallback | Implemented fallback assigning province values to city nulls for isolated geodata (e.g., Bali). |
 | 2026-04-27 | PM | Strategic Pivot: Entity Type | Flagged corporate IPs (Baba Lili Tata) as data noise; added task to distinguish human talent from brands. |
@@ -62,4 +65,4 @@
 ---
 
 ## 🚩 PM STATUS: GREEN
-**Next Immediate Step**: Finalize M4 parsing bug fixes and research Wikidata/MusicBrainz integration for automated Entity Classification.
+**Next Immediate Step**: Run `python main.py` and select option 1 to ingest the 600 artists into the database.
