@@ -20,7 +20,7 @@
 | M1  | Core ETL Engine    | [Complete] | Async infrastructure & DB Schema.                                  |
 | M2  | Source 1: Viberate | [Complete] | Expanded pool to 600 candidates (Pages 0 & 1).                     |
 | M3  | Source 2: Spotify  |  [Active]  | Enriching popularity & metadata for 600 candidates.                |
-| M4  | Geo-Enrichment     |  [Active]  | Nationality Purge (Batch) followed by Wiki/Geo mapping.            |
+| M4  | Geo-Enrichment     |  [Active]  | Nationality Validation (Flagging) followed by Wiki/Geo mapping.            |
 | M5  | Spatial Analytics  | [Pending]  | GeoPandas analysis of regional density & genre hubs.               |
 | M6  | Web Dashboard      | [Pending]  | Next.js / Express interactive spatial map.                         |
 | M7  | Deployment         | [Pending]  | Dockerization and Cloud Infrastructure setup.                      |
@@ -34,7 +34,7 @@
 - [x] **DB Schema Expansion**: Add `origin_city`, `origin_province`, `latitude`, and `longitude` columns.
 - [x] **Viberate Expansion**: Refactor `viberate.py` to collect 600 candidates.
 - [ ] **Spotify Enrichment**: Process 300+ new records with empty `spotify_link`.
-- [ ] **Nationality Purge (Batch)**: Create `nationality_purge.py` to hard-delete non-Indonesian/Corporate noise.
+- [x] **Nationality Validation (Flagging)**: Create `nationality_validator.py` to flag `is_indonesian` status.
 - [ ] **Wiki/Geo Scraper**: Refine extraction for remaining valid 400 records.
 - [ ] **Target Target**: Reach 350-400 "Clean" records for final spatial analysis.
 
@@ -55,6 +55,12 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 
 | Timestamp  | Persona | Action                               | Impact                                                                                                    |
 | :--------- | :-----: | :----------------------------------- | :-------------------------------------------------------------------------------------------------------- |
+| 2026-04-30 | Dev | feat: limit validator prototype to 100 | Capping nationality scan at 100 records for initial high-accuracy testing. |
+| 2026-04-30 | Dev | fix: enhance nationality validator v2 | Expanded keywords, added multi-paragraph scan, and robust JSON error handling. |
+| 2026-04-30 | Dev | fix: restore update_spotify_id function | Resolved ImportError in scraper by restoring the asynchronous update function. |
+| 2026-04-30 | Dev | fix: robust database schema migration | Fixed brittle column detection and schema-aware existence checks in `init_db`. |
+| 2026-04-30 | Dev | feat: nationality flagging logic | Pivoted from hard-purge to a safer flagging system using `is_indonesian` column. |
+| 2026-04-30 |   Dev   | feat: implement nationality purge auditor | Built `nationality_purge.py` to automate the deletion of non-Indonesian/Corporate records. |
 | 2026-04-30 |   PM    | Strategic Pivot: Purge Batch         | Decided to run a standalone `nationality_purge.py` script before geo-enrichment to clean the 600-artist pool. |
 | 2026-04-30 |   PM    | Status Report: M3 Complete           | Spotify enrichment finalized for 600 artists. Transitioning to 'The Purge' (M4).                          |
 | 2026-04-30 |   Dev   | feat: multi-page viberate extraction | Scaled Viberate pool to 600 candidates by integrating Page 0 and Page 1.                                  |
@@ -74,4 +80,4 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 
 ## 🚩 PM STATUS: GREEN
 
-**Next Immediate Step**: Create and execute `src/scrapers/nationality_purge.py` to clean the database.
+**Next Immediate Step**: Run `python src/scrapers/nationality_purge.py` to clean the database.

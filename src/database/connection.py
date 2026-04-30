@@ -41,19 +41,19 @@ if not engine:
 async def init_db():
     """
     Initializes/Refactors the database schema.
-    Desired order: id, needs_review, spotify_id, spotify_link, artist_name, genre, followers, popularity
-    Removes: created_at
+    Desired order: id, needs_review, spotify_id, spotify_link, artist_name, genre, followers, popularity, geo fields, is_indonesian
     """
     if not engine:
         return
         
     async with engine.begin() as conn:
-        # Check if table exists
-        check = await conn.execute(text("SELECT to_regclass('public.music_data')"))
-        exists = check.fetchone()[0] is not None
+        # Robust check for table existence using information_schema
+        check_table = await conn.execute(text(
+            "SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'music_data' AND table_schema = 'public')"
+        ))
+        exists = check_table.scalar()
         
         if not exists:
-            # Fresh start
             print("Creating new music_data table...")
             await conn.execute(text("""
                 CREATE TABLE music_data (
@@ -68,23 +68,34 @@ async def init_db():
                     origin_city TEXT,
                     origin_province TEXT,
                     latitude DECIMAL,
-                    longitude DECIMAL
+                    longitude DECIMAL,
+                    is_indonesian BOOLEAN DEFAULT NULL
                 );
             """))
+            print("Table created successfully.")
         else:
-            # Check current columns to see if we need to refactor (order matters)
-            cols_query = await conn.execute(text("SELECT column_name FROM information_schema.columns WHERE table_name = 'music_data' ORDER BY ordinal_position"))
+            # Check current columns strictly within public schema
+            cols_query = await conn.execute(text("""
+                SELECT column_name 
+                FROM information_schema.columns 
+                WHERE table_name = 'music_data' 
+                AND table_schema = 'public' 
+                ORDER BY ordinal_position
+            """))
             current_cols = [row[0] for row in cols_query.fetchall()]
             
             desired_order = [
                 "id", "needs_review", "spotify_id", "spotify_link", "artist_name", 
                 "genre", "followers", "popularity", "origin_city", "origin_province", 
-                "latitude", "longitude"
+                "latitude", "longitude", "is_indonesian"
             ]
             
-            # If the current columns don't match the desired order, trigger a refactor
+            # Trigger refactor if columns are missing or out of order
             if current_cols != desired_order:
-                print("Refactoring table to requested structure (reordering columns and removing created_at)...")
+                print(f"Schema mismatch detected.")
+                print(f"Current: {current_cols}")
+                print(f"Desired: {desired_order}")
+                print("Refactoring table to maintain desired structure...")
                 
                 # 1. Create the new table structure
                 await conn.execute(text("""
@@ -100,23 +111,19 @@ async def init_db():
                         origin_city TEXT,
                         origin_province TEXT,
                         latitude DECIMAL,
-                        longitude DECIMAL
+                        longitude DECIMAL,
+                        is_indonesian BOOLEAN DEFAULT NULL
                     );
                 """))
                 
                 # 2. Map existing columns to the new table
-                # We handle columns that might be missing in older versions (like genre/followers/geo fields)
-                insert_cols = ["id", "spotify_id", "artist_name"]
-                if 'genre' in current_cols: insert_cols.append("genre")
-                if 'followers' in current_cols: insert_cols.append("followers")
-                if 'popularity' in current_cols: insert_cols.append("popularity")
-                if 'needs_review' in current_cols: insert_cols.append("needs_review")
-                if 'origin_city' in current_cols: insert_cols.append("origin_city")
-                if 'origin_province' in current_cols: insert_cols.append("origin_province")
-                if 'latitude' in current_cols: insert_cols.append("latitude")
-                if 'longitude' in current_cols: insert_cols.append("longitude")
-                if 'spotify_link' in current_cols: insert_cols.append("spotify_link")
+                # Only include columns that actually exist in the current table
+                insert_cols = [c for c in desired_order if c in current_cols]
                 
+                # Special case: id must always be included to preserve PKs
+                if "id" not in insert_cols:
+                    insert_cols.insert(0, "id")
+
                 cols_str = ", ".join(insert_cols)
                 await conn.execute(text(f"INSERT INTO music_data_new ({cols_str}) SELECT {cols_str} FROM music_data"))
                 
@@ -126,86 +133,60 @@ async def init_db():
                 
                 # 4. Fix the ID sequence
                 await conn.execute(text("SELECT setval(pg_get_serial_sequence('music_data', 'id'), (SELECT MAX(id) FROM music_data))"))
-                print("Refactor complete.")
+                print("Database refactor and migration complete.")
+            else:
+                print("Database schema is already up to date.")
 
 async def insert_artist_data(spotify_id, artist_name, spotify_link=None, genre=None, followers=None, popularity=None, needs_review=False):
-    """
-    Inserts a new artist record into the music_data table.
-    """
-    if not engine:
-        return
+    """Inserts a new artist record into the music_data table."""
+    if not engine: return
     async with engine.begin() as conn:
         await conn.execute(
             text("""
                 INSERT INTO music_data (spotify_id, spotify_link, artist_name, genre, followers, popularity, needs_review) 
                 VALUES (:id, :link, :name, :genre, :followers, :popularity, :needs_review)
             """),
-            {
-                "id": spotify_id, 
-                "link": spotify_link,
-                "name": artist_name,
-                "genre": genre,
-                "followers": followers,
-                "popularity": popularity,
-                "needs_review": needs_review
-            }
+            {"id": spotify_id, "link": spotify_link, "name": artist_name, "genre": genre, "followers": followers, "popularity": popularity, "needs_review": needs_review}
         )
 
 async def get_all_artists(db_engine=None):
-    """
-    Retrieves all artists from the music_data table that don't have a Spotify ID.
-    """
+    """Retrieves all artists from the music_data table that don't have a Spotify ID."""
     target_engine = db_engine or engine
-    if not target_engine:
-        return []
+    if not target_engine: return []
     async with target_engine.begin() as conn:
         result = await conn.execute(text("SELECT id, artist_name FROM music_data WHERE spotify_id IS NULL OR spotify_id = ''"))
         return [{"id": row[0], "artist_name": row[1]} for row in result.fetchall()]
 
-async def update_spotify_id(db_id, spotify_id, spotify_link=None, genre=None, followers=None, popularity=None, needs_review=None, db_engine=None):
-    """
-    Updates the spotify_id and extra metadata for a specific artist in the database.
-    """
-    target_engine = db_engine or engine
-    if not target_engine:
-        return
-    async with target_engine.begin() as conn:
-        # Dynamically build the UPDATE SET clause to only update columns that are not None
-        set_clauses = [
-            "spotify_id = :spotify_id",
-            "spotify_link = :spotify_link",
-            "genre = :genre",
-            "followers = :followers",
-            "popularity = :popularity"
-        ]
-        params = {
-            "spotify_id": spotify_id,
-            "spotify_link": spotify_link,
-            "genre": genre,
-            "followers": followers,
-            "popularity": popularity,
-            "id": db_id
-        }
-        
-        if needs_review is not None:
-            set_clauses.append("needs_review = :needs_review")
-            params["needs_review"] = needs_review
-            
-        set_str = ", ".join(set_clauses)
-        
-        await conn.execute(
-            text(f"UPDATE music_data SET {set_str} WHERE id = :id"),
-            params
+def update_nationality_sync(db_id, is_indonesian, db_engine=None):
+    """Synchronously updates the is_indonesian flag for an artist."""
+    target_engine = db_engine or sync_engine
+    if not target_engine: return
+    with target_engine.begin() as conn:
+        conn.execute(
+            text("UPDATE music_data SET is_indonesian = :is_indonesian WHERE id = :id"),
+            {"is_indonesian": is_indonesian, "id": db_id}
         )
 
 def update_spotify_id_sync(db_id, spotify_id, spotify_link=None, genre=None, followers=None, popularity=None, needs_review=None, db_engine=None):
-    """
-    Synchronous version of update_spotify_id for use in threads/Proactor loops.
-    """
+    """Synchronous version of update_spotify_id."""
     target_engine = db_engine or sync_engine
-    if not target_engine:
-        return
+    if not target_engine: return
     with target_engine.begin() as conn:
+        set_clauses = ["spotify_id = :spotify_id", "spotify_link = :spotify_link", "genre = :genre", "followers = :followers", "popularity = :popularity"]
+        params = {"spotify_id": spotify_id, "spotify_link": spotify_link, "genre": genre, "followers": followers, "popularity": popularity, "id": db_id}
+        if needs_review is not None:
+            set_clauses.append("needs_review = :needs_review")
+            params["needs_review"] = needs_review
+        set_str = ", ".join(set_clauses)
+        conn.execute(text(f"UPDATE music_data SET {set_str} WHERE id = :id"), params)
+
+async def update_spotify_id(db_id, spotify_id, spotify_link=None, genre=None, followers=None, popularity=None, needs_review=None):
+    """
+    Asynchronously updates an artist's Spotify information.
+    """
+    if not engine:
+        return
+    async with engine.begin() as conn:
         set_clauses = [
             "spotify_id = :spotify_id",
             "spotify_link = :spotify_link",
@@ -227,8 +208,7 @@ def update_spotify_id_sync(db_id, spotify_id, spotify_link=None, genre=None, fol
             params["needs_review"] = needs_review
             
         set_str = ", ".join(set_clauses)
-        
-        conn.execute(
+        await conn.execute(
             text(f"UPDATE music_data SET {set_str} WHERE id = :id"),
             params
         )
@@ -236,13 +216,11 @@ def update_spotify_id_sync(db_id, spotify_id, spotify_link=None, genre=None, fol
 if __name__ == "__main__":
     import asyncio
     import sys
-    
     if sys.platform == 'win32':
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-
     print("--- Database Initialization/Refactor ---")
     if engine:
         asyncio.run(init_db())
-        print("Success: Database is ready and structure is verified.")
+        print("Success: Database is ready.")
     else:
-        print("Error: Could not initialize database. Check your .env file.")
+        print("Error: Could not initialize database.")
