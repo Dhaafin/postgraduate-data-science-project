@@ -1,655 +1,671 @@
 {
   "artists": {
-    "href": "https://api.spotify.com/v1/search?offset=0&limit=20&query=Aura%20Kasih&type=artist&locale=en-US,en;q%3D0.5",
+    "href": "https://api.spotify.com/v1/search?offset=0&limit=20&query=DJ%20Nansuya&type=artist&locale=en-US,en;q%3D0.5",
     "limit": 20,
-    "next": "https://api.spotify.com/v1/search?offset=20&limit=20&query=Aura%20Kasih&type=artist&locale=en-US,en;q%3D0.5",
+    "next": "https://api.spotify.com/v1/search?offset=20&limit=20&query=DJ%20Nansuya&type=artist&locale=en-US,en;q%3D0.5",
     "offset": 0,
     "previous": null,
-    "total": 806,
+    "total": 807,
     "items": [
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/5ivfg0F79kMFPsxUcbR9bG"
+          "spotify": "https://open.spotify.com/artist/12bX3Fr0vy9dvgIoxzPQ36"
         },
         "followers": {
           "href": null,
-          "total": 93439
+          "total": 70246
         },
-        "genres": ["dangdut", "indonesian pop"],
-        "href": "https://api.spotify.com/v1/artists/5ivfg0F79kMFPsxUcbR9bG",
-        "id": "5ivfg0F79kMFPsxUcbR9bG",
+        "genres": ["funkot", "dangdut"],
+        "href": "https://api.spotify.com/v1/artists/12bX3Fr0vy9dvgIoxzPQ36",
+        "id": "12bX3Fr0vy9dvgIoxzPQ36",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebde348a7b17345766eac26fc8",
+            "url": "https://i.scdn.co/image/ab67616d0000b273b875c45ffc52a8a8c0a8ed6b",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616100005174de348a7b17345766eac26fc8",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f178de348a7b17345766eac26fc8",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Aura Kasih",
-        "popularity": 41,
-        "type": "artist",
-        "uri": "spotify:artist:5ivfg0F79kMFPsxUcbR9bG"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/611ajYp7fMbkU5CYF08tje"
-        },
-        "followers": {
-          "href": null,
-          "total": 433317
-        },
-        "genres": ["indonesian pop", "indonesian r&b", "indonesian jazz"],
-        "href": "https://api.spotify.com/v1/artists/611ajYp7fMbkU5CYF08tje",
-        "id": "611ajYp7fMbkU5CYF08tje",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb57e03ee8e4a5acd8415f8cd3",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000517457e03ee8e4a5acd8415f8cd3",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f17857e03ee8e4a5acd8415f8cd3",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Audy",
-        "popularity": 62,
-        "type": "artist",
-        "uri": "spotify:artist:611ajYp7fMbkU5CYF08tje"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/5auFhdM0ZgtH6cXwncgZ4m"
-        },
-        "followers": {
-          "href": null,
-          "total": 1753751
-        },
-        "genres": ["indonesian pop", "malay", "malay pop", "indonesian r&b"],
-        "href": "https://api.spotify.com/v1/artists/5auFhdM0ZgtH6cXwncgZ4m",
-        "id": "5auFhdM0ZgtH6cXwncgZ4m",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb09160e5ffdc256e65713a8a9",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000517409160e5ffdc256e65713a8a9",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f17809160e5ffdc256e65713a8a9",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Agnes Monica",
-        "popularity": 59,
-        "type": "artist",
-        "uri": "spotify:artist:5auFhdM0ZgtH6cXwncgZ4m"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/6reQVU3OFzQdP0NqZCwrCz"
-        },
-        "followers": {
-          "href": null,
-          "total": 260601
-        },
-        "genres": ["indonesian pop"],
-        "href": "https://api.spotify.com/v1/artists/6reQVU3OFzQdP0NqZCwrCz",
-        "id": "6reQVU3OFzQdP0NqZCwrCz",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab67616d0000b273b93bbf42e2f7a05f9ab04c5b",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616d00001e02b93bbf42e2f7a05f9ab04c5b",
+            "url": "https://i.scdn.co/image/ab67616d00001e02b875c45ffc52a8a8c0a8ed6b",
             "height": 300,
             "width": 300
           },
           {
-            "url": "https://i.scdn.co/image/ab67616d00004851b93bbf42e2f7a05f9ab04c5b",
+            "url": "https://i.scdn.co/image/ab67616d00004851b875c45ffc52a8a8c0a8ed6b",
             "height": 64,
             "width": 64
           }
         ],
-        "name": "Tata Janeeta",
-        "popularity": 49,
+        "name": "DJ Nansuya",
+        "popularity": 46,
         "type": "artist",
-        "uri": "spotify:artist:6reQVU3OFzQdP0NqZCwrCz"
+        "uri": "spotify:artist:12bX3Fr0vy9dvgIoxzPQ36"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/1jWIP5sLhDZttQeR0mPffn"
+          "spotify": "https://open.spotify.com/artist/3K48HyC5AI6Pr1s6eeP7oT"
         },
         "followers": {
           "href": null,
-          "total": 180851
+          "total": 143
         },
-        "genres": ["indonesian pop", "indonesian jazz", "worship", "indonesian r&b"],
-        "href": "https://api.spotify.com/v1/artists/1jWIP5sLhDZttQeR0mPffn",
-        "id": "1jWIP5sLhDZttQeR0mPffn",
+        "genres": ["lagu timur"],
+        "href": "https://api.spotify.com/v1/artists/3K48HyC5AI6Pr1s6eeP7oT",
+        "id": "3K48HyC5AI6Pr1s6eeP7oT",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb6b80f30ab9610eb08bfa80df",
+            "url": "https://i.scdn.co/image/ab67616d0000b273e3ef014ef0c6ea66eb63ac52",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab676161000051746b80f30ab9610eb08bfa80df",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f1786b80f30ab9610eb08bfa80df",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Citra Scholastika",
-        "popularity": 49,
-        "type": "artist",
-        "uri": "spotify:artist:1jWIP5sLhDZttQeR0mPffn"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/0dycqOerM3RKuAFLARysza"
-        },
-        "followers": {
-          "href": null,
-          "total": 3234
-        },
-        "genres": ["indonesian pop"],
-        "href": "https://api.spotify.com/v1/artists/0dycqOerM3RKuAFLARysza",
-        "id": "0dycqOerM3RKuAFLARysza",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebe907d94ee2259653df8e910b",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616100005174e907d94ee2259653df8e910b",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f178e907d94ee2259653df8e910b",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Ariel Tatum",
-        "popularity": 36,
-        "type": "artist",
-        "uri": "spotify:artist:0dycqOerM3RKuAFLARysza"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/6AfqiFjK8GRp8ZcFWoYFgZ"
-        },
-        "followers": {
-          "href": null,
-          "total": 2
-        },
-        "genres": [],
-        "href": "https://api.spotify.com/v1/artists/6AfqiFjK8GRp8ZcFWoYFgZ",
-        "id": "6AfqiFjK8GRp8ZcFWoYFgZ",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab67616d0000b273d397d0a19543af782f1f638d",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616d00001e02d397d0a19543af782f1f638d",
+            "url": "https://i.scdn.co/image/ab67616d00001e02e3ef014ef0c6ea66eb63ac52",
             "height": 300,
             "width": 300
           },
           {
-            "url": "https://i.scdn.co/image/ab67616d00004851d397d0a19543af782f1f638d",
+            "url": "https://i.scdn.co/image/ab67616d00004851e3ef014ef0c6ea66eb63ac52",
             "height": 64,
             "width": 64
           }
         ],
-        "name": "Aura Kasih",
-        "popularity": 0,
+        "name": "DJ Nansuya",
+        "popularity": 2,
         "type": "artist",
-        "uri": "spotify:artist:6AfqiFjK8GRp8ZcFWoYFgZ"
+        "uri": "spotify:artist:3K48HyC5AI6Pr1s6eeP7oT"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/3cQdhbZkEXAamhOiwrCELG"
+          "spotify": "https://open.spotify.com/artist/2fVYcSodw5fN4YSHGdnuVS"
         },
         "followers": {
           "href": null,
-          "total": 3371
-        },
-        "genres": ["indonesian pop", "malay", "dangdut"],
-        "href": "https://api.spotify.com/v1/artists/3cQdhbZkEXAamhOiwrCELG",
-        "id": "3cQdhbZkEXAamhOiwrCELG",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebdd7c23316641654ceb1d83b7",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616100005174dd7c23316641654ceb1d83b7",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f178dd7c23316641654ceb1d83b7",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Vicky Shu",
-        "popularity": 12,
-        "type": "artist",
-        "uri": "spotify:artist:3cQdhbZkEXAamhOiwrCELG"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/327ipGIr9bD3MkLb2eucqC"
-        },
-        "followers": {
-          "href": null,
-          "total": 626417
-        },
-        "genres": ["indonesian pop", "indonesian indie"],
-        "href": "https://api.spotify.com/v1/artists/327ipGIr9bD3MkLb2eucqC",
-        "id": "327ipGIr9bD3MkLb2eucqC",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebd9b504eeee43c549f91e7c34",
-            "height": 640,
-            "width": 640
-          },
-          {
-            "url": "https://i.scdn.co/image/ab67616100005174d9b504eeee43c549f91e7c34",
-            "height": 320,
-            "width": 320
-          },
-          {
-            "url": "https://i.scdn.co/image/ab6761610000f178d9b504eeee43c549f91e7c34",
-            "height": 160,
-            "width": 160
-          }
-        ],
-        "name": "Suara Kayu",
-        "popularity": 62,
-        "type": "artist",
-        "uri": "spotify:artist:327ipGIr9bD3MkLb2eucqC"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/2sLMAueZdLQjrYoRhXGedz"
-        },
-        "followers": {
-          "href": null,
-          "total": 654
+          "total": 131
         },
         "genres": [],
-        "href": "https://api.spotify.com/v1/artists/2sLMAueZdLQjrYoRhXGedz",
-        "id": "2sLMAueZdLQjrYoRhXGedz",
-        "images": [],
-        "name": "Aura",
-        "popularity": 20,
-        "type": "artist",
-        "uri": "spotify:artist:2sLMAueZdLQjrYoRhXGedz"
-      },
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/2wGBQNmrYOrruN58zNdSuH"
-        },
-        "followers": {
-          "href": null,
-          "total": 25316
-        },
-        "genres": ["indonesian indie"],
-        "href": "https://api.spotify.com/v1/artists/2wGBQNmrYOrruN58zNdSuH",
-        "id": "2wGBQNmrYOrruN58zNdSuH",
+        "href": "https://api.spotify.com/v1/artists/2fVYcSodw5fN4YSHGdnuVS",
+        "id": "2fVYcSodw5fN4YSHGdnuVS",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb0e767f50be46caa085b43a87",
+            "url": "https://i.scdn.co/image/ab67616d0000b273b57c57778b022bce9f2ee815",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab676161000051740e767f50be46caa085b43a87",
-            "height": 320,
-            "width": 320
+            "url": "https://i.scdn.co/image/ab67616d00001e02b57c57778b022bce9f2ee815",
+            "height": 300,
+            "width": 300
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f1780e767f50be46caa085b43a87",
-            "height": 160,
-            "width": 160
+            "url": "https://i.scdn.co/image/ab67616d00004851b57c57778b022bce9f2ee815",
+            "height": 64,
+            "width": 64
           }
         ],
-        "name": "Aurélie",
-        "popularity": 43,
+        "name": "DJ Nansuya",
+        "popularity": 14,
         "type": "artist",
-        "uri": "spotify:artist:2wGBQNmrYOrruN58zNdSuH"
+        "uri": "spotify:artist:2fVYcSodw5fN4YSHGdnuVS"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/175PwHedjMlt2ujXwfX64A"
+          "spotify": "https://open.spotify.com/artist/3ZD0A7vXokEGOkRseFftK9"
         },
         "followers": {
           "href": null,
-          "total": 203785
+          "total": 6257
         },
-        "genres": ["indonesian indie", "indonesian jazz", "pop kreatif"],
-        "href": "https://api.spotify.com/v1/artists/175PwHedjMlt2ujXwfX64A",
-        "id": "175PwHedjMlt2ujXwfX64A",
+        "genres": ["funkot"],
+        "href": "https://api.spotify.com/v1/artists/3ZD0A7vXokEGOkRseFftK9",
+        "id": "3ZD0A7vXokEGOkRseFftK9",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebd9daf5d7180a23ce9ce4741f",
+            "url": "https://i.scdn.co/image/ab67616d0000b273870110765e9581146d9fb63d",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616100005174d9daf5d7180a23ce9ce4741f",
-            "height": 320,
-            "width": 320
+            "url": "https://i.scdn.co/image/ab67616d00001e02870110765e9581146d9fb63d",
+            "height": 300,
+            "width": 300
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f178d9daf5d7180a23ce9ce4741f",
-            "height": 160,
-            "width": 160
+            "url": "https://i.scdn.co/image/ab67616d00004851870110765e9581146d9fb63d",
+            "height": 64,
+            "width": 64
           }
         ],
-        "name": "Sore",
-        "popularity": 52,
+        "name": "DJ Nansuya",
+        "popularity": 17,
         "type": "artist",
-        "uri": "spotify:artist:175PwHedjMlt2ujXwfX64A"
+        "uri": "spotify:artist:3ZD0A7vXokEGOkRseFftK9"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/6mJII5SJlWEYnf7DY4Uywl"
+          "spotify": "https://open.spotify.com/artist/6hy5Ie6WVvz6TL3RQkU7zl"
         },
         "followers": {
           "href": null,
-          "total": 8278
+          "total": 284164
         },
-        "genres": ["indonesian indie"],
-        "href": "https://api.spotify.com/v1/artists/6mJII5SJlWEYnf7DY4Uywl",
-        "id": "6mJII5SJlWEYnf7DY4Uywl",
+        "genres": ["hipdut", "funkot", "lagu timur", "dangdut", "koplo"],
+        "href": "https://api.spotify.com/v1/artists/6hy5Ie6WVvz6TL3RQkU7zl",
+        "id": "6hy5Ie6WVvz6TL3RQkU7zl",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb4ba78db3257658dceb5d4ef8",
+            "url": "https://i.scdn.co/image/ab67616d0000b2737f0ab49bdea885644c368ad7",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab676161000051744ba78db3257658dceb5d4ef8",
-            "height": 320,
-            "width": 320
+            "url": "https://i.scdn.co/image/ab67616d00001e027f0ab49bdea885644c368ad7",
+            "height": 300,
+            "width": 300
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f1784ba78db3257658dceb5d4ef8",
-            "height": 160,
-            "width": 160
+            "url": "https://i.scdn.co/image/ab67616d000048517f0ab49bdea885644c368ad7",
+            "height": 64,
+            "width": 64
           }
         ],
-        "name": "Rara Sekar",
-        "popularity": 59,
+        "name": "Maman Fvndy",
+        "popularity": 62,
         "type": "artist",
-        "uri": "spotify:artist:6mJII5SJlWEYnf7DY4Uywl"
+        "uri": "spotify:artist:6hy5Ie6WVvz6TL3RQkU7zl"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/5puPe9ODwSfnmqy5cx90TC"
+          "spotify": "https://open.spotify.com/artist/5sm27K0brUm382lPj9rSdG"
         },
         "followers": {
           "href": null,
-          "total": 565022
+          "total": 116
         },
-        "genres": ["indonesian pop", "indonesian jazz"],
-        "href": "https://api.spotify.com/v1/artists/5puPe9ODwSfnmqy5cx90TC",
-        "id": "5puPe9ODwSfnmqy5cx90TC",
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/5sm27K0brUm382lPj9rSdG",
+        "id": "5sm27K0brUm382lPj9rSdG",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebf6cc0d7858be84ed4d387a77",
+            "url": "https://i.scdn.co/image/ab67616d0000b273e144f8b993bac4be50c0f868",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616100005174f6cc0d7858be84ed4d387a77",
-            "height": 320,
-            "width": 320
+            "url": "https://i.scdn.co/image/ab67616d00001e02e144f8b993bac4be50c0f868",
+            "height": 300,
+            "width": 300
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f178f6cc0d7858be84ed4d387a77",
-            "height": 160,
-            "width": 160
+            "url": "https://i.scdn.co/image/ab67616d00004851e144f8b993bac4be50c0f868",
+            "height": 64,
+            "width": 64
           }
         ],
-        "name": "Adera",
-        "popularity": 53,
+        "name": "DJ Nansuya",
+        "popularity": 21,
         "type": "artist",
-        "uri": "spotify:artist:5puPe9ODwSfnmqy5cx90TC"
+        "uri": "spotify:artist:5sm27K0brUm382lPj9rSdG"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/0xpXe6uTTpqn2Xwbt4jBRM"
+          "spotify": "https://open.spotify.com/artist/0dIJRlr9m4hUwdBYmKUTjW"
         },
         "followers": {
           "href": null,
-          "total": 96534
+          "total": 81175
         },
-        "genres": ["worship"],
-        "href": "https://api.spotify.com/v1/artists/0xpXe6uTTpqn2Xwbt4jBRM",
-        "id": "0xpXe6uTTpqn2Xwbt4jBRM",
+        "genres": ["hipdut", "funkot", "lagu timur", "dangdut", "koplo", "malay"],
+        "href": "https://api.spotify.com/v1/artists/0dIJRlr9m4hUwdBYmKUTjW",
+        "id": "0dIJRlr9m4hUwdBYmKUTjW",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb907828f42ee3c336d65e98b0",
+            "url": "https://i.scdn.co/image/ab6761610000e5ebed1feb0afd27194efc4c2d9e",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616100005174907828f42ee3c336d65e98b0",
+            "url": "https://i.scdn.co/image/ab67616100005174ed1feb0afd27194efc4c2d9e",
             "height": 320,
             "width": 320
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f178907828f42ee3c336d65e98b0",
+            "url": "https://i.scdn.co/image/ab6761610000f178ed1feb0afd27194efc4c2d9e",
             "height": 160,
             "width": 160
           }
         ],
-        "name": "Maria Shandi",
+        "name": "Akbar Chalay",
+        "popularity": 61,
+        "type": "artist",
+        "uri": "spotify:artist:0dIJRlr9m4hUwdBYmKUTjW"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/5QVthVlqRIfh9h6g7zJHG8"
+        },
+        "followers": {
+          "href": null,
+          "total": 106
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/5QVthVlqRIfh9h6g7zJHG8",
+        "id": "5QVthVlqRIfh9h6g7zJHG8",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000b273854464e08375c69da84f7d54",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e02854464e08375c69da84f7d54",
+            "height": 300,
+            "width": 300
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00004851854464e08375c69da84f7d54",
+            "height": 64,
+            "width": 64
+          }
+        ],
+        "name": "IKKY REMIXER",
+        "popularity": 13,
+        "type": "artist",
+        "uri": "spotify:artist:5QVthVlqRIfh9h6g7zJHG8"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/1KgiS9L9gXZUa40X3zoBE9"
+        },
+        "followers": {
+          "href": null,
+          "total": 94607
+        },
+        "genres": ["funkot", "lagu timur", "dangdut"],
+        "href": "https://api.spotify.com/v1/artists/1KgiS9L9gXZUa40X3zoBE9",
+        "id": "1KgiS9L9gXZUa40X3zoBE9",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebf3a5b6b9e6bbf680f7b87c1e",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174f3a5b6b9e6bbf680f7b87c1e",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178f3a5b6b9e6bbf680f7b87c1e",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Rahmat Tahalu",
+        "popularity": 51,
+        "type": "artist",
+        "uri": "spotify:artist:1KgiS9L9gXZUa40X3zoBE9"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/7DalUu7EREfCuacL1vMPd9"
+        },
+        "followers": {
+          "href": null,
+          "total": 42899
+        },
+        "genres": ["funkot"],
+        "href": "https://api.spotify.com/v1/artists/7DalUu7EREfCuacL1vMPd9",
+        "id": "7DalUu7EREfCuacL1vMPd9",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000b273e048317d9dc4155723eb67d3",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e02e048317d9dc4155723eb67d3",
+            "height": 300,
+            "width": 300
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00004851e048317d9dc4155723eb67d3",
+            "height": 64,
+            "width": 64
+          }
+        ],
+        "name": "DJ BONSAI",
         "popularity": 49,
         "type": "artist",
-        "uri": "spotify:artist:0xpXe6uTTpqn2Xwbt4jBRM"
+        "uri": "spotify:artist:7DalUu7EREfCuacL1vMPd9"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/0p8hh2OM0WjsT772VC1Mgj"
+          "spotify": "https://open.spotify.com/artist/7rlyXSnrccy5ppegzUgkXn"
         },
         "followers": {
           "href": null,
-          "total": 148558
+          "total": 36740
         },
-        "genres": ["worship"],
-        "href": "https://api.spotify.com/v1/artists/0p8hh2OM0WjsT772VC1Mgj",
-        "id": "0p8hh2OM0WjsT772VC1Mgj",
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/7rlyXSnrccy5ppegzUgkXn",
+        "id": "7rlyXSnrccy5ppegzUgkXn",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebb0c8a2e4f8f5bf438db4cb8f",
+            "url": "https://i.scdn.co/image/ab67616d0000b273a82d6fe100eab26d8d449e63",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616100005174b0c8a2e4f8f5bf438db4cb8f",
-            "height": 320,
-            "width": 320
+            "url": "https://i.scdn.co/image/ab67616d00001e02a82d6fe100eab26d8d449e63",
+            "height": 300,
+            "width": 300
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f178b0c8a2e4f8f5bf438db4cb8f",
-            "height": 160,
-            "width": 160
+            "url": "https://i.scdn.co/image/ab67616d00004851a82d6fe100eab26d8d449e63",
+            "height": 64,
+            "width": 64
           }
         ],
-        "name": "Symphony Worship",
-        "popularity": 56,
+        "name": "Dj Happy Team",
+        "popularity": 26,
         "type": "artist",
-        "uri": "spotify:artist:0p8hh2OM0WjsT772VC1Mgj"
+        "uri": "spotify:artist:7rlyXSnrccy5ppegzUgkXn"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/2xlEdRN74IYuAOrLjSNnjT"
+          "spotify": "https://open.spotify.com/artist/1cdrWsUN6xnobm3Kg6w9TY"
         },
         "followers": {
           "href": null,
-          "total": 18215
+          "total": 533
         },
-        "genres": ["malay", "indonesian pop", "indonesian indie"],
-        "href": "https://api.spotify.com/v1/artists/2xlEdRN74IYuAOrLjSNnjT",
-        "id": "2xlEdRN74IYuAOrLjSNnjT",
+        "genres": ["lagu jawa", "dangdut"],
+        "href": "https://api.spotify.com/v1/artists/1cdrWsUN6xnobm3Kg6w9TY",
+        "id": "1cdrWsUN6xnobm3Kg6w9TY",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb1163d1d3deba0ee0c4280abe",
+            "url": "https://i.scdn.co/image/ab67616d0000b273e8ce16654bbaa13edabab3eb",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab676161000051741163d1d3deba0ee0c4280abe",
-            "height": 320,
-            "width": 320
+            "url": "https://i.scdn.co/image/ab67616d00001e02e8ce16654bbaa13edabab3eb",
+            "height": 300,
+            "width": 300
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f1781163d1d3deba0ee0c4280abe",
-            "height": 160,
-            "width": 160
+            "url": "https://i.scdn.co/image/ab67616d00004851e8ce16654bbaa13edabab3eb",
+            "height": 64,
+            "width": 64
           }
         ],
-        "name": "Nuh...",
-        "popularity": 47,
+        "name": "Huda Fvnky",
+        "popularity": 28,
         "type": "artist",
-        "uri": "spotify:artist:2xlEdRN74IYuAOrLjSNnjT"
+        "uri": "spotify:artist:1cdrWsUN6xnobm3Kg6w9TY"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/1KManG7vhvMuL6FhkgRi1E"
+          "spotify": "https://open.spotify.com/artist/6gvsmDZKW5wRvjKCPnbHDh"
         },
         "followers": {
           "href": null,
-          "total": 215129
+          "total": 451325
         },
-        "genres": ["worship"],
-        "href": "https://api.spotify.com/v1/artists/1KManG7vhvMuL6FhkgRi1E",
-        "id": "1KManG7vhvMuL6FhkgRi1E",
+        "genres": ["funkot", "breakbeat", "hipdut"],
+        "href": "https://api.spotify.com/v1/artists/6gvsmDZKW5wRvjKCPnbHDh",
+        "id": "6gvsmDZKW5wRvjKCPnbHDh",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb5d7ab02cfbe8322fc769d7b9",
+            "url": "https://i.scdn.co/image/ab6761610000e5eb443f0a93160fcd27d20df292",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab676161000051745d7ab02cfbe8322fc769d7b9",
+            "url": "https://i.scdn.co/image/ab67616100005174443f0a93160fcd27d20df292",
             "height": 320,
             "width": 320
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f1785d7ab02cfbe8322fc769d7b9",
+            "url": "https://i.scdn.co/image/ab6761610000f178443f0a93160fcd27d20df292",
             "height": 160,
             "width": 160
           }
         ],
-        "name": "NDC Worship",
-        "popularity": 56,
+        "name": "Whisnu Santika",
+        "popularity": 59,
         "type": "artist",
-        "uri": "spotify:artist:1KManG7vhvMuL6FhkgRi1E"
+        "uri": "spotify:artist:6gvsmDZKW5wRvjKCPnbHDh"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/60X7K2bIpjUiuCDX7lk19b"
+          "spotify": "https://open.spotify.com/artist/1wvfytmONUedMwCF4lR6Ob"
         },
         "followers": {
           "href": null,
-          "total": 156714
+          "total": 110060
         },
-        "genres": ["worship"],
-        "href": "https://api.spotify.com/v1/artists/60X7K2bIpjUiuCDX7lk19b",
-        "id": "60X7K2bIpjUiuCDX7lk19b",
+        "genres": ["breakbeat", "funkot"],
+        "href": "https://api.spotify.com/v1/artists/1wvfytmONUedMwCF4lR6Ob",
+        "id": "1wvfytmONUedMwCF4lR6Ob",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb034f70b31146ef47be28c12f",
+            "url": "https://i.scdn.co/image/ab6761610000e5eb7d84083dbae387672af8269c",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616100005174034f70b31146ef47be28c12f",
+            "url": "https://i.scdn.co/image/ab676161000051747d84083dbae387672af8269c",
             "height": 320,
             "width": 320
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f178034f70b31146ef47be28c12f",
+            "url": "https://i.scdn.co/image/ab6761610000f1787d84083dbae387672af8269c",
             "height": 160,
             "width": 160
           }
         ],
-        "name": "GMS Live",
+        "name": "DJ Panda",
+        "popularity": 50,
+        "type": "artist",
+        "uri": "spotify:artist:1wvfytmONUedMwCF4lR6Ob"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/1dVpz0PaQtPEaqiuRXYpvv"
+        },
+        "followers": {
+          "href": null,
+          "total": 32971
+        },
+        "genres": ["pop kreatif", "indonesian pop", "indonesian jazz"],
+        "href": "https://api.spotify.com/v1/artists/1dVpz0PaQtPEaqiuRXYpvv",
+        "id": "1dVpz0PaQtPEaqiuRXYpvv",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000b2739751556e1b08a4135f93a924",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e029751556e1b08a4135f93a924",
+            "height": 300,
+            "width": 300
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d000048519751556e1b08a4135f93a924",
+            "height": 64,
+            "width": 64
+          }
+        ],
+        "name": "Nani Sugianto",
+        "popularity": 42,
+        "type": "artist",
+        "uri": "spotify:artist:1dVpz0PaQtPEaqiuRXYpvv"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6ZmNAWW9zg1PWdPRZIE453"
+        },
+        "followers": {
+          "href": null,
+          "total": 42613
+        },
+        "genres": ["funkot", "breakbeat"],
+        "href": "https://api.spotify.com/v1/artists/6ZmNAWW9zg1PWdPRZIE453",
+        "id": "6ZmNAWW9zg1PWdPRZIE453",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb1ead03d3467036393927d41b",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab676161000051741ead03d3467036393927d41b",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f1781ead03d3467036393927d41b",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Bravy",
+        "popularity": 49,
+        "type": "artist",
+        "uri": "spotify:artist:6ZmNAWW9zg1PWdPRZIE453"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/7zUOkZejry0Y8RHtbQrVoG"
+        },
+        "followers": {
+          "href": null,
+          "total": 12231
+        },
+        "genres": ["funkot", "breakbeat", "indonesian hip hop", "hipdut"],
+        "href": "https://api.spotify.com/v1/artists/7zUOkZejry0Y8RHtbQrVoG",
+        "id": "7zUOkZejry0Y8RHtbQrVoG",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb9e7675e83f687b05c8d76064",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab676161000051749e7675e83f687b05c8d76064",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f1789e7675e83f687b05c8d76064",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "Liquid Silva",
         "popularity": 55,
         "type": "artist",
-        "uri": "spotify:artist:60X7K2bIpjUiuCDX7lk19b"
+        "uri": "spotify:artist:7zUOkZejry0Y8RHtbQrVoG"
       },
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/1Oaod2BEUHCaRav5EH1dva"
+          "spotify": "https://open.spotify.com/artist/4MUe5vCBLLsfnePfFT8AEi"
         },
         "followers": {
           "href": null,
-          "total": 191642
+          "total": 167113
         },
-        "genres": ["indonesian pop", "malay"],
-        "href": "https://api.spotify.com/v1/artists/1Oaod2BEUHCaRav5EH1dva",
-        "id": "1Oaod2BEUHCaRav5EH1dva",
+        "genres": ["hipdut", "funkot", "lagu timur", "dangdut", "breakbeat", "koplo"],
+        "href": "https://api.spotify.com/v1/artists/4MUe5vCBLLsfnePfFT8AEi",
+        "id": "4MUe5vCBLLsfnePfFT8AEi",
         "images": [
           {
-            "url": "https://i.scdn.co/image/ab6761610000e5ebb845b84872bca0c79d550b4a",
+            "url": "https://i.scdn.co/image/ab6761610000e5eb9d05e04e2ee4d0826e80e1c2",
             "height": 640,
             "width": 640
           },
           {
-            "url": "https://i.scdn.co/image/ab67616100005174b845b84872bca0c79d550b4a",
+            "url": "https://i.scdn.co/image/ab676161000051749d05e04e2ee4d0826e80e1c2",
             "height": 320,
             "width": 320
           },
           {
-            "url": "https://i.scdn.co/image/ab6761610000f178b845b84872bca0c79d550b4a",
+            "url": "https://i.scdn.co/image/ab6761610000f1789d05e04e2ee4d0826e80e1c2",
             "height": 160,
             "width": 160
           }
         ],
-        "name": "Aurelie Hermansyah",
-        "popularity": 43,
+        "name": "DJ Mamang",
+        "popularity": 55,
         "type": "artist",
-        "uri": "spotify:artist:1Oaod2BEUHCaRav5EH1dva"
+        "uri": "spotify:artist:4MUe5vCBLLsfnePfFT8AEi"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/0tFGlYcMNSsKJx4Gd9SadM"
+        },
+        "followers": {
+          "href": null,
+          "total": 207747
+        },
+        "genres": ["funkot", "hipdut", "dangdut", "breakbeat", "koplo"],
+        "href": "https://api.spotify.com/v1/artists/0tFGlYcMNSsKJx4Gd9SadM",
+        "id": "0tFGlYcMNSsKJx4Gd9SadM",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb837f665679fbc9a9df753b9e",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616100005174837f665679fbc9a9df753b9e",
+            "height": 320,
+            "width": 320
+          },
+          {
+            "url": "https://i.scdn.co/image/ab6761610000f178837f665679fbc9a9df753b9e",
+            "height": 160,
+            "width": 160
+          }
+        ],
+        "name": "DJ Haning",
+        "popularity": 49,
+        "type": "artist",
+        "uri": "spotify:artist:0tFGlYcMNSsKJx4Gd9SadM"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/2GaNr4eswvUOi45yl8fzNa"
+        },
+        "followers": {
+          "href": null,
+          "total": 1518
+        },
+        "genres": ["lagu timur", "hipdut", "funkot"],
+        "href": "https://api.spotify.com/v1/artists/2GaNr4eswvUOi45yl8fzNa",
+        "id": "2GaNr4eswvUOi45yl8fzNa",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000b27328c3838fbdccc625639c56bd",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e0228c3838fbdccc625639c56bd",
+            "height": 300,
+            "width": 300
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000485128c3838fbdccc625639c56bd",
+            "height": 64,
+            "width": 64
+          }
+        ],
+        "name": "Djsiduk V9",
+        "popularity": 53,
+        "type": "artist",
+        "uri": "spotify:artist:2GaNr4eswvUOi45yl8fzNa"
       }
     ]
   }
