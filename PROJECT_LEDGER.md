@@ -15,8 +15,8 @@
 | ID | Milestone | Status | Details |
 |:---|:---|:---:|:---|
 | M1 | Core ETL Engine | [Complete] | Async infrastructure & DB Schema. |
-| M2 | Source 1: Viberate | [Active] | Expanding pool to 600 candidates (Pages 0 & 1). |
-| M3 | Source 2: Spotify | [Complete] | Hybrid API/Scraper pipeline for popularity & metadata. |
+| M2 | Source 1: Viberate | [Complete] | Expanded pool to 600 candidates (Pages 0 & 1). |
+| M3 | Source 2: Spotify | [Active] | Enriching popularity & metadata for 600 candidates. |
 | M4 | Geo-Enrichment | [Active] | Validation Gate & "The Purge" (Deleting non-Indonesian/Corporate). |
 | M5 | Spatial Analytics | [Pending] | GeoPandas analysis of regional density & genre hubs. |
 | M6 | Web Dashboard | [Pending] | Next.js / Express interactive spatial map. |
@@ -29,6 +29,7 @@
 
 - [x] **DB Schema Expansion**: Add `origin_city`, `origin_province`, `latitude`, and `longitude` columns.
 - [x] **Viberate Expansion**: Refactor `viberate.py` to collect 600 candidates.
+- [ ] **Spotify Enrichment**: Process 300+ new records with empty `spotify_link`.
 - [ ] **Nationality Validator**: Build Regex/NLP check for "Indonesian" keywords in Wikipedia intros.
 - [ ] **The Purge Logic**: Implement hard-deletion for records failing the Nationality/Corporate gate.
 - [ ] **Target Target**: Reach 350-400 "Clean" records for final spatial analysis.
@@ -48,7 +49,7 @@
 ## 📝 CHRONOLOGICAL ACTIVITY LOG
 | Timestamp | Persona | Action | Impact |
 |:---|:---:|:---|:---|
-| 2026-04-30 | Dev | feat: target viberate page 1 for incremental expansion | Updated scraper to focus exclusively on ranks 300-600 to avoid duplicates. |
+| 2026-04-30 | PM | Status Report: M2 Complete | Verified 600 records in DB; transitioning to Spotify Enrichment (M3) and Validation (M4). |
 | 2026-04-30 | Dev | feat: multi-page viberate extraction | Scaled Viberate pool to 600 candidates by integrating Page 0 and Page 1. |
 | 2026-04-30 | PM | Strategic Pivot: Purge & Expand | Re-opened M2; pivoting M4 to include "The Purge" (deletion of noise) to target 350-400 clean records. |
 | 2026-04-27 | Dev | feat: NLP dom scanning fallback | Built `re` based NLP extraction parsing the first 5 paragraphs if the infobox is missing or empty. |
@@ -65,4 +66,4 @@
 ---
 
 ## 🚩 PM STATUS: GREEN
-**Next Immediate Step**: Run `python main.py` and select option 1 to ingest the 600 artists into the database.
+**Next Immediate Step**: Run `python main.py` Option 2 to enrich the new 300 artists with Spotify metadata.
