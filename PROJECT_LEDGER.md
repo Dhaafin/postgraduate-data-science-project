@@ -20,7 +20,7 @@
 | M1  | Core ETL Engine    | [Complete] | Async infrastructure & DB Schema.                                  |
 | M2  | Source 1: Viberate | [Complete] | Expanded pool to 600 candidates (Pages 0 & 1).                     |
 | M3  | Source 2: Spotify  |  [Active]  | Enriching popularity & metadata for 600 candidates.                |
-| M4  | Geo-Enrichment     |  [Active]  | Nationality Validation (Flagging) followed by Wiki/Geo mapping.            |
+| M4  | Geo-Enrichment     |  [Active]  | 516 Valid Indonesian artists ready for Wiki/Geo mapping.            |
 | M5  | Spatial Analytics  | [Pending]  | GeoPandas analysis of regional density & genre hubs.               |
 | M6  | Web Dashboard      | [Pending]  | Next.js / Express interactive spatial map.                         |
 | M7  | Deployment         | [Pending]  | Dockerization and Cloud Infrastructure setup.                      |
@@ -34,8 +34,9 @@
 - [x] **DB Schema Expansion**: Add `origin_city`, `origin_province`, `latitude`, and `longitude` columns.
 - [x] **Viberate Expansion**: Refactor `viberate.py` to collect 600 candidates.
 - [ ] **Spotify Enrichment**: Process 300+ new records with empty `spotify_link`.
-- [x] **Nationality Validation (Flagging)**: Create `nationality_validator.py` to flag `is_indonesian` status.
-- [ ] **Wiki/Geo Scraper**: Refine extraction for remaining valid 400 records.
+- [x] **Nationality Validation (Flagging)**: 516 Indonesian, 14 Foreign, 68 Uncertain.
+- [x] **Documentation**: Created `docs/ARTIST_VALIDATION_REPORT.md` summarizing validation heuristics and yield.
+- [ ] **Wiki/Geo Scraper**: Refine extraction for remaining valid 516 records.
 - [ ] **Target Target**: Reach 350-400 "Clean" records for final spatial analysis.
 
 ---
@@ -55,6 +56,11 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 
 | Timestamp  | Persona | Action                               | Impact                                                                                                    |
 | :--------- | :-----: | :----------------------------------- | :-------------------------------------------------------------------------------------------------------- |
+| Timestamp | Persona | Action | Impact |
+|:---|:---:|:---|:---|
+| 2026-05-01 | PM | doc: create artist validation report | Formalized 516 validated records in `docs/ARTIST_VALIDATION_REPORT.md`. |
+| 2026-04-30 | PM | Status Report: Validation Complete | 516 artists successfully validated as Indonesian. Exceeded target of 400 clean records. |
+
 | 2026-04-30 | Dev | fix: validator rate limits & genres | Added delay to prevent HTTP 429 and moved `sholawat` to valid Indonesian genres. |
 | 2026-04-30 | Dev | feat: implement hybrid metadata validator v3 | Replaced NLP-first approach with Spotify genre-first logic, improving accuracy to ~80% instantly. |
 | 2026-04-30 | Dev | feat: limit validator prototype to 100 | Capping nationality scan at 100 records for initial high-accuracy testing. |
@@ -82,4 +88,4 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 
 ## 🚩 PM STATUS: GREEN
 
-**Next Immediate Step**: Run `python src/scrapers/nationality_purge.py` to clean the database.
+**Next Immediate Step**: Refine `WikiGeoScraper.py` to target only `is_indonesian = TRUE` records and extract Geo-Coordinates.
