@@ -169,7 +169,7 @@ async def run_spotify_search_scraper():
     async with async_playwright() as playwright:
         # We use a persistent context so we don't have to log in every single time
         print(f"Launching browser (user data: {user_data_dir})...")
-        context = await playwright.chromium.launch_persistent_context(
+        context = await playwright.firefox.launch_persistent_context(
             user_data_dir,
             headless=False,
             args=["--start-maximized"]

@@ -58,6 +58,7 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 | :--------- | :-----: | :----------------------------------- | :-------------------------------------------------------------------------------------------------------- |
 | Timestamp | Persona | Action | Impact |
 |:---|:---:|:---|:---|
+| 2026-05-02 | Dev | refactor: revert to firefox engine | Restored Firefox as the primary browser for Playwright. |
 | 2026-05-02 | Dev | fix: resolve browser crash & Layer 2 | Switched to Chromium and implemented Follower Cap filter for robust validation. |
 | 2026-05-02 | PM | Strategic Pivot: Clean Slate Recovery | Initiated full scrub of Spotify/Nationality data due to scraper logic failure. |
 | 2026-05-02 | Dev | fix: implement weighted similarity scoring | Refactored Spotify search scraper to prevent popularity-based false positives (e.g. David Guetta). |
