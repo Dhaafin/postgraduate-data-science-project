@@ -19,8 +19,8 @@
 | :-- | :----------------- | :--------: | :----------------------------------------------------------------- |
 | M1  | Core ETL Engine    | [Complete] | Async infrastructure & DB Schema.                                  |
 | M2  | Source 1: Viberate | [Complete] | Expanded pool to 600 candidates (Pages 0 & 1).                     |
-| M3  | Source 2: Spotify  |  [Active]  | Enriching popularity & metadata for 600 candidates.                |
-| M4  | Geo-Enrichment     |  [Active]  | 516 Valid Indonesian artists ready for Wiki/Geo mapping.            |
+| M3  | Source 2: Spotify  |  [Active]  | **RESET**: Re-scraping 600 records with Weighted Scoring.  |
+| M4  | Geo-Enrichment     |  [Active]  | **RESET**: Re-validating nationality after Spotify scrub.       |
 | M5  | Spatial Analytics  | [Pending]  | GeoPandas analysis of regional density & genre hubs.               |
 | M6  | Web Dashboard      | [Pending]  | Next.js / Express interactive spatial map.                         |
 | M7  | Deployment         | [Pending]  | Dockerization and Cloud Infrastructure setup.                      |
@@ -33,12 +33,11 @@
 
 - [x] **DB Schema Expansion**: Add `origin_city`, `origin_province`, `latitude`, and `longitude` columns.
 - [x] **Viberate Expansion**: Refactor `viberate.py` to collect 600 candidates.
-- [ ] **Spotify Enrichment**: Process 300+ new records with empty `spotify_link`.
-- [x] **Nationality Validation (Flagging)**: Initial sweep complete (516 ID, 14 Foreign, 68 Uncertain).
-- [ ] **Manual Audit**: Review 82 records in `docs/MANUAL_REVIEW_QUEUE.md` to reclaim false negatives (e.g., Seventeen, Project Pop).
-- [x] **Documentation**: Created `docs/ARTIST_VALIDATION_REPORT.md` summarizing validation heuristics and yield.
-- [ ] **Wiki/Geo Scraper**: Refine extraction for remaining valid 516+ records.
-- [ ] **Target Target**: Reach 400-500 "Clean" records for final spatial analysis.
+- [ ] **Spotify Enrichment**: **RE-RUNNING** with Weighted Similarity Scoring.
+- [ ] **Nationality Validation**: **RE-RUNNING** after Spotify data recovery.
+- [ ] **Documentation**: `docs/ARTIST_VALIDATION_REPORT.md` is currently STALE.
+- [ ] **Wiki/Geo Scraper**: Blocked until M3/M4 recovery.
+- [ ] **Target Target**: Reach 500+ "Clean" records for final spatial analysis.
 
 ---
 
@@ -59,6 +58,7 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 | :--------- | :-----: | :----------------------------------- | :-------------------------------------------------------------------------------------------------------- |
 | Timestamp | Persona | Action | Impact |
 |:---|:---:|:---|:---|
+| 2026-05-02 | PM | Strategic Pivot: Clean Slate Recovery | Initiated full scrub of Spotify/Nationality data due to scraper logic failure. |
 | 2026-05-02 | Dev | fix: implement weighted similarity scoring | Refactored Spotify search scraper to prevent popularity-based false positives (e.g. David Guetta). |
 | 2026-05-01 | PM | task: generate manual review queue | Created `docs/MANUAL_REVIEW_QUEUE.md` for 82 ambiguous records. |
 | 2026-05-01 | PM | doc: create artist validation report | Formalized 516 validated records in `docs/ARTIST_VALIDATION_REPORT.md`. |
