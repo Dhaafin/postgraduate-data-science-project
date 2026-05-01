@@ -58,6 +58,7 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 | :--------- | :-----: | :----------------------------------- | :-------------------------------------------------------------------------------------------------------- |
 | Timestamp | Persona | Action | Impact |
 |:---|:---:|:---|:---|
+| 2026-05-02 | Dev | fix: resolve browser crash & Layer 2 | Switched to Chromium and implemented Follower Cap filter for robust validation. |
 | 2026-05-02 | PM | Strategic Pivot: Clean Slate Recovery | Initiated full scrub of Spotify/Nationality data due to scraper logic failure. |
 | 2026-05-02 | Dev | fix: implement weighted similarity scoring | Refactored Spotify search scraper to prevent popularity-based false positives (e.g. David Guetta). |
 | 2026-05-01 | PM | task: generate manual review queue | Created `docs/MANUAL_REVIEW_QUEUE.md` for 82 ambiguous records. |
@@ -89,6 +90,6 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 
 ---
 
-## 🚩 PM STATUS: GREEN
+## 🚩 PM STATUS: AMBER
 
-**Next Immediate Step**: Refine `WikiGeoScraper.py` to target only `is_indonesian = TRUE` records and extract Geo-Coordinates.
+**Next Immediate Step**: Run `spotify_search_scraper.py` to rebuild the metadata layer with Weighted Similarity Scoring.

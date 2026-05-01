@@ -99,6 +99,13 @@ async def scrape_single_artist(page, query_name, selectors, output_file):
             if name_score < 0.6 and genre_bonus == 0:
                 total_score -= 0.4
 
+            # F. Layer 2: Global Star Filter (Follower Cap)
+            # If the artist is massive (> 1M followers) and not a perfect name match,
+            # we apply a heavy penalty unless they have a strong Indo-genre signal.
+            followers = artist.get("followers", {}).get("total", 0)
+            if followers > 1_000_000 and name_score < 0.95 and genre_bonus == 0:
+                total_score -= 1.0
+
             scored_candidates.append({
                 "data": artist,
                 "total_score": total_score,
@@ -162,7 +169,7 @@ async def run_spotify_search_scraper():
     async with async_playwright() as playwright:
         # We use a persistent context so we don't have to log in every single time
         print(f"Launching browser (user data: {user_data_dir})...")
-        context = await playwright.firefox.launch_persistent_context(
+        context = await playwright.chromium.launch_persistent_context(
             user_data_dir,
             headless=False,
             args=["--start-maximized"]
