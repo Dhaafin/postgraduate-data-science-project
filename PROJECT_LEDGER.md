@@ -34,10 +34,11 @@
 - [x] **DB Schema Expansion**: Add `origin_city`, `origin_province`, `latitude`, and `longitude` columns.
 - [x] **Viberate Expansion**: Refactor `viberate.py` to collect 600 candidates.
 - [ ] **Spotify Enrichment**: Process 300+ new records with empty `spotify_link`.
-- [x] **Nationality Validation (Flagging)**: 516 Indonesian, 14 Foreign, 68 Uncertain.
+- [x] **Nationality Validation (Flagging)**: Initial sweep complete (516 ID, 14 Foreign, 68 Uncertain).
+- [ ] **Manual Audit**: Review 82 records in `docs/MANUAL_REVIEW_QUEUE.md` to reclaim false negatives (e.g., Seventeen, Project Pop).
 - [x] **Documentation**: Created `docs/ARTIST_VALIDATION_REPORT.md` summarizing validation heuristics and yield.
-- [ ] **Wiki/Geo Scraper**: Refine extraction for remaining valid 516 records.
-- [ ] **Target Target**: Reach 350-400 "Clean" records for final spatial analysis.
+- [ ] **Wiki/Geo Scraper**: Refine extraction for remaining valid 516+ records.
+- [ ] **Target Target**: Reach 400-500 "Clean" records for final spatial analysis.
 
 ---
 
@@ -58,6 +59,8 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 | :--------- | :-----: | :----------------------------------- | :-------------------------------------------------------------------------------------------------------- |
 | Timestamp | Persona | Action | Impact |
 |:---|:---:|:---|:---|
+| 2026-05-02 | Dev | fix: implement weighted similarity scoring | Refactored Spotify search scraper to prevent popularity-based false positives (e.g. David Guetta). |
+| 2026-05-01 | PM | task: generate manual review queue | Created `docs/MANUAL_REVIEW_QUEUE.md` for 82 ambiguous records. |
 | 2026-05-01 | PM | doc: create artist validation report | Formalized 516 validated records in `docs/ARTIST_VALIDATION_REPORT.md`. |
 | 2026-04-30 | PM | Status Report: Validation Complete | 516 artists successfully validated as Indonesian. Exceeded target of 400 clean records. |
 

@@ -14,6 +14,7 @@ import os
 import sys
 import json
 import re
+import difflib
 from playwright.async_api import async_playwright
 
 # Add the project root to sys.path so we can import internal modules (src.*)
@@ -70,27 +71,55 @@ async def scrape_single_artist(page, query_name, selectors, output_file):
             print(f"  -> No luck. Spotify doesn't seem to have anyone for '{query_name}'.")
             return None
 
-        # We need to be picky here. We only want results where the artist name 
-        # actually makes sense given our search query to avoid grabbing the wrong person.
+        # --- SCORING ENGINE ---
         query_clean = query_name.lower().strip()
-        query_words = set(re.findall(r'\w+', query_clean))
-        stop_words = {"the", "and", "feat", "ft", "v", "vs"}
-        significant_query_words = query_words - stop_words or query_words
-
-        candidates = []
-        for artist in artists_data:
-            name_clean = artist.get("name", "").lower().strip()
-            name_words = set(re.findall(r'\w+', name_clean))
-            # If they share at least one meaningful word, they're a candidate
-            if significant_query_words & name_words:
-                candidates.append(artist)
+        indo_anchors = ["indonesia", "indo", "jawa", "dangdut", "koplo", "sunda", "malay", "sholawat"]
         
-        if not candidates:
-            print(f"  -> Found some names, but none of them look like a good enough match for '{query_name}'.")
+        scored_candidates = []
+        for artist in artists_data:
+            name_actual = artist.get("name", "")
+            name_clean = name_actual.lower().strip()
+            artist_genres = [g.lower() for g in artist.get("genres", [])]
+            popularity = artist.get("popularity", 0)
+
+            # A. Semantic Similarity (difflib ratio)
+            name_score = difflib.SequenceMatcher(None, query_clean, name_clean).ratio()
+            
+            # B. Geographic Bonus
+            genre_bonus = 0.25 if any(any(anchor in g for anchor in indo_anchors) for g in artist_genres) else 0.0
+            
+            # C. Popularity Tie-breaker (Max 0.05)
+            pop_score = (popularity / 100) * 0.05
+            
+            # D. Total Score
+            total_score = name_score + genre_bonus + pop_score
+            
+            # E. Collision Penalty (The "David Guetta" Guard)
+            # If the name is a weak match and no Indo-signal is present, penalize.
+            if name_score < 0.6 and genre_bonus == 0:
+                total_score -= 0.4
+
+            scored_candidates.append({
+                "data": artist,
+                "total_score": total_score,
+                "name_score": name_score
+            })
+        
+        if not scored_candidates:
+            print(f"  -> No candidates found for '{query_name}'.")
             return None
 
-        # If we have multiple candidates, we'll bet on the one with the highest popularity
-        best_match = max(candidates, key=lambda x: x.get("popularity", 0))
+        # Sort by total score descending
+        scored_candidates.sort(key=lambda x: x["total_score"], reverse=True)
+        best = scored_candidates[0]
+        
+        # F. Confidence Threshold
+        if best["total_score"] < 0.7:
+            print(f"  -> Low Confidence Match ({best['total_score']:.2f}) for '{query_name}'. Refusing to save.")
+            return None
+
+        best_match = best["data"]
+        print(f"  -> Best Match: {best_match.get('name')} (Score: {best['total_score']:.2f}, Name Score: {best['name_score']:.2f})")
 
         return {
             "artist_name":  best_match.get("name"),
