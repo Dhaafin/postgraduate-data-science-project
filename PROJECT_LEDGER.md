@@ -59,6 +59,7 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 | :--------- | :-----: | :----------------------------------- | :-------------------------------------------------------------------------------------------------------- |
 | Timestamp | Persona | Action | Impact |
 |:---|:---:|:---|:---|
+| 2026-05-03 | Dev | refactor: secure main.py db insertions with kwargs | Updated `main.py` to use keyword arguments for `insert_artist_data` to ensure compatibility with the new `profile_picture` signature. |
 | 2026-05-03 | Dev | feat: add profile picture extraction to spotify scraper and db | Added `profile_picture` column to schema and updated Playwright scraper to extract API image URLs. |
 | 2026-05-02 | Dev | refactor: revert to firefox engine | Restored Firefox as the primary browser for Playwright. |
 | 2026-05-02 | Dev | fix: resolve browser crash & Layer 2 | Switched to Chromium and implemented Follower Cap filter for robust validation. |

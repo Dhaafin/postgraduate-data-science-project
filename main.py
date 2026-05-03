@@ -20,7 +20,7 @@ async def run_viberate():
 
     for artist_name in viberate_artists:
         print(f"Saving to Database (Viberate): {artist_name}")
-        await insert_artist_data(None, artist_name)
+        await insert_artist_data(spotify_id=None, artist_name=artist_name)
     print("Viberate data saved successfully.")
 
 async def run_spotify_search_workflow():
