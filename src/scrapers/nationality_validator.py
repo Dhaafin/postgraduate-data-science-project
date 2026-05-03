@@ -21,6 +21,7 @@ class NationalityValidator:
             "User-Agent": "NationalityValidator/3.0 (Research Project; contact via github)"
         }
         self.api_url = "https://id.wikipedia.org/w/api.php"
+        self.report_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../docs/ARTIST_VALIDATION_REPORT.md'))
         
         # TIER 1: Spotify Indonesian Genres
         self.SPOTIFY_INDO_GENRES = [
@@ -163,6 +164,7 @@ class NationalityValidator:
         uncertain = 0
         spotify_hits = 0
         wiki_hits = 0
+        results_log = []
         
         for artist in artists:
             name = artist["name"]
@@ -185,13 +187,16 @@ class NationalityValidator:
                 print(f"🇮🇩 [INDO ] {name:<25} | {reason}")
                 update_nationality_sync(db_id, True)
                 indo += 1
+                results_log.append({"name": name, "status": "✅ INDO", "reason": reason})
             elif status == "FOREIGN":
                 print(f"🌎 [NON-ID] {name:<25} | {reason}")
                 update_nationality_sync(db_id, False)
                 foreign += 1
+                results_log.append({"name": name, "status": "🌎 FOREIGN", "reason": reason})
             else:
                 print(f"❓ [UNCRTN] {name:<25} | {reason}")
                 uncertain += 1
+                results_log.append({"name": name, "status": "❓ UNCERTAIN", "reason": reason})
                 
         print("\n" + "="*50)
         print(f"VALIDATION SUMMARY")
@@ -203,6 +208,38 @@ class NationalityValidator:
         print(f"  - Foreign/Noise:    {foreign}")
         print(f"  - Uncertain:        {uncertain}")
         print("="*50)
+
+        self.generate_markdown_report(len(artists), indo, foreign, uncertain, spotify_hits, wiki_hits, results_log)
+
+    def generate_markdown_report(self, total, indo, foreign, uncertain, spotify_hits, wiki_hits, log):
+        """Generates a formatted markdown report."""
+        timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+        
+        content = f"""# Artist Nationality Validation Report
+Generated on: `{timestamp}`
+
+## 📊 Summary Statistics
+| Metric | Count |
+| :--- | :--- |
+| **Total Audited** | {total} |
+| **Valid Indonesian** | {indo} |
+| **Foreign / Noise** | {foreign} |
+| **Uncertain** | {uncertain} |
+
+## 🛠️ Pipeline Performance
+- **Fast-Tracked via Spotify Genres**: {spotify_hits}
+- **Fallbacks via Wikipedia Scan**: {wiki_hits}
+
+## 📝 Detailed Audit Log
+| Artist Name | Status | Reason / Marker |
+| :--- | :--- | :--- |
+"""
+        for entry in log:
+            content += f"| {entry['name']} | {entry['status']} | {entry['reason']} |\n"
+
+        with open(self.report_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"\n[REPORT] Detailed validation results saved to: {self.report_path}")
 
 if __name__ == "__main__":
     validator = NationalityValidator()
