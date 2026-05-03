@@ -34,6 +34,7 @@
 - [x] **DB Schema Expansion**: Add `origin_city`, `origin_province`, `latitude`, and `longitude` columns.
 - [x] **Viberate Expansion**: Refactor `viberate.py` to collect 600 candidates.
 - [ ] **Spotify Enrichment**: **RE-RUNNING** with Weighted Similarity Scoring.
+- [x] **Spotify Enrichment**: Add profile picture extraction to database.
 - [ ] **Nationality Validation**: **RE-RUNNING** after Spotify data recovery.
 - [ ] **Documentation**: `docs/ARTIST_VALIDATION_REPORT.md` is currently STALE.
 - [ ] **Wiki/Geo Scraper**: Blocked until M3/M4 recovery.
@@ -58,6 +59,7 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 | :--------- | :-----: | :----------------------------------- | :-------------------------------------------------------------------------------------------------------- |
 | Timestamp | Persona | Action | Impact |
 |:---|:---:|:---|:---|
+| 2026-05-03 | Dev | feat: add profile picture extraction to spotify scraper and db | Added `profile_picture` column to schema and updated Playwright scraper to extract API image URLs. |
 | 2026-05-02 | Dev | refactor: revert to firefox engine | Restored Firefox as the primary browser for Playwright. |
 | 2026-05-02 | Dev | fix: resolve browser crash & Layer 2 | Switched to Chromium and implemented Follower Cap filter for robust validation. |
 | 2026-05-02 | PM | Strategic Pivot: Clean Slate Recovery | Initiated full scrub of Spotify/Nationality data due to scraper logic failure. |

@@ -132,6 +132,7 @@ async def scrape_single_artist(page, query_name, selectors, output_file):
             "artist_name":  best_match.get("name"),
             "spotify_id":   best_match.get("id"),
             "spotify_link": best_match.get("external_urls", {}).get("spotify"),
+            "profile_picture": best_match.get("images", [])[0].get("url") if best_match.get("images") else None,
             "followers":    best_match.get("followers", {}).get("total", 0),
             "genres":       best_match.get("genres", []),
             "popularity":   best_match.get("popularity", 0)
@@ -222,6 +223,7 @@ async def run_spotify_search_scraper():
                         db_id=target['db_id'],
                         spotify_id=result["spotify_id"],
                         spotify_link=result["spotify_link"],
+                        profile_picture=result["profile_picture"],
                         genre=result["genres"],
                         followers=result["followers"],
                         popularity=result["popularity"],

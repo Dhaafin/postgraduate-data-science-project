@@ -62,6 +62,7 @@ async def init_db():
                     spotify_id TEXT,
                     spotify_link TEXT,
                     artist_name TEXT,
+                    profile_picture TEXT,
                     genre TEXT[],
                     followers INTEGER,
                     popularity INTEGER,
@@ -86,8 +87,8 @@ async def init_db():
             
             desired_order = [
                 "id", "needs_review", "spotify_id", "spotify_link", "artist_name", 
-                "genre", "followers", "popularity", "origin_city", "origin_province", 
-                "latitude", "longitude", "is_indonesian"
+                "profile_picture", "genre", "followers", "popularity", "origin_city", 
+                "origin_province", "latitude", "longitude", "is_indonesian"
             ]
             
             # Trigger refactor if columns are missing or out of order
@@ -105,6 +106,7 @@ async def init_db():
                         spotify_id TEXT,
                         spotify_link TEXT,
                         artist_name TEXT,
+                        profile_picture TEXT,
                         genre TEXT[],
                         followers INTEGER,
                         popularity INTEGER,
@@ -137,16 +139,16 @@ async def init_db():
             else:
                 print("Database schema is already up to date.")
 
-async def insert_artist_data(spotify_id, artist_name, spotify_link=None, genre=None, followers=None, popularity=None, needs_review=False):
+async def insert_artist_data(spotify_id, artist_name, spotify_link=None, profile_picture=None, genre=None, followers=None, popularity=None, needs_review=False):
     """Inserts a new artist record into the music_data table."""
     if not engine: return
     async with engine.begin() as conn:
         await conn.execute(
             text("""
-                INSERT INTO music_data (spotify_id, spotify_link, artist_name, genre, followers, popularity, needs_review) 
-                VALUES (:id, :link, :name, :genre, :followers, :popularity, :needs_review)
+                INSERT INTO music_data (spotify_id, spotify_link, artist_name, profile_picture, genre, followers, popularity, needs_review) 
+                VALUES (:id, :link, :name, :profile_picture, :genre, :followers, :popularity, :needs_review)
             """),
-            {"id": spotify_id, "link": spotify_link, "name": artist_name, "genre": genre, "followers": followers, "popularity": popularity, "needs_review": needs_review}
+            {"id": spotify_id, "link": spotify_link, "name": artist_name, "profile_picture": profile_picture, "genre": genre, "followers": followers, "popularity": popularity, "needs_review": needs_review}
         )
 
 async def get_all_artists(db_engine=None):
@@ -167,20 +169,20 @@ def update_nationality_sync(db_id, is_indonesian, db_engine=None):
             {"is_indonesian": is_indonesian, "id": db_id}
         )
 
-def update_spotify_id_sync(db_id, spotify_id, spotify_link=None, genre=None, followers=None, popularity=None, needs_review=None, db_engine=None):
+def update_spotify_id_sync(db_id, spotify_id, spotify_link=None, profile_picture=None, genre=None, followers=None, popularity=None, needs_review=None, db_engine=None):
     """Synchronous version of update_spotify_id."""
     target_engine = db_engine or sync_engine
     if not target_engine: return
     with target_engine.begin() as conn:
-        set_clauses = ["spotify_id = :spotify_id", "spotify_link = :spotify_link", "genre = :genre", "followers = :followers", "popularity = :popularity"]
-        params = {"spotify_id": spotify_id, "spotify_link": spotify_link, "genre": genre, "followers": followers, "popularity": popularity, "id": db_id}
+        set_clauses = ["spotify_id = :spotify_id", "spotify_link = :spotify_link", "profile_picture = :profile_picture", "genre = :genre", "followers = :followers", "popularity = :popularity"]
+        params = {"spotify_id": spotify_id, "spotify_link": spotify_link, "profile_picture": profile_picture, "genre": genre, "followers": followers, "popularity": popularity, "id": db_id}
         if needs_review is not None:
             set_clauses.append("needs_review = :needs_review")
             params["needs_review"] = needs_review
         set_str = ", ".join(set_clauses)
         conn.execute(text(f"UPDATE music_data SET {set_str} WHERE id = :id"), params)
 
-async def update_spotify_id(db_id, spotify_id, spotify_link=None, genre=None, followers=None, popularity=None, needs_review=None):
+async def update_spotify_id(db_id, spotify_id, spotify_link=None, profile_picture=None, genre=None, followers=None, popularity=None, needs_review=None):
     """
     Asynchronously updates an artist's Spotify information.
     """
@@ -190,6 +192,7 @@ async def update_spotify_id(db_id, spotify_id, spotify_link=None, genre=None, fo
         set_clauses = [
             "spotify_id = :spotify_id",
             "spotify_link = :spotify_link",
+            "profile_picture = :profile_picture",
             "genre = :genre",
             "followers = :followers",
             "popularity = :popularity"
@@ -197,6 +200,7 @@ async def update_spotify_id(db_id, spotify_id, spotify_link=None, genre=None, fo
         params = {
             "spotify_id": spotify_id,
             "spotify_link": spotify_link,
+            "profile_picture": profile_picture,
             "genre": genre,
             "followers": followers,
             "popularity": popularity,
