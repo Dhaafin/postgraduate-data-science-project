@@ -54,6 +54,7 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 
 | Timestamp  | Persona | Action                               | Impact                                                                                                    |
 | :--------- | :-----: | :----------------------------------- | :-------------------------------------------------------------------------------------------------------- |
+| 2026-05-03 |   Dev   | feat: integrate nationality validator| Integrated `NationalityValidator` into `main.py` with CLI and Interactive Menu support.                   |
 | 2026-05-03 |   PM    | status: M3 Spotify Recovery Complete | Successfully re-scraped 600 artists using Weighted Similarity Scoring and added Profile Pictures.         |
 | 2026-05-03 |   Dev   | refactor: secure main.py db inserts  | Switched to kwargs for `insert_artist_data` to handle schema expansion safely.                            |
 | 2026-05-03 |   Dev   | feat: profile picture integration    | Added `profile_picture` column and extraction logic to Spotify scraper.                                   |
