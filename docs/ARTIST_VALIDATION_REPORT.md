@@ -1,66 +1,77 @@
-# 🇮🇩 Artist Validation Report: Nationality & Signal Quality
+# Artist Nationality Validation Report
 
-**Date**: 2026-05-01  
-**Project**: Digital Inequality in Indonesian Music  
-**Status**: Validation Phase Complete (M3/M4 Bridge)
+Generated on: `2026-05-03 16:45:31`
 
----
+## 📊 Summary Statistics
 
-## 1. Executive Summary
-Following the expansion of the artist pool to 600 candidates via Viberate (Pages 0 & 1), a multi-tiered validation sweep was executed to enforce strict nationality filters. The objective was to isolate legitimate Indonesian human talent for downstream spatial analytics.
+| Metric               | Count |
+| :------------------- | :---- |
+| **Total Audited**    | 598   |
+| **Valid Indonesian** | 552   |
+| **Foreign / Noise**  | 4     |
+| **Uncertain**        | 42    |
 
-| Metric | Value | % of Total |
-| :--- | :--- | :--- |
-| **Total Candidates Audited** | 600 | 100% |
-| **Validated Indonesian** | **516** | **86%** |
-| **Identified Foreign/Non-ID** | 14 | 2.3% |
-| **Uncertain (Requires Audit)** | 68 | 11.3% |
+## 🛠️ Pipeline Performance
 
----
-
-## 2. Validation Methodology (V3.0 Hybrid)
-The validator utilized a **tiered heuristic strategy** to minimize API overhead and maximize accuracy:
-
-### Tier 1: Spotify Metadata Fast-Track
-*   **Logic**: Direct matching against Spotify genre tags.
-*   **Green-Light Keywords**: `indonesian`, `indo`, `jawa`, `dangdut`, `koplo`, `sunda`, `minang`, `batak`, `sholawat`, `funkot`.
-*   **Fast-Track Success**: High accuracy (~80%+) for established artists with rich metadata.
-
-### Tier 2: Corporate Noise Filtering
-*   **Objective**: Purging non-human entities and corporate IPs.
-*   **Exclusion Keywords**: `children's music`, `white noise`, `lullaby`, `mollywood`.
-*   **Case Study**: *Baba Lili Tata* (Children's IP) was correctly flagged as data noise.
-
-### Tier 3: Wikipedia NLP Fallback
-*   **Logic**: Scanned the first two paragraphs of the Indonesian Wikipedia page for nationality markers.
-*   **Markers**: "berkebangsaan amerika serikat", "asal korea selatan", etc.
-*   **Confirmation**: "Penyanyi Indonesia", "Grup musik Indonesia" confirmed `is_indonesian = TRUE`.
+- **Fast-Tracked via Spotify Genres**: 538
+- **Fallbacks via Wikipedia Scan**: 60
 
 ---
 
-## 3. Findings & Signal Quality
+## 🌎 Foreign / Noise
 
-### Top Genre Distribution (Sampled)
-The validated pool shows a strong concentration in the following regional and national genres:
-1.  **Pop Indonesia / Indo-Pop** (Primary)
-2.  **Dangdut / Koplo** (Strong regional signal)
-3.  **Sholawat** (Religious-cultural signal)
-4.  **Hip-hop Jawa** (Emerging regional signal)
-
-### The "Uncertain" Queue (68 Records)
-These records returned `Wiki ambiguous` or lacked both Spotify genres and Wikipedia presence. 
-*   **Nature of Ambiguity**: Mostly very new indie artists or those with highly generic names (e.g., "Astrid", "Sarwendah") where the search disambiguation failed.
-*   **Risk**: Low risk of "contaminating" the final spatial map if excluded, but high potential for "Jakarta-centrism" signal if they are actually regional indie artists.
+| Artist Name      | Status     | Reason / Marker                                           |
+| :--------------- | :--------- | :-------------------------------------------------------- | ----------- |
+| YOON SAN HA      | 🌎 FOREIGN | Spotify Foreign Genre: k-ballad                           | --Foreign   |
+| Baba Lili Tata   | 🌎 FOREIGN | Spotify Foreign Genre: children's music                   | --Foreign   |
+| NXGHT!           | 🌎 FOREIGN | Spotify Foreign Genre: brazilian                          | --Foreign   |
+| Stephanie Poetri | 🌎 FOREIGN | Wiki strong foreign marker: berkebangsaan amerika serikat | --Indonesia |
 
 ---
 
-## 4. Next Steps: Geo-Enrichment (M4)
-With 516 validated records, we have exceeded the PRD target of 400 clean records. The pipeline is now primed for:
-1.  **Origin City Extraction**: Using MediaWiki API to parse "Tempat Lahir" or "Asal".
-2.  **Coordinate Mapping**: Resolving extracted cities to Latitude/Longitude.
-3.  **Province Normalization**: Ensuring all 516 records are mapped to one of the 38 Indonesian provinces.
+## ❓ Uncertain (Manual Review Required)
 
----
-
-> [!NOTE]
-> This report confirms that the dataset is now "Clean" enough to support rigorous spatial analysis. The low percentage of foreign records (2.3%) suggests the initial Viberate scraping (Filter: Indonesia) was highly effective.
+| Artist Name                | Status       | Reason / Marker          |
+| :------------------------- | :----------- | :----------------------- | ------------ |
+| Fonzi M                    | ❓ UNCERTAIN | Wiki ambiguous.          | --Foreign    |
+| Pianella Piano             | ❓ UNCERTAIN | Wiki ambiguous.          | --Foreign    |
+| Flo Milli                  | ❓ UNCERTAIN | Wiki ambiguous.          | --Foreign    |
+| jaame.sss                  | ❓ UNCERTAIN | HTTP 429                 | --Foreign    |
+| Wendy Walters              | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Arash Buana                | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Weird Genius               | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Hal                        | ❓ UNCERTAIN | HTTP 429                 | -- Indonesia |
+| Dimas Senopati             | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Tony Q Rastafara           | ❓ UNCERTAIN | HTTP 429                 | --Foreign    |
+| Riyandi Kusuma             | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Iqbaal Ramadhan            | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| KinosGina                  | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| The Cloves And The Tobacco | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Fanirahmansyah             | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Budi Arsa                  | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Lily-Rose Depp             | ❓ UNCERTAIN | HTTP 429                 | --Foreign    |
+| Tenny TAP                  | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Flo Milli                  | ❓ UNCERTAIN | Wiki ambiguous.          | --Foreign    |
+| aqsarashi                  | ❓ UNCERTAIN | No Wikipedia page found. | --Indonesia  |
+| Gustixa                    | ❓ UNCERTAIN | No Wikipedia page found. | --Indonesia  |
+| Hal                        | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Dimas M                    | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| فضل شاكر                   | ❓ UNCERTAIN | HTTP 429                 | --Foreign    |
+| Six Dior                   | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| GMS Live                   | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Heiakim                    | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Vanesha Prescilla          | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Josephine Alexandra        | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Strive To Be               | ❓ UNCERTAIN | HTTP 429                 | --Foreign    |
+| Yeshua Abraham             | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| MelSickScreamoAnnie        | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Rachie                     | ❓ UNCERTAIN | HTTP 429                 | --Foreign    |
+| Maria Shandi               | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Niky Putra                 | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Step by Step ID            | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Zachz Winner               | ❓ UNCERTAIN | No Wikipedia page found. | --Indonesia  |
+| Ansellma                   | ❓ UNCERTAIN | No Wikipedia page found. | --Indonesia  |
+| sped up + slowed           | ❓ UNCERTAIN | HTTP 429                 | --Foreign    |
+| Nadine Abigail             | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Ary Kencana                | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
+| Rawi Beat                  | ❓ UNCERTAIN | HTTP 429                 | --Indonesia  |
