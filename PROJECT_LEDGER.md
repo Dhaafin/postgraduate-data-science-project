@@ -35,9 +35,9 @@
 - [x] **Viberate Expansion**: Refactor `viberate.py` to collect 600 candidates.
 - [x] **Spotify Enrichment**: **RE-RUNNING** with Weighted Similarity Scoring.
 - [x] **Spotify Enrichment**: Add profile picture extraction to database.
-- [x] **Nationality Validation**: Re-running nationality check against new Spotify metadata. (Filtered for Review)
-- [ ] **Wiki/Geo Scraper**: Extracting origin city/province for 600 artists.
-- [ ] **Target Target**: Reach 500+ "Clean" records for final spatial analysis.
+- [x] **Nationality Validation**: Manual audit complete via `sync_manual_validation.py`.
+- [ ] **Wiki/Geo Scraper**: Extracting origin city/province for verified pool.
+- [x] **Target Target**: Reach 500+ "Clean" records for final spatial analysis.
 
 ---
 
@@ -52,8 +52,7 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 
 ---
 
-| Timestamp  | Persona | Action                               | Impact                                                                                                    |
-| :--------- | :-----: | :----------------------------------- | :-------------------------------------------------------------------------------------------------------- |
+| 2026-05-04 |   Dev   | feat: manual validation sync utility | Implementation of 4th column parsing to sync report overrides to Postgres. |
 | 2026-05-03 |   Dev   | docs: separate foreign vs uncertain | Split `ARTIST_VALIDATION_REPORT.md` into dedicated sections for Foreign and Uncertain. |
 | 2026-05-03 |   Dev   | feat: automated validation reporting | Added markdown report generation to `NationalityValidator` to track auditing logic in `docs/`.            |
 | 2026-05-03 |   Dev   | feat: integrate nationality validator| Integrated `NationalityValidator` into `main.py` with CLI and Interactive Menu support.                   |
