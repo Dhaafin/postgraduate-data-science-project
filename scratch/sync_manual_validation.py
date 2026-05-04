@@ -1,6 +1,10 @@
 import os
+import sys
 import re
 from sqlalchemy import text
+
+# Add project root to sys.path for internal imports
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.database.connection import sync_engine, update_nationality_sync
 
 # Configuration

@@ -52,6 +52,7 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 
 ---
 
+| 2026-05-04 |   Dev   | fix: sync script import paths       | Resolved ModuleNotFoundError by adding root to sys.path. |
 | 2026-05-04 |   Dev   | feat: manual validation sync utility | Implementation of 4th column parsing to sync report overrides to Postgres. |
 | 2026-05-03 |   Dev   | docs: separate foreign vs uncertain | Split `ARTIST_VALIDATION_REPORT.md` into dedicated sections for Foreign and Uncertain. |
 | 2026-05-03 |   Dev   | feat: automated validation reporting | Added markdown report generation to `NationalityValidator` to track auditing logic in `docs/`.            |
