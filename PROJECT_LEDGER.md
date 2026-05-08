@@ -29,29 +29,29 @@
 
 ## 🛠️ ACTIVE FEATURE: M4 - Wikipedia/Wikidata Geo-Coding & Validation
 
-> **Objective**: Identify "Origin City" and enforce strict data hygiene by purging non-Indonesian and corporate records.
+> **Objective**: Identify "Origin City" using a Provenance-First model to quantify Jakarta-centric migration.
 
-- [x] **DB Schema Expansion**: Add `origin_city`, `origin_province`, `latitude`, and `longitude` columns.
-- [x] **Viberate Expansion**: Refactor `viberate.py` to collect 600 candidates.
-- [x] **Spotify Enrichment**: **RE-RUNNING** with Weighted Similarity Scoring.
-- [x] **Spotify Enrichment**: Add profile picture extraction to database.
-- [x] **Nationality Validation**: Manual audit complete via `sync_manual_validation.py`.
-- [ ] **Wiki/Geo Scraper**: Extracting origin city/province for verified pool.
-- [x] **Target Target**: Reach 500+ "Clean" records for final spatial analysis.
+- [x] **DB Schema Expansion**: Add `artist_type`, `origin_city`, `origin_province`, `latitude`, and `longitude` columns.
+- [x] **Nationality Validation**: Tier 1 (Spotify) & Tier 2 (Wiki Keywords) complete.
+- [/] **Wiki Origin Scraper**: 
+    - **Solo Artists**: Extract from `Lahir` (Birthplace) field.
+    - **Bands/Groups**: Extract from `Asal` (Formation) field.
+    - **Strategy**: Prioritize hyperlink `<a>` text for normalization; fallback to regex for plain text.
+- [ ] **Geocoding Implementation**: Batch process `origin_city` via Nominatim for spatial coordinates.
+- [x] **Target**: Reach 500+ "Clean" records for final spatial analysis.
 
 ---
 
 ## 📓 RESEARCH PARKING LOT (Future Architectural Problems)
 
-_These items are high-priority for the research thesis but deferred until M4 baseline data is collected._
-
-- [ ] **The "Migration" Disambiguation**: Define logic to handle artists who were born in Region A but moved/formed in Jakarta.
+- [ ] **The "Migration" Disambiguation**: Cross-reference `Birthplace` with `Active City` to quantify the "Jakarta Drain."
 - [ ] **Temporal Correlation**: Correlate "Spotify Breakthrough" date with "Migration Year" to assess digital democratization vs. legacy networks.
 - [ ] **Genre-Location Variance**: Analyze if certain genres (e.g., Koplo) are more resistant to Jakarta migration than others (e.g., Pop).
-- [ ] **Industrial Artifacts vs Talent**: Define exclusionary criteria for "Brand Artists" (children's IPs, corporate lo-fi) to refine the spatial inequality signal.
+- [ ] **Industrial Artifacts vs Talent**: Define exclusionary criteria for "Brand Artists" (children's IPs, corporate lo-fi).
 
 ---
 
+| 2026-05-08 |   PM    | Strategic Pivot: Provenance First   | Decided on Option A: Solo=Birthplace, Band=Formation to preserve the "Original Location" signal against Jakarta-centrism. |
 | 2026-05-04 |   Dev   | feat: data hygiene purge utility    | Built script to remove foreign artists and records without genres. |
 | 2026-05-04 |   Dev   | fix: sync script import paths       | Resolved ModuleNotFoundError by adding root to sys.path. |
 | 2026-05-04 |   Dev   | feat: manual validation sync utility | Implementation of 4th column parsing to sync report overrides to Postgres. |
@@ -81,4 +81,4 @@ _These items are high-priority for the research thesis but deferred until M4 bas
 
 ## 🚩 PM STATUS: GREEN
 
-**Next Immediate Step**: Run `nationality_validator.py` (M4) to filter the 600 records and prepare for Geo-Coding.
+**Next Immediate Step**: Build the `WikipediaOriginScraper` logic to extract location strings for the 516 validated records.
