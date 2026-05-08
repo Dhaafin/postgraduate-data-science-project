@@ -33,10 +33,9 @@
 
 - [x] **DB Schema Expansion**: Add `artist_type`, `origin_city`, `origin_province`, `latitude`, and `longitude` columns.
 - [x] **Nationality Validation**: Tier 1 (Spotify) & Tier 2 (Wiki Keywords) complete.
-- [/] **Wiki Origin Scraper**: 
-    - **Solo Artists**: Extract from `Lahir` (Birthplace) field.
-    - **Bands/Groups**: Extract from `Asal` (Formation) field.
-    - **Strategy**: Prioritize hyperlink `<a>` text for normalization; fallback to regex for plain text.
+- [x] **Wiki Origin Scraper**: 
+    - [x] **Sprint 4.1 (Discovery)**: URL mapping via Wikidata/Search API complete.
+    - [/] **Sprint 4.2 (Extraction)**: Solo=Birthplace, Band=Formation logic in progress.
 - [ ] **Geocoding Implementation**: Batch process `origin_city` via Nominatim for spatial coordinates.
 - [x] **Target**: Reach 500+ "Clean" records for final spatial analysis.
 
@@ -51,6 +50,7 @@
 
 ---
 
+| 2026-05-08 |   Dev   | feat: wikipedia discovery pipeline | Implemented Sprint 4.1 (Wikidata Bridge + Anchored Search) to map artist IDs to Wiki URLs. |
 | 2026-05-08 |   PM    | Strategic Pivot: Provenance First   | Decided on Option A: Solo=Birthplace, Band=Formation to preserve the "Original Location" signal against Jakarta-centrism. |
 | 2026-05-04 |   Dev   | feat: data hygiene purge utility    | Built script to remove foreign artists and records without genres. |
 | 2026-05-04 |   Dev   | fix: sync script import paths       | Resolved ModuleNotFoundError by adding root to sys.path. |

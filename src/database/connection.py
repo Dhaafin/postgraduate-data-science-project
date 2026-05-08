@@ -71,7 +71,8 @@ async def init_db():
                     origin_province TEXT,
                     latitude DECIMAL,
                     longitude DECIMAL,
-                    is_indonesian BOOLEAN DEFAULT NULL
+                    is_indonesian BOOLEAN DEFAULT NULL,
+                    wikipedia_url TEXT
                 );
             """))
             print("Table created successfully.")
@@ -89,7 +90,7 @@ async def init_db():
             desired_order = [
                 "id", "needs_review", "spotify_id", "spotify_link", "artist_name", 
                 "profile_picture", "genre", "followers", "popularity", "artist_type",
-                "origin_city", "origin_province", "latitude", "longitude", "is_indonesian"
+                "origin_city", "origin_province", "latitude", "longitude", "is_indonesian", "wikipedia_url"
             ]
             
             # Trigger refactor if columns are missing or out of order
@@ -116,7 +117,8 @@ async def init_db():
                         origin_province TEXT,
                         latitude DECIMAL,
                         longitude DECIMAL,
-                        is_indonesian BOOLEAN DEFAULT NULL
+                        is_indonesian BOOLEAN DEFAULT NULL,
+                        wikipedia_url TEXT
                     );
                 """))
                 
@@ -176,8 +178,8 @@ def update_spotify_id_sync(db_id, spotify_id, spotify_link=None, profile_picture
     target_engine = db_engine or sync_engine
     if not target_engine: return
     with target_engine.begin() as conn:
-        set_clauses = ["spotify_id = :spotify_id", "spotify_link = :spotify_link", "profile_picture = :profile_picture", "genre = :genre", "followers = :followers", "popularity = :popularity", "artist_type = :artist_type"]
-        params = {"spotify_id": spotify_id, "spotify_link": spotify_link, "profile_picture": profile_picture, "genre": genre, "followers": followers, "popularity": popularity, "artist_type": artist_type, "id": db_id}
+        set_clauses = ["spotify_id = :spotify_id", "spotify_link = :spotify_link", "profile_picture = :profile_picture", "genre = :genre", "followers = :followers", "popularity = :popularity", "artist_type = :artist_type", "wikipedia_url = :wikipedia_url"]
+        params = {"spotify_id": spotify_id, "spotify_link": spotify_link, "profile_picture": profile_picture, "genre": genre, "followers": followers, "popularity": popularity, "artist_type": artist_type, "wikipedia_url": None, "id": db_id}
         if needs_review is not None:
             set_clauses.append("needs_review = :needs_review")
             params["needs_review"] = needs_review
@@ -208,6 +210,7 @@ async def update_spotify_id(db_id, spotify_id, spotify_link=None, profile_pictur
             "followers": followers,
             "popularity": popularity,
             "artist_type": artist_type,
+            "wikipedia_url": None,
             "id": db_id
         }
         
