@@ -57,8 +57,14 @@ def run_test():
     misses = 0
     results_summary = []
     
+    print("="*60)
+    print(" MUSICBRAINZ API SCALABILITY TEST (50 RECORDS)")
+    print("="*60)
+    print("Please wait, querying 50 artists (approx 60 seconds)...")
+    
     for idx, artist in enumerate(artists, start=1):
         name = artist["name"]
+        print(f"\rProgress: [{idx}/50] ...", end="", flush=True)
         mb_data = query_musicbrainz(name)
         
         if mb_data:
@@ -69,6 +75,8 @@ def run_test():
             misses += 1
             
         time.sleep(1.2) # Strict 1 request/sec limit
+        
+    print("\r" + " "*30 + "\r", end="") # Clear the progress line
         
     print("\n" + "="*60)
     print(" TEST SUMMARY: MUSICBRAINZ 50-RECORD SPIKE")

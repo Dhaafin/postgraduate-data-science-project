@@ -50,6 +50,7 @@
 
 ---
 
+| 2026-05-11 |   Dev   | fix: add ux progress indicator to test script | Added carriage return progress indicator to prevent perceived script freezing during MusicBrainz rate limiting. |
 | 2026-05-11 |   Dev   | test: implement 50-record musicbrainz api scalability test | Created spike script to validate MusicBrainz data structure for artist origin extraction. |
 | 2026-05-08 |   Dev   | fix: wiki discovery v3 | Implemented Expert Mode with substring matching, randomized jitter, and 429 auto-retry logic. |
 | 2026-05-08 |   Dev   | fix: wiki discovery v2 | Refactored discovery to use Opensearch and Similarity checking to eliminate false positives. |
