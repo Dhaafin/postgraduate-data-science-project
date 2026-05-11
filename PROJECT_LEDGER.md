@@ -50,6 +50,9 @@
 
 ---
 
+| 2026-05-11 |   Dev   | test: implement 50-record musicbrainz api scalability test | Created spike script to validate MusicBrainz data structure for artist origin extraction. |
+| 2026-05-08 |   Dev   | fix: wiki discovery v3 | Implemented Expert Mode with substring matching, randomized jitter, and 429 auto-retry logic. |
+| 2026-05-08 |   Dev   | fix: wiki discovery v2 | Refactored discovery to use Opensearch and Similarity checking to eliminate false positives. |
 | 2026-05-08 |   Dev   | feat: wikipedia discovery pipeline | Implemented Sprint 4.1 (Wikidata Bridge + Anchored Search) to map artist IDs to Wiki URLs. |
 | 2026-05-08 |   PM    | Strategic Pivot: Provenance First   | Decided on Option A: Solo=Birthplace, Band=Formation to preserve the "Original Location" signal against Jakarta-centrism. |
 | 2026-05-04 |   Dev   | feat: data hygiene purge utility    | Built script to remove foreign artists and records without genres. |
