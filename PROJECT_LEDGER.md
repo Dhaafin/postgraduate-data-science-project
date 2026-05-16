@@ -27,15 +27,17 @@
 
 ---
 
-## 🛠️ ACTIVE FEATURE: M4 - Wikipedia/Wikidata Geo-Coding & Validation
+## 🛠️ ACTIVE FEATURE: M4 - Multi-Source Geo-Enrichment (MusicBrainz Pivot)
 
 > **Objective**: Identify "Origin City" using a Provenance-First model to quantify Jakarta-centric migration.
 
 - [x] **DB Schema Expansion**: Add `artist_type`, `origin_city`, `origin_province`, `latitude`, and `longitude` columns.
 - [x] **Nationality Validation**: Tier 1 (Spotify) & Tier 2 (Wiki Keywords) complete.
-- [x] **Wiki Origin Scraper**: 
-    - [x] **Sprint 4.1 (Discovery)**: URL mapping via Wikidata/Search API complete.
-    - [/] **Sprint 4.2 (Extraction)**: Solo=Birthplace, Band=Formation logic in progress.
+- [x] **MusicBrainz Origin Scraper**: 
+    - [x] **Sprint 4.1 (API Spike)**: Validated MusicBrainz payload accuracy.
+    - [x] **Sprint 4.2 (Extraction Engine)**: Built `musicbrainz_enrichment.py` with 2s rate limit.
+    - [x] **Sprint 4.2.1 (City Validator)**: Implemented `geo_constants.py` and `refine_musicbrainz_reports.py` for semantic recovery.
+    - [ ] **Sprint 4.3 (Execution & Manual Review)**: Run pipeline and complete MANUAL_ORIGIN_QUEUE.md.
 - [ ] **Geocoding Implementation**: Batch process `origin_city` via Nominatim for spatial coordinates.
 - [x] **Target**: Reach 500+ "Clean" records for final spatial analysis.
 
@@ -50,6 +52,11 @@
 
 ---
 
+| 2026-05-16 |   Dev   | feat: consolidate enrichment master queue | Updated `refine_musicbrainz_reports.py` to merge rescued artists and manual queues into `FINAL_GEO_ENRICHMENT_QUEUE.md`. |
+| 2026-05-16 |   Dev   | feat: implement semantic city validation | Created `geo_constants.py` and `refine_musicbrainz_reports.py` to recover Indonesian artists from MB foreign reports. |
+| 2026-05-16 |   Dev   | refactor: move MusicBrainz reports to dedicated subdirectory | Reorganized `docs/` by moving MusicBrainz reports to `docs/musicbrainz/` and updating the scraper. |
+| 2026-05-11 |   Dev   | feat: build musicbrainz extraction engine | Developed `musicbrainz_enrichment.py` with strict rate limiting and dual reporting logic for manual reviews. |
+| 2026-05-11 |   PM    | Strategic Pivot: MusicBrainz First | Abandoned Wikipedia scraping in favor of MusicBrainz API due to superior data structure. |
 | 2026-05-11 |   Dev   | fix: add ux progress indicator to test script | Added carriage return progress indicator to prevent perceived script freezing during MusicBrainz rate limiting. |
 | 2026-05-11 |   Dev   | test: implement 50-record musicbrainz api scalability test | Created spike script to validate MusicBrainz data structure for artist origin extraction. |
 | 2026-05-08 |   Dev   | fix: wiki discovery v3 | Implemented Expert Mode with substring matching, randomized jitter, and 429 auto-retry logic. |
@@ -85,4 +92,4 @@
 
 ## 🚩 PM STATUS: GREEN
 
-**Next Immediate Step**: Build the `WikipediaOriginScraper` logic to extract location strings for the 516 validated records.
+**Next Immediate Step**: Process `docs/musicbrainz/FINAL_GEO_ENRICHMENT_QUEUE.md` and initiate the Geocoding pipeline.
