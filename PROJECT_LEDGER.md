@@ -37,7 +37,7 @@
     - [x] **Sprint 4.1 (API Spike)**: Validated MusicBrainz payload accuracy.
     - [x] **Sprint 4.2 (Extraction Engine)**: Built `musicbrainz_enrichment.py` with 2s rate limit.
     - [x] **Sprint 4.2.1 (City Validator)**: Implemented `geo_constants.py` and `refine_musicbrainz_reports.py` for semantic recovery.
-    - [x] **Sprint 4.3 (Execution & Manual Review)**: Built `01_wikipedia_origin_sweep.py` for automated pre-filling.
+    - [x] **Sprint 4.3 (Execution & Manual Review)**: Built `01_wikipedia_origin_sweep.py` and `02_wikipedia_type_sweep.py` for automated enrichment.
 - [ ] **Geocoding Implementation**: Batch process `origin_city` via Nominatim for spatial coordinates.
 - [x] **Target**: Reach 500+ "Clean" records for final spatial analysis.
 
@@ -52,6 +52,8 @@
 
 ---
 
+| 2026-05-16 |   Dev   | feat: implement wikipedia artist-type classification sweep | Developed `02_wikipedia_type_sweep.py` to classify records as Person/Group using Wikipedia infoboxes. |
+| 2026-05-16 |   Dev   | fix: implement rate-limit handling and retries for wiki sweep | Developed defensive scraping logic to handle HTTP 429 errors in Wikipedia pipelines. |
 | 2026-05-16 |   Dev   | feat: implement wikipedia origin sweep pipeline | Developed `01_wikipedia_origin_sweep.py` to automate origin extraction from Wikipedia infoboxes for staging data. |
 | 2026-05-16 |   PM    | status: Supabase Migration Complete | Successfully migrated from Neon to Supabase. Aligned all scripts to target `staging.music_data_staging`. |
 | 2026-05-16 |   Dev   | feat: consolidate enrichment master queue | Updated `refine_musicbrainz_reports.py` to merge rescued artists and manual queues into `FINAL_GEO_ENRICHMENT_QUEUE.md`. |
