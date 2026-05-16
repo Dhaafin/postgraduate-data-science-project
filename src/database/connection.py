@@ -49,14 +49,14 @@ async def init_db():
     async with engine.begin() as conn:
         # Robust check for table existence using information_schema
         check_table = await conn.execute(text(
-            "SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'music_data' AND table_schema = 'public')"
+            "SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'music_data_staging' AND table_schema = 'staging')"
         ))
         exists = check_table.scalar()
         
         if not exists:
             print("Creating new music_data table...")
             await conn.execute(text("""
-                CREATE TABLE music_data (
+                CREATE TABLE staging.music_data_staging (
                     id SERIAL PRIMARY KEY,
                     needs_review BOOLEAN DEFAULT FALSE,
                     spotify_id TEXT,
@@ -81,8 +81,8 @@ async def init_db():
             cols_query = await conn.execute(text("""
                 SELECT column_name 
                 FROM information_schema.columns 
-                WHERE table_name = 'music_data' 
-                AND table_schema = 'public' 
+                WHERE table_name = 'music_data_staging' 
+                AND table_schema = 'staging' 
                 ORDER BY ordinal_position
             """))
             current_cols = [row[0] for row in cols_query.fetchall()]
@@ -102,7 +102,7 @@ async def init_db():
                 
                 # 1. Create the new table structure
                 await conn.execute(text("""
-                    CREATE TABLE music_data_new (
+                    CREATE TABLE staging.music_data_staging_new (
                         id SERIAL PRIMARY KEY,
                         needs_review BOOLEAN DEFAULT FALSE,
                         spotify_id TEXT,
@@ -131,14 +131,14 @@ async def init_db():
                     insert_cols.insert(0, "id")
 
                 cols_str = ", ".join(insert_cols)
-                await conn.execute(text(f"INSERT INTO music_data_new ({cols_str}) SELECT {cols_str} FROM music_data"))
+                await conn.execute(text(f"INSERT INTO staging.music_data_staging_new ({cols_str}) SELECT {cols_str} FROM staging.music_data_staging"))
                 
                 # 3. Swap the tables
-                await conn.execute(text("DROP TABLE music_data"))
-                await conn.execute(text("ALTER TABLE music_data_new RENAME TO music_data"))
+                await conn.execute(text("DROP TABLE staging.music_data_staging"))
+                await conn.execute(text("ALTER TABLE staging.music_data_staging_new RENAME TO music_data_staging"))
                 
                 # 4. Fix the ID sequence
-                await conn.execute(text("SELECT setval(pg_get_serial_sequence('music_data', 'id'), (SELECT MAX(id) FROM music_data))"))
+                await conn.execute(text("SELECT setval(pg_get_serial_sequence('staging.music_data_staging', 'id'), (SELECT MAX(id) FROM staging.music_data_staging))"))
                 print("Database refactor and migration complete.")
             else:
                 print("Database schema is already up to date.")
@@ -149,7 +149,7 @@ async def insert_artist_data(spotify_id, artist_name, spotify_link=None, profile
     async with engine.begin() as conn:
         await conn.execute(
             text("""
-                INSERT INTO music_data (spotify_id, spotify_link, artist_name, profile_picture, genre, followers, popularity, artist_type, needs_review) 
+                INSERT INTO staging.music_data_staging (spotify_id, spotify_link, artist_name, profile_picture, genre, followers, popularity, artist_type, needs_review) 
                 VALUES (:id, :link, :name, :profile_picture, :genre, :followers, :popularity, :artist_type, :needs_review)
             """),
             {"id": spotify_id, "link": spotify_link, "name": artist_name, "profile_picture": profile_picture, "genre": genre, "followers": followers, "popularity": popularity, "artist_type": artist_type, "needs_review": needs_review}
@@ -160,7 +160,7 @@ async def get_all_artists(db_engine=None):
     target_engine = db_engine or engine
     if not target_engine: return []
     async with target_engine.begin() as conn:
-        result = await conn.execute(text("SELECT id, artist_name FROM music_data WHERE spotify_id IS NULL OR spotify_id = ''"))
+        result = await conn.execute(text("SELECT id, artist_name FROM staging.music_data_staging WHERE spotify_id IS NULL OR spotify_id = ''"))
         return [{"id": row[0], "artist_name": row[1]} for row in result.fetchall()]
 
 def update_nationality_sync(db_id, is_indonesian, db_engine=None):
@@ -169,7 +169,7 @@ def update_nationality_sync(db_id, is_indonesian, db_engine=None):
     if not target_engine: return
     with target_engine.begin() as conn:
         conn.execute(
-            text("UPDATE music_data SET is_indonesian = :is_indonesian WHERE id = :id"),
+            text("UPDATE staging.music_data_staging SET is_indonesian = :is_indonesian WHERE id = :id"),
             {"is_indonesian": is_indonesian, "id": db_id}
         )
 
@@ -184,7 +184,7 @@ def update_spotify_id_sync(db_id, spotify_id, spotify_link=None, profile_picture
             set_clauses.append("needs_review = :needs_review")
             params["needs_review"] = needs_review
         set_str = ", ".join(set_clauses)
-        conn.execute(text(f"UPDATE music_data SET {set_str} WHERE id = :id"), params)
+        conn.execute(text(f"UPDATE staging.music_data_staging SET {set_str} WHERE id = :id"), params)
 
 async def update_spotify_id(db_id, spotify_id, spotify_link=None, profile_picture=None, genre=None, followers=None, popularity=None, artist_type=None, needs_review=None):
     """
@@ -220,7 +220,7 @@ async def update_spotify_id(db_id, spotify_id, spotify_link=None, profile_pictur
             
         set_str = ", ".join(set_clauses)
         await conn.execute(
-            text(f"UPDATE music_data SET {set_str} WHERE id = :id"),
+            text(f"UPDATE staging.music_data_staging SET {set_str} WHERE id = :id"),
             params
         )
 

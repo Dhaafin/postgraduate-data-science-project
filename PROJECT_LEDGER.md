@@ -8,7 +8,7 @@
 
 - **Pipeline**: Python (Asyncio/Playwright) for ETL.
 - **Spatial**: Pandas/GeoPandas for regional hub analysis.
-- **Stack**: Next.js (Frontend) + Express (API) + PostgreSQL (Neon).
+- **Stack**: Next.js (Frontend) + Express (API) + PostgreSQL (Supabase).
 - **Ops**: Dockerized deployment with Cloudflare/Cloudinary asset management.
 
 ---
@@ -52,6 +52,7 @@
 
 ---
 
+| 2026-05-16 |   PM    | status: Supabase Migration Complete | Successfully migrated from Neon to Supabase. Aligned all scripts to target `staging.music_data_staging`. |
 | 2026-05-16 |   Dev   | feat: consolidate enrichment master queue | Updated `refine_musicbrainz_reports.py` to merge rescued artists and manual queues into `FINAL_GEO_ENRICHMENT_QUEUE.md`. |
 | 2026-05-16 |   Dev   | feat: implement semantic city validation | Created `geo_constants.py` and `refine_musicbrainz_reports.py` to recover Indonesian artists from MB foreign reports. |
 | 2026-05-16 |   Dev   | refactor: move MusicBrainz reports to dedicated subdirectory | Reorganized `docs/` by moving MusicBrainz reports to `docs/musicbrainz/` and updating the scraper. |

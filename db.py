@@ -22,7 +22,7 @@ async def init_db():
     """
     async with engine.begin() as conn:
         await conn.execute(text("""
-            CREATE TABLE IF NOT EXISTS music_data (
+            CREATE TABLE IF NOT EXISTS staging.music_data_staging (
                 id SERIAL PRIMARY KEY,
                 spotify_id TEXT,
                 artist_name TEXT,
@@ -40,6 +40,6 @@ async def insert_artist_data(spotify_id, artist_name):
     """
     async with engine.begin() as conn:
         await conn.execute(
-            text("INSERT INTO music_data (spotify_id, artist_name) VALUES (:id, :name)"),
+            text("INSERT INTO staging.music_data_staging (spotify_id, artist_name) VALUES (:id, :name)"),
             {"id": spotify_id, "name": artist_name}
         )
