@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import random
 import re
 import requests
 from bs4 import BeautifulSoup
@@ -54,6 +55,29 @@ class WikipediaOriginSweep:
         # Remove "Indonesia" suffix if redundant for geocoding but keep for validation
         return text
 
+    def _safe_get_json(self, params, artist_name):
+        """Wrapper for requests to handle rate limits and non-JSON responses."""
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                r = requests.get(self.api_url, params=params, headers=self.headers, timeout=15)
+                
+                if r.status_code == 429:
+                    wait_time = 30 * (attempt + 1)
+                    print(f" [!] Rate limited. Sleeping {wait_time}s...")
+                    time.sleep(wait_time)
+                    continue
+                
+                r.raise_for_status()
+                return r.json()
+            except requests.exceptions.JSONDecodeError:
+                print(f" [!] Invalid JSON for {artist_name} (Attempt {attempt+1})")
+                time.sleep(5)
+            except Exception as e:
+                print(f" [!] Request failed: {e}")
+                time.sleep(5)
+        return None
+
     def fetch_wikipedia_origin(self, artist_name):
         """Search and extract origin from Wikipedia Infobox or Lead Paragraph."""
         # Step A: Search for the best page
@@ -63,48 +87,48 @@ class WikipediaOriginSweep:
             "srsearch": artist_name,
             "format": "json"
         }
-        try:
-            r = requests.get(self.api_url, params=search_params, headers=self.headers, timeout=10)
-            data = r.json()
-            if not data.get("query", {}).get("search"):
-                return None
+        
+        data = self._safe_get_json(search_params, artist_name)
+        if not data or not data.get("query", {}).get("search"):
+            return None
+        
+        title = data["query"]["search"][0]["title"]
+        
+        # Step B: Parse the page content
+        parse_params = {
+            "action": "parse",
+            "page": title,
+            "prop": "text",
+            "format": "json",
+            "redirects": "true"
+        }
+        
+        data = self._safe_get_json(parse_params, artist_name)
+        if not data or "parse" not in data:
+            return None
             
-            title = data["query"]["search"][0]["title"]
-            
-            # Step B: Parse the page content
-            parse_params = {
-                "action": "parse",
-                "page": title,
-                "prop": "text",
-                "format": "json",
-                "redirects": "true"
-            }
-            r = requests.get(self.api_url, params=parse_params, headers=self.headers, timeout=10)
-            html = r.json()["parse"]["text"]["*"]
-            soup = BeautifulSoup(html, "html.parser")
-            
-            # Step C: Check Infobox
-            infobox = soup.find("table", {"class": "infobox"})
-            if infobox:
-                rows = infobox.find_all("tr")
-                for row in rows:
-                    th = row.find("th")
-                    td = row.find("td")
-                    if th and td:
-                        header = th.get_text().lower()
-                        if "lahir" in header or "asal" in header:
-                            return self.clean_location_string(td.get_text())
+        html = data["parse"]["text"]["*"]
+        soup = BeautifulSoup(html, "html.parser")
+        
+        # Step C: Check Infobox
+        infobox = soup.find("table", {"class": "infobox"})
+        if infobox:
+            rows = infobox.find_all("tr")
+            for row in rows:
+                th = row.find("th")
+                td = row.find("td")
+                if th and td:
+                    header = th.get_text().lower()
+                    if "lahir" in header or "asal" in header:
+                        return self.clean_location_string(td.get_text())
 
-            # Step D: Fallback to first paragraph regex
-            paragraphs = soup.find_all("p")
-            for p in paragraphs[:2]:
-                text_content = p.get_text()
-                match = re.search(r"lahir (?:di|pada) ([\w\s,]+)", text_content, re.I)
-                if match:
-                    return self.clean_location_string(match.group(1))
-
-        except Exception as e:
-            print(f"  [!] Error processing {artist_name}: {e}")
+        # Step D: Fallback to first paragraph regex
+        paragraphs = soup.find_all("p")
+        for p in paragraphs[:2]:
+            text_content = p.get_text()
+            match = re.search(r"lahir (?:di|pada) ([\w\s,]+)", text_content, re.I)
+            if match:
+                return self.clean_location_string(match.group(1))
         
         return None
 
@@ -138,8 +162,8 @@ class WikipediaOriginSweep:
                 print(" | ❌ Not found")
                 self.skipped_count += 1
             
-            # Respect Wikipedia rate limits
-            time.sleep(1.5)
+            # Respect Wikipedia rate limits (Increased jitter for stability)
+            time.sleep(random.uniform(2.0, 5.0))
 
         print("\n" + "="*60)
         print(" SWEEP COMPLETE")
