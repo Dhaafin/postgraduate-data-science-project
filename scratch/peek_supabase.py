@@ -14,12 +14,12 @@ async def peek_data():
         
     try:
         async with engine.connect() as conn:
-            query = text("SELECT id, artist_name, origin_city, spotify_id FROM staging.music_data_staging LIMIT 5")
+            query = text("SELECT id, artist_name, origin_city, origin_province, spotify_id FROM staging.music_data_staging WHERE origin_city IS NOT NULL LIMIT 10")
             result = await conn.execute(query)
             rows = result.fetchall()
             print("\n--- [PEEK: staging.music_data_staging] ---")
             for row in rows:
-                print(f"ID: {row[0]} | Artist: {row[1]:<20} | Origin: {row[2] or 'None':<15} | Spotify: {row[3]}")
+                print(f"ID: {row[0]} | Artist: {row[1]:<20} | City: {row[2] or 'None':<15} | Prov: {row[3] or 'None':<15}")
             print("--- [END PEEK] ---\n")
     except Exception as e:
         print(f"Error: {e}")

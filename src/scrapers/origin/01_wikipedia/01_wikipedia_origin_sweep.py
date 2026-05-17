@@ -132,24 +132,41 @@ class WikipediaOriginSweep:
         
         return None
 
-    def run(self):
+    def run(self, use_db=False):
         print("\n" + "="*60)
         print(" WIKIPEDIA ORIGIN SWEEP PIPELINE (M4)")
         print("="*60)
         
-        artists = self.parse_queue()
-        print(f"Targeting {len(artists)} artists with MANUAL_PENDING status...\n")
+        if use_db:
+            print("Mode: Dynamic Database Sweep (empty origins for confirmed Indonesian artists)\n")
+            if not sync_engine:
+                print("[!] Sync engine not initialized")
+                return
+            with sync_engine.begin() as conn:
+                query = text("""
+                    SELECT id, artist_name 
+                    FROM staging.music_data_staging 
+                    WHERE origin_city IS NULL 
+                      AND is_indonesian = TRUE
+                    ORDER BY id
+                """)
+                artists = [{"id": row[0], "name": row[1]} for row in conn.execute(query).fetchall()]
+        else:
+            print("Mode: Static Markdown Queue Sweep\n")
+            artists = self.parse_queue()
+            
+        print(f"Targeting {len(artists)} artists for origin sweep...\n")
 
         for idx, artist in enumerate(artists, start=1):
             name = artist["name"]
             db_id = artist["id"]
             
-            print(f"[{idx}/{len(artists)}] 🔍 {name:<30}", end="", flush=True)
+            print(f"[{idx}/{len(artists)}] SEARCH {name:<30}", end="", flush=True)
             
             origin = self.fetch_wikipedia_origin(name)
             
             if origin and is_indonesian_location(origin):
-                print(f" | ✅ Found: {origin}")
+                print(f" | FOUND: {origin}")
                 
                 # Update Supabase Staging
                 with sync_engine.begin() as conn:
@@ -159,7 +176,7 @@ class WikipediaOriginSweep:
                     )
                 self.successful_discoveries += 1
             else:
-                print(" | ❌ Not found")
+                print(" | NOT FOUND")
                 self.skipped_count += 1
             
             # Respect Wikipedia rate limits (Increased jitter for stability)
@@ -173,4 +190,9 @@ class WikipediaOriginSweep:
         print("="*60)
 
 if __name__ == "__main__":
-    WikipediaOriginSweep().run()
+    import argparse
+    parser = argparse.ArgumentParser(description="Wikipedia Origin Sweep")
+    parser.add_argument("--db", action="store_true", help="Sweep dynamic database for empty origins of confirmed Indonesian artists")
+    args = parser.parse_args()
+    
+    WikipediaOriginSweep().run(use_db=args.db)

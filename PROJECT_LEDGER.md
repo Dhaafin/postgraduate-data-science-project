@@ -52,6 +52,7 @@
 
 ---
 
+| 2026-05-16 |   Dev   | feat: implement geo-normalization and hierarchy standardization | Created `geo_normalizer.py` to fix Jakarta hierarchy and Province-City mapping in staging. |
 | 2026-05-16 |   Dev   | feat: implement wikipedia artist-type classification sweep | Developed `02_wikipedia_type_sweep.py` to classify records as Person/Group using Wikipedia infoboxes. |
 | 2026-05-16 |   Dev   | fix: implement rate-limit handling and retries for wiki sweep | Developed defensive scraping logic to handle HTTP 429 errors in Wikipedia pipelines. |
 | 2026-05-16 |   Dev   | feat: implement wikipedia origin sweep pipeline | Developed `01_wikipedia_origin_sweep.py` to automate origin extraction from Wikipedia infoboxes for staging data. |

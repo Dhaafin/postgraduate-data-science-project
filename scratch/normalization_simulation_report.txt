@@ -1,0 +1,419 @@
+--- [PEEKING SUPABASE & SIMULATING GEO-NORMALIZATION] ---
+Total records in staging.music_data_staging: 385
+
+ID    | Artist Name                    | Raw City                                 | Raw Prov             | Normalized City                          | Normalized Prov      | Status    
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1     | Syifa Maharani                 | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+2     | Hindia                         | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+3     | Nadhif Basalamah               | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+4     | Denny Caknan                   | Ngawi, Jawa Timur                        | None                 | Ngawi                                    | Jawa Timur           | CHANGED   
+6     | Idgitaf                        | Tangerang                                | None                 | Tangerang                                | Banten               | CHANGED   
+7     | For revenge                    | Indonesia                                | None                 | None                                     | None                 | CHANGED   
+8     | Nadin Amizah                   | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+10    | Lyodra                         | Medan                                    | None                 | Medan                                    | Sumatera Utara       | CHANGED   
+11    | Bernadya                       | Surabaya                                 | None                 | Surabaya                                 | Jawa Timur           | CHANGED   
+12    | .Feast                         | Depok                                    | None                 | Depok                                    | Jawa Barat           | CHANGED   
+13    | Tulus                          | Oslo                                     | None                 | Oslo                                     | None                 | OK        
+14    | NIKI                           | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+15    | Rizky Febian                   | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+16    | Sheila On 7                    | Yogyakarta                               | None                 | Yogyakarta                               | DI Yogyakarta        | CHANGED   
+17    | Raisa                          | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+18    | Judika                         | Dairi Regency                            | None                 | Dairi                                    | Sumatera Utara       | CHANGED   
+19    | VIRGOUN                        | Bekasi                                   | None                 | Bekasi                                   | Jawa Barat           | CHANGED   
+20    | Raim LaOde                     | Liya Togo, Sulawesi Tenggara, Indonesia  | None                 | Liya Togo                                | Sulawesi Tenggara    | CHANGED   
+21    | Sal Priadi                     | Malang                                   | None                 | Malang                                   | Jawa Timur           | CHANGED   
+22    | Last Child                     | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+24    | Tiara Andini                   | Jember                                   | None                 | Jember                                   | Jawa Timur           | CHANGED   
+25    | Ayu Ting Ting                  | Depok                                    | None                 | Depok                                    | Jawa Barat           | CHANGED   
+26    | Aurelie Hermansyah             | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+27    | Noah                           | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+28    | Afgan                          | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+29    | Raffi Ahmad                    | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+30    | Vidi Aldiano                   | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+31    | Pamungkas                      | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+32    | Sarwendah                      | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+33    | Dewa 19                        | Surabaya                                 | None                 | Surabaya                                 | Jawa Timur           | CHANGED   
+34    | NDX A.K.A                      | Indonesia                                | None                 | None                                     | None                 | CHANGED   
+35    | Lesti Kejora                   | Bandung, Jawa Barat, Indonesia           | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+36    | Rossa                          | Jawa Barat                               | None                 | None                                     | Jawa Barat           | CHANGED   
+37    | Guyon Waton                    | Indonesia                                | None                 | None                                     | None                 | CHANGED   
+38    | Perunggu                       | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+39    | Syifa Hadju                    | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+40    | Ungu                           | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+41    | Ziva Magnolya                  | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+42    | Rizky Billar                   | Medan, Sumatera Utara, Indonesia         | None                 | Medan                                    | Sumatera Utara       | CHANGED   
+44    | SITI BADRIAH                   | Bekasi                                   | None                 | Bekasi                                   | Jawa Barat           | CHANGED   
+46    | Yura Yunita                    | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+47    | Tenxi                          | Sidoarjo                                 | None                 | Sidoarjo                                 | Jawa Timur           | CHANGED   
+48    | Feby Putri                     | Makassar                                 | None                 | Makassar                                 | Sulawesi Selatan     | CHANGED   
+49    | ARMADA                         | London                                   | None                 | London                                   | None                 | OK        
+51    | Budi Doremi                    | Serang                                   | None                 | Serang                                   | Banten               | CHANGED   
+52    | Anggis Devaki                  | Bali                                     | None                 | None                                     | Bali                 | CHANGED   
+53    | Ghea Indrawari                 | Singkawang                               | None                 | Singkawang                               | Kalimantan Barat     | CHANGED   
+54    | Iwan Fals                      | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+55    | Rony Parulian                  | Pematangsiantar                          | None                 | Pematangsiantar                          | Sumatera Utara       | CHANGED   
+56    | Sara Wijayanto                 | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+58    | Juicy Luicy                    | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+59    | Andmesh                        | Alor Regency                             | None                 | Alor                                     | Nusa Tenggara Timur  | CHANGED   
+60    | Fourtwnty                      | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+61    | Aqeela Calista                 | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+63    | Happy Asmara                   | Kediri                                   | None                 | Kediri                                   | Jawa Timur           | CHANGED   
+65    | Toton Caribo                   | Ambon                                    | None                 | Ambon                                    | Maluku               | CHANGED   
+66    | JKT48                          | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+67    | Fabio Asher                    | Kotamobagu, Sulawesi Utara, Indonesia    | None                 | Kotamobagu                               | Sulawesi Utara       | CHANGED   
+68    | Rich Brian                     | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+69    | Yovie & Nuno                   | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+70    | Slank                          | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+72    | Seventeen Band                 | Yogyakarta, Indonesia                    | None                 | Yogyakarta                               | DI Yogyakarta        | CHANGED   
+75    | Via Vallen                     | Sidoarjo Regency                         | None                 | Sidoarjo                                 | Jawa Timur           | CHANGED   
+76    | Anggi Marito                   | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+77    | Ari Lasso                      | Madiun                                   | None                 | Madiun                                   | Jawa Timur           | CHANGED   
+78    | Ifan Seventeen                 | Yogyakarta, Indonesia                    | None                 | Yogyakarta                               | DI Yogyakarta        | CHANGED   
+79    | Glenn Fredly                   | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+80    | SAMSONS                        | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+81    | Ndarboy Genk                   | Kasihan, Bantul, Yogyakarta, Indonesia   | None                 | Kasihan, Bantul, Yogyakarta              | DI Yogyakarta        | CHANGED   
+82    | Kahitna                        | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+83    | Batas Senja                    | Indonesia                                | None                 | None                                     | None                 | CHANGED   
+84    | Yovie Widianto                 | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+85    | Keisya Levronka                | Malang                                   | None                 | Malang                                   | Jawa Timur           | CHANGED   
+86    | Inul Daratista                 | Pasuruan                                 | None                 | Pasuruan                                 | Jawa Timur           | CHANGED   
+87    | Naykilla                       | Surabaya                                 | None                 | Surabaya                                 | Jawa Timur           | CHANGED   
+89    | Tri Suaka                      | Indonesia                                | None                 | None                                     | None                 | CHANGED   
+90    | Aftershine                     | Sleman, Daerah Istimewa Yogyakarta, Indo | None                 | Sleman, Daerah Istimewa Yogyakarta       | DI Yogyakarta        | CHANGED   
+91    | Kerispatih                     | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+92    | Niken Salindry                 | Kediri, Indonesia                        | None                 | Kediri                                   | Jawa Timur           | CHANGED   
+93    | Melly Goeslaw                  | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+94    | Nidji                          | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+95    | Isyana Sarasvati               | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+96    | D'MASIV                        | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+97    | Jemsii                         | Sukabumi                                 | None                 | Sukabumi                                 | Jawa Barat           | CHANGED   
+98    | Piche Kota                     | Atambua, Nusa Tenggara Timur, Indonesia  | None                 | Atambua                                  | Nusa Tenggara Timur  | CHANGED   
+99    | Payung Teduh                   | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+100   | Reality Club                   | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+101   | Mahen                          | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+102   | Nella Kharisma                 | Kediri, Jawa Timur, Indonesia            | None                 | Kediri                                   | Jawa Timur           | CHANGED   
+103   | Wali                           | Ciputat                                  | None                 | Ciputat                                  | Banten               | CHANGED   
+104   | Bravy                          | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+105   | Denise Chariesta               | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+106   | Rhoma Irama                    | Jawa Barat                               | None                 | None                                     | Jawa Barat           | CHANGED   
+108   | Meisita Lomania                | Bandung, Jawa Barat, Indonesia           | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+109   | HIVI!                          | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+110   | Nikita Willy                   | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+111   | Cakra Khan                     | Jawa Barat                               | None                 | None                                     | Jawa Barat           | CHANGED   
+112   | Kangen Band                    | Bandar Lampung                           | None                 | Bandar                                   | Lampung              | CHANGED   
+113   | Ariel Noah                     | Langkat Regency                          | None                 | Langkat                                  | Sumatera Utara       | CHANGED   
+114   | Arinaga Family                 | Indonesia                                | None                 | None                                     | None                 | CHANGED   
+116   | Geisha                         | Pekanbaru                                | None                 | Pekanbaru                                | Riau                 | CHANGED   
+117   | Irwansyah                      | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+118   | Barasuara                      | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+119   | Nabila Taqiyyah                | Banda Aceh, Aceh, Indonesia              | None                 | Banda Aceh                               | Aceh                 | CHANGED   
+120   | Syahrini                       | Sukabumi                                 | None                 | Sukabumi                                 | Jawa Barat           | CHANGED   
+121   | Mario G Klau                   | Sikka Regency                            | None                 | Sikka                                    | Nusa Tenggara Timur  | CHANGED   
+123   | Maulana Ardiansyah             | Padang, Sumatera Barat,  Indonesia       | None                 | Padang                                   | Sumatera Barat       | CHANGED   
+125   | Chrisye                        | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+127   | Nissa Sabyan                   | Bandung, Jawa Barat, Indonesia           | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+128   | ADA BAND                       | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+129   | Haddad Alwi                    | Banjarnegara, Jawa Tengah, Indonesia     | None                 | Banjarnegara                             | Jawa Tengah          | CHANGED   
+130   | Aku Jeje                       | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+131   | Brisia Jodie                   | Yogyakarta                               | None                 | Yogyakarta                               | DI Yogyakarta        | CHANGED   
+132   | Repvblik                       | Bogor                                    | None                 | Bogor                                    | Jawa Barat           | CHANGED   
+133   | INDAHKUS                       | Padang                                   | None                 | Padang                                   | Sumatera Barat       | CHANGED   
+136   | Alula Aisy                     | Bandung, Jawa Barat, Indonesia           | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+139   | Andra & The Backbone           | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+142   | Arvian Dwi                     | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+143   | ST12                           | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+144   | Risa Saraswati                 | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+145   | Putri Delina                   | Bandung, Indonesia                       | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+146   | Azia Riza                      | Bekasi, Jawa Barat, Indonesia            | None                 | Bekasi                                   | Jawa Barat           | CHANGED   
+147   | Peterpan                       | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+148   | Ipank                          | Kolkata                                  | None                 | Kolkata                                  | None                 | OK        
+149   | Lomba Sihir                    | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+150   | Zaskia Gotik                   | Bekasi                                   | None                 | Bekasi                                   | Jawa Barat           | CHANGED   
+151   | Tipe-X                         | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+152   | NaFF                           | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+153   | dia                            | Seoul                                    | None                 | Seoul                                    | None                 | OK        
+155   | Stand Here Alone               | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+156   | Dewi Perssik                   | Patrang, Jember, Jawa Timur, Indonesia   | None                 | Patrang, Jember                          | Jawa Timur           | CHANGED   
+157   | Young Lex                      | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+158   | Marion Jola                    | Kupang                                   | None                 | Kupang                                   | Nusa Tenggara Timur  | CHANGED   
+159   | Astrid                         | Vimmerby Municipality                    | None                 | Vimmerby Municipality                    | None                 | OK        
+162   | Meiska                         | Espoo                                    | None                 | Espoo                                    | None                 | OK        
+165   | Anji                           | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+166   | Putri Ariani                   | Kampar Regency                           | None                 | Kampar                                   | Riau                 | CHANGED   
+168   | Rizwan Fadilah                 | Bandung, Indonesia                       | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+169   | Cita Citata                    | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+172   | Justy Aldrin                   | Amahai, Maluku Tengah, Maluku            | None                 | Amahai, Maluku Tengah                    | Maluku               | CHANGED   
+176   | Rara Lida                      | Kota Prabumulih, Sumatera Selatan, Indon | None                 | Kota Prabumulih                          | Sumatera Selatan     | CHANGED   
+177   | Misellia Ikwan                 | Surabaya                                 | None                 | Surabaya                                 | Jawa Timur           | CHANGED   
+178   | Fresly Nikijuluw               | Ullath, Saparua Timur, Maluku Tengah     | None                 | Ullath, Saparua Timur, Tengah            | Maluku               | CHANGED   
+179   | Wizz Baker                     | Amahai, Maluku Tengah, Maluku            | None                 | Amahai, Maluku Tengah                    | Maluku               | CHANGED   
+181   | Hanin Dhiya                    | Bogor Regency                            | None                 | Bogor                                    | Jawa Barat           | CHANGED   
+182   | Iis Dahlia                     | Indramayu Regency                        | None                 | Indramayu                                | Jawa Barat           | CHANGED   
+183   | Fauzana                        | Padang Pariaman, Sumatra barat, Indonesi | None                 | Padang Pariaman, Sumatra barat           | Sumatera Barat       | CHANGED   
+184   | Titi Kamal                     | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+185   | Gritte Agatha                  | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+186   | KOTAK                          | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+187   | Salma Salsabil                 | Probolinggo                              | None                 | Probolinggo                              | Jawa Timur           | CHANGED   
+188   | The Lantis                     | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+189   | Arsy Widianto                  | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+191   | Fatin Shidqia Lubis            | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+202   | Betrand Putra Onsu             | Manggarai, Nusa Tenggara Timur, Indonesi | None                 | Manggarai                                | Nusa Tenggara Timur  | CHANGED   
+204   | Woro Widowati                  | Magelang, Jawa Tengah, Indonesia         | None                 | Magelang                                 | Jawa Tengah          | CHANGED   
+205   | Syakir Daulay                  | Bireuen, Nanggroe Aceh Darussalam, Indon | None                 | Bireuen                                  | Aceh                 | CHANGED   
+206   | Al Ghazali                     | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+207   | Selfi Yamma                    | Indonesia                                | None                 | None                                     | None                 | CHANGED   
+209   | Dongker                        | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+210   | Danilla                        | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+211   | Hijau Daun                     | Bandar Lampung                           | None                 | Bandar                                   | Lampung              | CHANGED   
+212   | Masdddho                       | Temanggung, Jawa Tengah, Indonesia       | None                 | Temanggung                               | Jawa Tengah          | CHANGED   
+213   | Kaleb J                        | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+216   | Barsena Bestandhi              | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+217   | Sammy Simorangkir              | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+219   | Adrian Khalif                  | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+220   | Acha Septriasa                 | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+221   | Paul Partohap                  | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+222   | Superman Is Dead               | Bali                                     | None                 | None                                     | Bali                 | CHANGED   
+227   | Bondan Prakoso                 | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+228   | Adlani Rambe                   | Sumatera Utara                           | None                 | None                                     | Sumatera Utara       | CHANGED   
+233   | Stevan Pasaribu                | Sumatera Utara                           | None                 | None                                     | Sumatera Utara       | CHANGED   
+234   | Enau                           | Minsk                                    | None                 | Minsk                                    | None                 | OK        
+235   | Angga Yunanda                  | Lombok, Nusa Tenggara Barat, Indonesia   | None                 | Lombok                                   | Nusa Tenggara Barat  | CHANGED   
+236   | Rey Mbayang                    | Manado, Sulawesi Utara, Indonesia        | None                 | Manado                                   | Sulawesi Utara       | CHANGED   
+238   | Tami Aulia                     | Samarinda, Indonesia                     | None                 | Samarinda                                | Kalimantan Timur     | CHANGED   
+239   | Eka gustiwana                  | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+242   | Jason Ranti                    | Tangerang Selatan                        | None                 | Tangerang Selatan                        | Banten               | CHANGED   
+243   | Anwar BAB                      | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+245   | Opick                          | Jember                                   | None                 | Jember                                   | Jawa Timur           | CHANGED   
+246   | Banda Neira                    | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+248   | Valdy Nyonk                    | Tasikmalaya, Jawa Barat, Indonesia       | None                 | Tasikmalaya                              | Jawa Barat           | CHANGED   
+249   | Mawar De Jongh                 | Haarlem                                  | None                 | Haarlem                                  | None                 | OK        
+252   | Ai Khodijah                    | Padang, Sumatera Barat, Indonesia        | None                 | Padang                                   | Sumatera Barat       | CHANGED   
+256   | Thomas Arya                    | Padang, Sumatera Barat, Indonesia        | None                 | Padang                                   | Sumatera Barat       | CHANGED   
+258   | Aziz Hedra                     | Medan                                    | None                 | Medan                                    | Sumatera Utara       | CHANGED   
+260   | Aaliyah Massaid                | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+262   | Nada Sikkah                    | Sumedang, Jawa Barat, Indonesia          | None                 | Sumedang                                 | Jawa Barat           | CHANGED   
+263   | Michelle Ziudith               | Medan, Sumatera Utara, Indonesia         | None                 | Medan                                    | Sumatera Utara       | CHANGED   
+264   | Ebiet G. Ade                   | Banjarnegara                             | None                 | Banjarnegara                             | Jawa Tengah          | CHANGED   
+265   | Ghea Youbi                     | Bandung, Jawa Barat, Indonesia           | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+266   | Daun Jatuh                     | Tangerang                                | None                 | Tangerang                                | Banten               | CHANGED   
+267   | Ruri Wantogia                  | Bogor, Jawa Barat, Indonesia             | None                 | Bogor                                    | Jawa Barat           | CHANGED   
+268   | Letto                          | Yogyakarta                               | None                 | Yogyakarta                               | DI Yogyakarta        | CHANGED   
+270   | Nathalie Holscher              | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+271   | Dudy Oris                      | Surabaya                                 | None                 | Surabaya                                 | Jawa Timur           | CHANGED   
+272   | Ardhito Pramono                | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+273   | Naura Ayu                      | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+274   | Rebellion Rose                 | Yogyakarta                               | None                 | Yogyakarta                               | DI Yogyakarta        | CHANGED   
+275   | Fade2Black                     | Bogor                                    | None                 | Bogor                                    | Jawa Barat           | CHANGED   
+276   | Maliq & d'Essentials           | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+277   | Stereo Wall                    | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+279   | Chintya Gabriella              | Medan                                    | None                 | Medan                                    | Sumatera Utara       | CHANGED   
+281   | J-Rocks                        | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+282   | Denada                         | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+284   | AwKarin                        | Jakarta, DKI Jakarta, Indonesia          | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+287   | Azmy Z                         | Bandung Barat, Indonesia                 | None                 | Bandung Barat                            | Jawa Barat           | CHANGED   
+288   | Didi Kempot                    | Surakarta                                | None                 | Surakarta                                | Jawa Tengah          | CHANGED   
+289   | Bulan Sutena                   | Kabupaten Gianyar, Bali, Indonesia       | None                 | Kabupaten Gianyar                        | Bali                 | CHANGED   
+290   | Nyoman Paul                    | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+291   | Wika Salim                     | Bogor                                    | None                 | Bogor                                    | Jawa Barat           | CHANGED   
+292   | Adhisty Zara                   | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+293   | Doel Sumbang                   | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+296   | Halstage                       | Malang                                   | Jawa Timur           | Malang                                   | Jawa Timur           | OK        
+298   | Aura Kasih                     | Bandung, Jawa Barat, Indonesia           | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+300   | Azmy Z                         | Bandung Barat, Indonesia                 | None                 | Bandung Barat                            | Jawa Barat           | CHANGED   
+301   | Vierra                         | Vierra                                   | None                 | Vierra                                   | None                 | OK        
+302   | Habib Syech Bin Abdul Qadir As | 20 September 1961Kelurahan Semanggi, Kec | None                 | 20 September 1961Kelurahan Semanggi, Kec | Jawa Tengah          | CHANGED   
+303   | Radja                          | Banjarmasin                              | None                 | Banjarmasin                              | Kalimantan Selatan   | CHANGED   
+307   | Natasha Udu                    | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+308   | Tasya Rosmala                  | Pasuruan, Jawa Timur, Indonesia          | None                 | Pasuruan                                 | Jawa Timur           | CHANGED   
+309   | Sasya Arkhisna                 | Nganjuk, Jawa Timur, Indonesia           | None                 | Nganjuk                                  | Jawa Timur           | CHANGED   
+310   | Nike Ardilla                   | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+311   | Alffy Rev                      | Trawas, Mojokerto, Jawa Timur, Indonesia | None                 | Trawas, Mojokerto                        | Jawa Timur           | CHANGED   
+312   | Valdy Nyonk                    | Tasikmalaya, Jawa Barat, Indonesia       | None                 | Tasikmalaya                              | Jawa Barat           | CHANGED   
+314   | Aura Kasih                     | Bandung, Jawa Barat, Indonesia           | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+315   | Mitty Zasia                    | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+316   | Fajar Noor                     | Medan, Sumatera Utara, Indonesia         | None                 | Medan                                    | Sumatera Utara       | CHANGED   
+317   | Stevan Pasaribu                | Sumatera Utara                           | None                 | None                                     | Sumatera Utara       | CHANGED   
+318   | Rumahsakit                     | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+319   | Virzha                         | Banda Aceh                               | None                 | Banda                                    | Aceh                 | CHANGED   
+320   | Stereo Wall                    | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+321   | Kunto Aji                      | Yogyakarta                               | None                 | Yogyakarta                               | DI Yogyakarta        | CHANGED   
+323   | Ari Lesmana                    | Pekanbaru                                | None                 | Pekanbaru                                | Riau                 | CHANGED   
+325   | Zaskia Sungkar                 | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+326   | RAN                            | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+327   | Aziz Hedra                     | Medan                                    | None                 | Medan                                    | Sumatera Utara       | CHANGED   
+328   | Dewa                           | Surabaya                                 | None                 | Surabaya                                 | Jawa Timur           | CHANGED   
+331   | Caitlin Halderman              | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+333   | Krisdayanti                    | Batu                                     | None                 | Batu                                     | Jawa Timur           | CHANGED   
+334   | Five Minutes                   | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+335   | Fade2Black                     | Bogor                                    | None                 | Bogor                                    | Jawa Barat           | CHANGED   
+336   | Hal                            | Winona                                   | None                 | Winona                                   | None                 | OK        
+338   | Saykoji                        | Balikpapan                               | None                 | Balikpapan                               | Kalimantan Timur     | CHANGED   
+341   | Dike Sabrina                   | Sidoarjo, Jawa Timur, Indonesia          | None                 | Sidoarjo                                 | Jawa Timur           | CHANGED   
+342   | Dhyo Haw                       | Tangerang, Banten, Indonesia             | None                 | Tangerang                                | Banten               | CHANGED   
+345   | Adera                          | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+346   | Sherina Munaf                  | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+348   | Gigi                           | Torino                                   | None                 | Torino                                   | None                 | OK        
+349   | Ify Alyssa                     | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+352   | The Jansen                     | Bogor                                    | None                 | Bogor                                    | Jawa Barat           | CHANGED   
+353   | The Panturas                   | Sumedang Regency                         | None                 | Sumedang                                 | Sumatera Utara       | CHANGED   
+354   | Afan DA5                       | Pamekasan, Madura, Jawa Timur, Indonesia | None                 | Pamekasan, Madura                        | Jawa Timur           | CHANGED   
+356   | SULE                           | Cimahi                                   | None                 | Cimahi                                   | Jawa Barat           | CHANGED   
+358   | Yuni Shara                     | Batu                                     | None                 | Batu                                     | Jawa Timur           | CHANGED   
+359   | The Changcuters                | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+360   | Nosstress                      | Bali                                     | None                 | None                                     | Bali                 | CHANGED   
+361   | Agnes Monica                   | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+367   | Niken Salindry                 | Kediri, Indonesia                        | None                 | Kediri                                   | Jawa Timur           | CHANGED   
+370   | Lala Widy                      | Sidoarjo, Jawa Timur, Indonesia          | None                 | Sidoarjo                                 | Jawa Timur           | CHANGED   
+371   | Endank Soekamti                | Yogyakarta                               | None                 | Yogyakarta                               | DI Yogyakarta        | CHANGED   
+372   | Rayola                         | Houston                                  | None                 | Houston                                  | None                 | OK        
+373   | Tompi                          | Lhokseumawe                              | None                 | Lhokseumawe                              | Aceh                 | CHANGED   
+375   | Michelle Ziudith               | Medan, Sumatera Utara, Indonesia         | None                 | Medan                                    | Sumatera Utara       | CHANGED   
+378   | Kemal Palevi                   | Samarinda, Kalimantan Timur, Indonesia   | None                 | Samarinda                                | Kalimantan Timur     | CHANGED   
+380   | Ning Umi Laila                 | Surabaya, Jawa timur                     | None                 | Surabaya                                 | Jawa Timur           | CHANGED   
+385   | Aldy Maldini                   | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+387   | Sari Simorangkir               | Indonesia                                | None                 | None                                     | None                 | CHANGED   
+389   | Ade Astrid                     | Jambi, Indonesia                         | None                 | None                                     | Jambi                | CHANGED   
+390   | Faul Gayo                      | Bener Meriah, Aceh, Indonesia            | None                 | Bener Meriah                             | Aceh                 | CHANGED   
+393   | Anisa Rahman                   | Bekasi, Jawa Barat, Indonesia            | None                 | Bekasi                                   | Jawa Barat           | CHANGED   
+395   | Ajeng Febria                   | Kediri, Jawa Timur, Indonesia            | None                 | Kediri                                   | Jawa Timur           | CHANGED   
+396   | Mulan Jameela                  | Garut Regency                            | None                 | Garut                                    | Jawa Barat           | CHANGED   
+399   | Kery Astina                    | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+404   | Abdel Achrian                  | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+405   | Efek Rumah Kaca                | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+406   | Adzando Davema                 | Padang, Sumatera Barat, Indonesia        | None                 | Padang                                   | Sumatera Barat       | CHANGED   
+407   | D'Bagindas                     | Malang                                   | None                 | Malang                                   | Jawa Timur           | CHANGED   
+408   | Bunda Corla                    | Medan, Sumatera Utara,  Indonesia        | None                 | Medan                                    | Sumatera Utara       | CHANGED   
+411   | Sridevi                        | Tamil Nadu                               | None                 | Tamil Nadu                               | None                 | OK        
+413   | Damara De                      | Sleman, Daerah Istimewa Yogyakarta, Indo | None                 | Sleman, Daerah Istimewa Yogyakarta       | DI Yogyakarta        | CHANGED   
+415   | Luthfi Aulia                   | Padang, Sumatera Barat, Indonesia        | None                 | Padang                                   | Sumatera Barat       | CHANGED   
+416   | Armand Maulana                 | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+417   | Tissa Biani                    | Depok                                    | None                 | Depok                                    | Jawa Barat           | CHANGED   
+419   | Asila Maisa                    | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+420   | Suara Kayu                     | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+422   | Jihan audy                     | Surabaya, Jawa Timur, Indonesia          | None                 | Surabaya                                 | Jawa Timur           | CHANGED   
+425   | Pidi Baiq                      | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+426   | Jun Munthe                     | Medan, Sumatera Utara, Indonesia         | None                 | Medan                                    | Sumatera Utara       | CHANGED   
+428   | Kuntriksi Ellail               | Tangerang, Banten, Indonesia             | None                 | Tangerang                                | Banten               | CHANGED   
+429   | Tata Janeeta                   | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+431   | Rio Clappy                     | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+432   | Eclat Story                    | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+434   | Muhammad Hadi Assegaf          | Sukabumi                                 | None                 | Sukabumi                                 | Jawa Barat           | CHANGED   
+435   | Near                           | Avio                                     | None                 | Avio                                     | None                 | OK        
+436   | Glenca Chysara                 | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+438   | Ahmad Dhani                    | Surabaya                                 | None                 | Surabaya                                 | Jawa Timur           | CHANGED   
+439   | Enzy Storia                    | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+441   | Whisnu Santika                 | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+443   | Andien                         | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+444   | The Rain                       | Manchester                               | None                 | Manchester                               | None                 | OK        
+449   | Panji Sakti                    | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+450   | Kris Dayanti                   | Batu                                     | None                 | Batu                                     | Jawa Timur           | CHANGED   
+455   | Reza Artamevia                 | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+456   | Julia Perez                    | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+457   | Citra Scholastika              | Yogyakarta                               | None                 | Yogyakarta                               | DI Yogyakarta        | CHANGED   
+458   | Olla Ramlan                    | Banjarmasin, Kalimantan Selatan, Indones | None                 | Banjarmasin                              | Kalimantan Selatan   | CHANGED   
+459   | Quinn Salman                   | Indonesia                                | None                 | None                                     | None                 | CHANGED   
+461   | VIERRATALE                     | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+462   | Dara Ayu                       | Pati, Jawa Tengah, Indonesia             | None                 | Pati                                     | Jawa Tengah          | CHANGED   
+463   | Tegar Septian                  | Pemalang Regency                         | None                 | Pemalang                                 | Jawa Timur           | CHANGED   
+467   | Tasya Kamila                   | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+470   | The Adams                      | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+471   | David Bayu                     | Surakarta                                | None                 | Surakarta                                | Jawa Tengah          | CHANGED   
+472   | Iksan Skuter                   | Blora Regency                            | None                 | Blora                                    | Jawa Tengah          | CHANGED   
+473   | Elvy Sukaesih                  | Indonesia                                | None                 | None                                     | None                 | CHANGED   
+474   | Decky Ryan                     | Padang, Indonesia                        | None                 | Padang                                   | Sumatera Barat       | CHANGED   
+475   | Breakbeat.id                   | Surabaya, Jawa Timur, Indonesia          | None                 | Surabaya                                 | Jawa Timur           | CHANGED   
+476   | Alfina Nindiyani               | Indonesia                                | None                 | None                                     | None                 | CHANGED   
+477   | Monita Tahalea                 | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+478   | Fiksi Aunurofik                | Majalengka, Indonesia                    | None                 | Majalengka                               | Jawa Barat           | CHANGED   
+479   | Pas Band                       | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+480   | Shabrina Leanor                | Manggar, Bangka Belitung, Indonesia      | None                 | Manggar                                  | Kepulauan Bangka Bel | CHANGED   
+481   | Rafi Sudirman                  | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+483   | Ananta Vinnie                  | Tangerang, Indonesia                     | None                 | Tangerang                                | Banten               | CHANGED   
+484   | FSTVLST                        | Yogyakarta                               | None                 | Yogyakarta                               | DI Yogyakarta        | CHANGED   
+485   | Jogja Hip Hop Foundation       | Yogyakarta, Indonesia                    | None                 | Yogyakarta                               | DI Yogyakarta        | CHANGED   
+486   | Shanna Shannon                 | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+488   | Denada                         | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+490   | Sidney Mohede                  | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+493   | Shakira Jasmine                | Cimahi                                   | None                 | Cimahi                                   | Jawa Barat           | CHANGED   
+496   | Dory Harsa                     | Solo, Jawa Tengah, Indonesia             | None                 | Solo                                     | Jawa Tengah          | CHANGED   
+498   | Dj Imut                        | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+499   | Dian Sastrowardoyo             | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+500   | Gita Youbi                     | Bandung, Jawa Barat, Indonesia           | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+501   | Melitha Sidabutar              | 8 Januari 2001Jakarta, Indonesia         | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+504   | Ikke Nurjanah                  | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+506   | Dul Jaelani                    | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+508   | Agatha Chelsea                 | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+509   | Laleilmanino                   | Denpasar                                 | None                 | Denpasar                                 | Bali                 | CHANGED   
+510   | Ade Govinda                    | Yogyakarta                               | None                 | Yogyakarta                               | DI Yogyakarta        | CHANGED   
+512   | The Jeblogs                    | Indonesia                                | None                 | None                                     | None                 | CHANGED   
+513   | Gita Gutawa                    | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+515   | TheOvertunes                   | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+516   | Tohpati                        | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+517   | Zara Leola                     | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+518   | Umay Shahab                    | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+519   | Aruma                          | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+520   | Erwin Gutawa                   | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+523   | Els Warouw                     | Bandar Lampung                           | None                 | Bandar                                   | Lampung              | CHANGED   
+527   | Dygta                          | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+528   | Evi Masamba                    | Masamba, Luwu, Sulawesi Selatan, Indones | None                 | Masamba, Luwu                            | Sulawesi Selatan     | CHANGED   
+532   | Rocket Rockers                 | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+533   | Julian Jacob                   | Peebles                                  | None                 | Peebles                                  | None                 | OK        
+534   | Rafael Tan                     | Garut Regency                            | None                 | Garut                                    | Jawa Barat           | CHANGED   
+535   | Souljah                        | London                                   | None                 | London                                   | None                 | OK        
+537   | Gita Savitri Devi              | Palembang, 27 Juli 1992                  | None                 | Palembang                                | Sumatera Selatan     | CHANGED   
+538   | Awdella                        | Surabaya, Jawa Timur, Indonesia          | None                 | Surabaya                                 | Jawa Timur           | CHANGED   
+539   | The SIGIT                      | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+540   | COBOY JUNIOR                   | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+541   | Drive                          | Athens                                   | None                 | Athens                                   | None                 | OK        
+544   | Burgerkill                     | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+545   | Jamrud                         | Cimahi                                   | None                 | Cimahi                                   | Jawa Barat           | CHANGED   
+546   | SHAGGY DOG                     | Yogyakarta                               | None                 | Yogyakarta                               | DI Yogyakarta        | CHANGED   
+549   | Charita Utami                  | Palembang                                | None                 | Palembang                                | Sumatera Selatan     | CHANGED   
+552   | Ilir7                          | 27 September 1977Lumajang, Jawa Timur, I | None                 | 27 September 1977Lumajang                | Jawa Timur           | CHANGED   
+553   | Bilal Indrajaya                | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+555   | Rahmat Tahalu                  | Bandung, Jawa Barat, Indonesia           | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+556   | Ruth Sahanaya                  | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+557   | Pee Wee Gaskins                | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+558   | Project Pop                    | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+563   | TuanTigabelas (Tuan 13)        | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+564   | Glitter                        | Banbury                                  | None                 | Banbury                                  | None                 | OK        
+568   | Aldi Taher                     | Jayapura                                 | None                 | Jayapura                                 | Papua                | CHANGED   
+569   | Amanda Caesa                   | Bekasi, Jawa Barat, Indonesia            | None                 | Bekasi                                   | Jawa Barat           | CHANGED   
+571   | Gamaliel Audrey Cantika        | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+573   | Shinta Arsinta                 | Kediri, Jawa Timur, Indonesia            | None                 | Kediri                                   | Jawa Timur           | CHANGED   
+575   | Dere                           | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+578   | Arya Galih                     | Kediri, Jawa Timur, Indonesia            | None                 | Kediri                                   | Jawa Timur           | CHANGED   
+584   | Samuel Cipta                   | Jakarta, Indonesia                       | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+585   | Adhitia Sofyan                 | Bandung                                  | None                 | Bandung                                  | Jawa Barat           | CHANGED   
+592   | Neona                          | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+594   | Adikara Fardy                  | Jakarta                                  | None                 | Jakarta                                  | DKI Jakarta          | CHANGED   
+597   | Dodit Mulyanto                 | Blitar, Jawa Timur, Indonesia            | None                 | Blitar                                   | Jawa Timur           | CHANGED   
+
+================================================================================
+ SUMMARY STATISTICS
+================================================================================
+Total Staging Records           : 385
+Records with Geo Data           : 385
+Records that would be updated   : 365
+Records remaining unchanged     : 20
+
+[WARNING] Cities that could not be mapped to any Province:
+ - Athens
+ - Avio
+ - Banbury
+ - Espoo
+ - Haarlem
+ - Houston
+ - Kolkata
+ - London
+ - Manchester
+ - Minsk
+ - Oslo
+ - Peebles
+ - Seoul
+ - Tamil Nadu
+ - Torino
+ - Vierra
+ - Vimmerby Municipality
+ - Winona
+================================================================================
