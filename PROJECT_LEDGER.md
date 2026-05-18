@@ -20,8 +20,8 @@
 | M1  | Core ETL Engine    | [Complete] | Async infrastructure & DB Schema.                                  |
 | M2  | Source 1: Viberate | [Complete] | Expanded pool to 600 candidates (Pages 0 & 1).                     |
 | M3  | Source 2: Spotify  | [Complete] | Re-scraped 600 records with Weighted Scoring & Profile Pics. |
-| M4  | Geo-Enrichment     |  [Active]  | Validating nationality and extracting Origin City/Province.        |
-| M5  | Spatial Analytics  | [Pending]  | GeoPandas analysis of regional density & genre hubs.               |
+| M4  | Geo-Enrichment     | [Complete] | Standardized provincial origin data for 365 Indonesian artists.    |
+| M5  | Spatial Analytics  |  [Active]  | Genre mapping, static centroid lookups, and regional inequality calculations. |
 | M6  | Web Dashboard      | [Pending]  | Next.js / Express interactive spatial map.                         |
 | M7  | Deployment         | [Pending]  | Dockerization and Cloud Infrastructure setup.                      |
 
@@ -38,10 +38,20 @@
     - [x] **Sprint 4.2 (Extraction Engine)**: Built `musicbrainz_enrichment.py` with 2s rate limit.
     - [x] **Sprint 4.2.1 (City Validator)**: Implemented `geo_constants.py` and `refine_musicbrainz_reports.py` for semantic recovery.
     - [x] **Sprint 4.3 (Execution & Manual Review)**: Built `01_wikipedia_origin_sweep.py` and `02_wikipedia_type_sweep.py` for automated enrichment.
-- [ ] **Geocoding Implementation**: Batch process `origin_city` via Nominatim for spatial coordinates.
+- [x] **Geocoding Implementation**: Pivoted to Static Centroid Lookup (bypassing Nominatim live API for hybrid choropleth visualization).
 - [x] **Target**: Reach 500+ "Clean" records for final spatial analysis.
 
 ---
+
+## 📋 FUTURE INGESTION PIPELINE & DATA POPULATION SOP
+
+To scale the platform beyond the initial staging cohort, we will construct a standardized system and SOP for infinite-scaling artist discovery:
+- [ ] **The Ingestion Orchestrator**: Build a standardized pipeline CLI (e.g. `npm run ingest:new` or `python src/ingest_artist.py`) that accepts a raw artist name, verifies Spotify metrics, and inserts the row with `is_indonesian = TRUE` and all geo-fields set to `NULL`.
+- [ ] **Automated Ingestion SOP Execution**:
+    1. **Ingest**: Populate raw metadata from Spotify (`spotify_popularity`, `profile_picture`).
+    2. **Sweep**: Execute `01_wikipedia_origin_sweep.py --db` to crawl infoboxes.
+    3. **Normalize**: Run `geo_normalizer.py` to resolve and standardize province hierarchies.
+    4. **Resolve**: Fall back to `02_wikipedia_type_sweep.py` for automated structural classification (Person/Group).
 
 ## 📓 RESEARCH PARKING LOT (Future Architectural Problems)
 
@@ -52,6 +62,7 @@
 
 ---
 
+| 2026-05-18 |   Dev   | feat: create database deduplication and sanitation utility | Created `deduplicate_database.py` to clean duplicate artists and resolve scraper collisions. |
 | 2026-05-16 |   Dev   | feat: implement geo-normalization and hierarchy standardization | Created `geo_normalizer.py` to fix Jakarta hierarchy and Province-City mapping in staging. |
 | 2026-05-16 |   Dev   | feat: implement wikipedia artist-type classification sweep | Developed `02_wikipedia_type_sweep.py` to classify records as Person/Group using Wikipedia infoboxes. |
 | 2026-05-16 |   Dev   | fix: implement rate-limit handling and retries for wiki sweep | Developed defensive scraping logic to handle HTTP 429 errors in Wikipedia pipelines. |
