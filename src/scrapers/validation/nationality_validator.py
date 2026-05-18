@@ -12,7 +12,7 @@ import time
 from bs4 import BeautifulSoup
 
 # Add project root to path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../')))
 from src.database.operations import get_unflagged_nationality_artists_sync, update_nationality_sync
 
 class NationalityValidator:
@@ -21,7 +21,7 @@ class NationalityValidator:
             "User-Agent": "NationalityValidator/3.1 (Research Project; contact via github)"
         }
         self.api_url = "https://id.wikipedia.org/w/api.php"
-        self.report_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../docs/validation/ARTIST_VALIDATION_REPORT.md'))
+        self.report_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../docs/validation/ARTIST_VALIDATION_REPORT.md'))
         
         # Ensure directory exists
         os.makedirs(os.path.dirname(self.report_path), exist_ok=True)

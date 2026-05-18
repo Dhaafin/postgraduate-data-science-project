@@ -6,9 +6,9 @@ Provides an interactive menu and a robust `--ingest` CLI for seamless database e
 import sys
 import argparse
 import asyncio
-from src.scrapers.discovery import fetch_viberate_artists
-from src.scrapers.enrichment import run_spotify_enrichment
-from src.scrapers.validation import NationalityValidator
+from src.scrapers.discovery.discovery import fetch_viberate_artists
+from src.scrapers.enrichment.enrichment import run_spotify_enrichment
+from src.scrapers.validation.nationality_validator import NationalityValidator
 from src.scrapers.origin.musicbrainz import MusicBrainzEnrichment
 from src.scrapers.origin.wikipedia import WikipediaSweeper
 from src.scrapers.origin.normalizer import GeoNormalizer

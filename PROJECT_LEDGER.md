@@ -63,6 +63,7 @@ To scale the platform beyond the initial staging cohort, we will construct a sta
 
 ---
 
+| 2026-05-18 |   Dev   | refactor: sanitize obsolete top-level scrapers and resolve imports | Cleaned up all redundant scripts from src/scrapers/ and corrected nested relative path imports. |
 | 2026-05-18 |   Dev   | refactor: restructure pipeline architecture and unify DB operations | Centralized SQLAlchemy queries, standardized scraper modules, and built the end-to-end ingestion CLI. |
 | 2026-05-18 |   PM    | Strategic Pivot: Codebase Refactoring & Ingestion SOP | Proposed Milestone 8 to clean repository architecture, centralize SQL operations, fix legacy table bugs, and create a unified expansion CLI. |
 | 2026-05-18 |   Dev   | feat: create database deduplication and sanitation utility | Created `deduplicate_database.py` to clean duplicate artists and resolve scraper collisions. |

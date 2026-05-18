@@ -11,7 +11,7 @@ import json
 from playwright.async_api import async_playwright
 
 # Add the project root to sys.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../')))
 from src.database.operations import get_next_target_for_enrichment_sync, update_spotify_id_sync
 from src.utils.scoring import score_spotify_candidate
 
@@ -75,7 +75,7 @@ async def scrape_single_artist(page, query_name, selectors, output_file):
 
 async def run_spotify_enrichment():
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.join(base_dir, "../../")
+    project_root = os.path.join(base_dir, "../../../")
     user_data_dir = os.path.join(project_root, "data/user_data")
     output_file = os.path.join(project_root, "data/raw/spotify_search_response.json")
 
