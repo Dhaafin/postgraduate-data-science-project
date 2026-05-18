@@ -82,19 +82,27 @@ class MusicBrainzDiscovery:
                         artist_type = None
                         
                     origin_city = None
+                    origin_province = None
                     if "begin-area" in a and a["begin-area"]:
-                        origin_city = a["begin-area"].get("name")
+                        area_type = a["begin-area"].get("type")
+                        area_name = a["begin-area"].get("name")
+                        if area_type == "City":
+                            origin_city = area_name
+                        elif area_type == "Subdivision":
+                            origin_province = area_name
+                        else:
+                            origin_city = area_name # Fallback
                         
                     total_discovered += 1
                     
                     if dry_run:
-                        preview_list.append({"name": name, "type": artist_type, "city": origin_city})
-                        print(f"   [PREVIEW] {name:<25} | Type: {str(artist_type):<5} | City: {str(origin_city)}")
+                        preview_list.append({"name": name, "type": artist_type, "city": origin_city, "prov": origin_province})
+                        print(f"   [PREVIEW] {name:<25} | Type: {str(artist_type):<5} | City: {str(origin_city):<15} | Prov: {str(origin_province)}")
                     else:
-                        db_id = insert_musicbrainz_seed_sync(name, artist_type, origin_city)
+                        db_id = insert_musicbrainz_seed_sync(name, artist_type, origin_city, origin_province)
                         if db_id:
                             total_inserted += 1
-                            print(f"   [+] INSERTED: {name:<25} | Type: {str(artist_type):<5} | City: {str(origin_city)}")
+                            print(f"   [+] INSERTED: {name:<25} | Type: {str(artist_type):<5} | City: {str(origin_city):<15} | Prov: {str(origin_province)}")
                         
                 offset += limit
                 time.sleep(self.rate_limit_delay)

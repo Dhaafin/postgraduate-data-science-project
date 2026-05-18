@@ -163,7 +163,7 @@ def insert_seed_artist_sync(artist_name, db_engine=None):
         )
         return result.fetchone()[0]
 
-def insert_musicbrainz_seed_sync(artist_name, artist_type, origin_city, db_engine=None):
+def insert_musicbrainz_seed_sync(artist_name, artist_type, origin_city, origin_province, db_engine=None):
     """Inserts a pre-validated MusicBrainz artist directly into the staging table. Skips if exists."""
     target_engine = db_engine or sync_engine
     if not target_engine: return None
@@ -182,10 +182,10 @@ def insert_musicbrainz_seed_sync(artist_name, artist_type, origin_city, db_engin
         result = conn.execute(
             text("""
                 INSERT INTO staging.music_data_staging 
-                (artist_name, artist_type, origin_city, is_indonesian) 
-                VALUES (:name, :type, :city, TRUE) 
+                (artist_name, artist_type, origin_city, origin_province, is_indonesian) 
+                VALUES (:name, :type, :city, :prov, TRUE) 
                 RETURNING id
             """),
-            {"name": artist_name, "type": artist_type, "city": origin_city}
+            {"name": artist_name, "type": artist_type, "city": origin_city, "prov": origin_province}
         )
         return result.fetchone()[0]
