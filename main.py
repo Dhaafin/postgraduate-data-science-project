@@ -7,6 +7,7 @@ import sys
 import argparse
 import asyncio
 from src.scrapers.discovery.discovery import fetch_viberate_artists
+from src.scrapers.discovery.musicbrainz import MusicBrainzDiscovery
 from src.scrapers.enrichment.enrichment import run_spotify_enrichment
 from src.scrapers.validation.nationality_validator import NationalityValidator
 from src.scrapers.origin.musicbrainz import MusicBrainzEnrichment
@@ -57,16 +58,17 @@ def display_menu():
     print("\n" + "="*60)
     print(" INDONESIAN MUSIC SPATIAL ANALYTICS PIPELINE")
     print("="*60)
-    print("1. Discover New Artists (Viberate)")
-    print("2. Enrich Missing Spotify Metadata")
-    print("3. Run Nationality Validation (Hybrid)")
-    print("4. Resolve Missing Origins (Wikipedia + MusicBrainz)")
-    print("5. Standardize Geolocation Hierarchy")
-    print("6. Execute Full End-to-End Database Sweep")
+    print("1. Discover New Artists (Viberate Charts)")
+    print("2. Discover New Artists (MusicBrainz Deep Search)")
+    print("3. Enrich Missing Spotify Metadata")
+    print("4. Run Nationality Validation (Hybrid)")
+    print("5. Resolve Missing Origins (Wikipedia + MusicBrainz)")
+    print("6. Standardize Geolocation Hierarchy")
+    print("7. Execute Full End-to-End Database Sweep")
     print("0. Exit")
     print("="*60)
     
-    choice = input("\nEnter choice [0-6]: ")
+    choice = input("\nEnter choice [0-7]: ")
     return choice
 
 def main():
@@ -95,18 +97,25 @@ def main():
             except ValueError:
                 print("Invalid input. Please provide comma-separated integers.")
         elif choice == '2':
+            pages = input("Enter max pages to pull from MusicBrainz (100 results per page, e.g., 5): ")
+            try:
+                max_pages = int(pages.strip())
+                MusicBrainzDiscovery().run_discovery(max_pages=max_pages)
+            except ValueError:
+                print("Invalid input. Please provide an integer.")
+        elif choice == '3':
             if sys.platform == 'win32':
                 asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
             asyncio.run(run_spotify_enrichment())
-        elif choice == '3':
-            NationalityValidator().run_validation()
         elif choice == '4':
+            NationalityValidator().run_validation()
+        elif choice == '5':
             WikipediaSweeper().run_origin_sweep()
             WikipediaSweeper().run_type_sweep()
             MusicBrainzEnrichment().run()
-        elif choice == '5':
-            GeoNormalizer().run()
         elif choice == '6':
+            GeoNormalizer().run()
+        elif choice == '7':
             if sys.platform == 'win32':
                 asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
             asyncio.run(run_spotify_enrichment())

@@ -63,6 +63,8 @@ To scale the platform beyond the initial staging cohort, we will construct a sta
 
 ---
 
+| 2026-05-18 |   Dev   | feat: add regex deduplication safeguard and dry-run mode for musicbrainz | Strengthened `insert_musicbrainz_seed_sync` against typos/casing using `REGEXP_REPLACE` and added a preview mode to the discovery script. |
+| 2026-05-18 |   Dev   | feat: implement musicbrainz discovery for pre-validated indonesian artist seeding | Added `musicbrainz.py` discovery scraper using Lucene `country:ID` queries to invert the ingestion funnel. |
 | 2026-05-18 |   Dev   | refactor: sanitize obsolete top-level scrapers and resolve imports | Cleaned up all redundant scripts from src/scrapers/ and corrected nested relative path imports. |
 | 2026-05-18 |   Dev   | refactor: restructure pipeline architecture and unify DB operations | Centralized SQLAlchemy queries, standardized scraper modules, and built the end-to-end ingestion CLI. |
 | 2026-05-18 |   PM    | Strategic Pivot: Codebase Refactoring & Ingestion SOP | Proposed Milestone 8 to clean repository architecture, centralize SQL operations, fix legacy table bugs, and create a unified expansion CLI. |

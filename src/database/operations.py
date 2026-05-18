@@ -162,3 +162,30 @@ def insert_seed_artist_sync(artist_name, db_engine=None):
             {"name": artist_name}
         )
         return result.fetchone()[0]
+
+def insert_musicbrainz_seed_sync(artist_name, artist_type, origin_city, db_engine=None):
+    """Inserts a pre-validated MusicBrainz artist directly into the staging table. Skips if exists."""
+    target_engine = db_engine or sync_engine
+    if not target_engine: return None
+    with target_engine.begin() as conn:
+        # Strict deduplication: ignore case, spaces, and punctuation
+        check = conn.execute(
+            text("""
+                SELECT id FROM staging.music_data_staging 
+                WHERE LOWER(REGEXP_REPLACE(artist_name, '[^a-zA-Z0-9]', '', 'g')) = LOWER(REGEXP_REPLACE(:name, '[^a-zA-Z0-9]', '', 'g'))
+            """),
+            {"name": artist_name}
+        ).fetchone()
+        if check:
+            return None
+            
+        result = conn.execute(
+            text("""
+                INSERT INTO staging.music_data_staging 
+                (artist_name, artist_type, origin_city, is_indonesian) 
+                VALUES (:name, :type, :city, TRUE) 
+                RETURNING id
+            """),
+            {"name": artist_name, "type": artist_type, "city": origin_city}
+        )
+        return result.fetchone()[0]
