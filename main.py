@@ -100,7 +100,26 @@ def main():
             pages = input("Enter max pages to pull from MusicBrainz (100 results per page, e.g., 5): ")
             try:
                 max_pages = int(pages.strip())
-                MusicBrainzDiscovery().run_discovery(max_pages=max_pages)
+                # Step 1: Run in preview mode
+                preview_list = MusicBrainzDiscovery().run_discovery(max_pages=max_pages, dry_run=True)
+                
+                if not preview_list:
+                    print("No artists with locations found.")
+                    continue
+                    
+                # Step 2: Prompt for confirmation
+                confirm = input(f"\nFound {len(preview_list)} artists with valid locations. Insert into database? (y/n): ")
+                if confirm.lower() == 'y':
+                    from src.database.operations import insert_musicbrainz_seed_sync
+                    total_inserted = 0
+                    for a in preview_list:
+                        db_id = insert_musicbrainz_seed_sync(a["name"], a["type"], a["city"], a["prov"])
+                        if db_id:
+                            total_inserted += 1
+                    print(f"\nSuccessfully inserted {total_inserted} new artists!")
+                else:
+                    print("Ingestion cancelled.")
+                    
             except ValueError:
                 print("Invalid input. Please provide an integer.")
         elif choice == '3':

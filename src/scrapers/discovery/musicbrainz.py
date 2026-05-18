@@ -92,6 +92,9 @@ class MusicBrainzDiscovery:
                             origin_province = area_name
                         else:
                             origin_city = area_name # Fallback
+                            
+                    if not origin_city and not origin_province:
+                        continue
                         
                     total_discovered += 1
                     
