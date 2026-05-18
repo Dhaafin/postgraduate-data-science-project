@@ -75,9 +75,9 @@ class MusicBrainzDiscovery:
                         
                     raw_type = a.get("type", "Unknown")
                     if raw_type == "Person":
-                        artist_type = "Solo"
+                        artist_type = "Person"
                     elif raw_type == "Group":
-                        artist_type = "Band"
+                        artist_type = "Group"
                     else:
                         artist_type = None
                         
