@@ -12,7 +12,7 @@ import sys
 
 # Add project root to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../')))
-from src.database.operations import insert_musicbrainz_seed_sync
+from src.database.operations import insert_musicbrainz_seed_sync, check_artist_exists_sync
 
 class MusicBrainzDiscovery:
     def __init__(self):
@@ -94,6 +94,11 @@ class MusicBrainzDiscovery:
                             origin_city = area_name # Fallback
                             
                     if not origin_city and not origin_province:
+                        continue
+                        
+                    if check_artist_exists_sync(name):
+                        if dry_run:
+                            print(f"   [SKIPPED] {name:<25} | Already in database")
                         continue
                         
                     total_discovered += 1

@@ -163,12 +163,11 @@ def insert_seed_artist_sync(artist_name, db_engine=None):
         )
         return result.fetchone()[0]
 
-def insert_musicbrainz_seed_sync(artist_name, artist_type, origin_city, origin_province, db_engine=None):
-    """Inserts a pre-validated MusicBrainz artist directly into the staging table. Skips if exists."""
+def check_artist_exists_sync(artist_name, db_engine=None):
+    """Checks if an artist already exists using strict alphanumeric matching."""
     target_engine = db_engine or sync_engine
-    if not target_engine: return None
+    if not target_engine: return False
     with target_engine.begin() as conn:
-        # Strict deduplication: ignore case, spaces, and punctuation
         check = conn.execute(
             text("""
                 SELECT id FROM staging.music_data_staging 
@@ -176,9 +175,17 @@ def insert_musicbrainz_seed_sync(artist_name, artist_type, origin_city, origin_p
             """),
             {"name": artist_name}
         ).fetchone()
-        if check:
-            return None
-            
+        return bool(check)
+
+def insert_musicbrainz_seed_sync(artist_name, artist_type, origin_city, origin_province, db_engine=None):
+    """Inserts a pre-validated MusicBrainz artist directly into the staging table. Skips if exists."""
+    target_engine = db_engine or sync_engine
+    if not target_engine: return None
+    
+    if check_artist_exists_sync(artist_name, target_engine):
+        return None
+        
+    with target_engine.begin() as conn:
         result = conn.execute(
             text("""
                 INSERT INTO staging.music_data_staging 
