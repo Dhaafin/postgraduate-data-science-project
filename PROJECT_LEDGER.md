@@ -63,6 +63,7 @@ To scale the platform beyond the initial staging cohort, we will construct a sta
 
 ---
 
+| 2026-05-18 |   Dev   | fix: upgrade GeoNormalizer to process records with null cities and resolve Jakarta/Yogyakarta subdivisions | Restructured `normalizer.py` SQL query and logic to standardize artists missing a city value but containing province info (e.g. Jakarta, Yogyakarta subdivisions). |
 | 2026-05-18 |   Dev   | fix: sanitize legacy artist_type database entries to Person and Group | Ran an SQL update to patch 90 legacy `Solo`/`Band` records into `Person`/`Group` for schema conformity. |
 | 2026-05-18 |   Dev   | fix: run deduplication check in discovery preview phase to skip existing artists | Extracted `check_artist_exists_sync` to explicitly drop already-ingested artists from the interactive preview list. |
 | 2026-05-18 |   Dev   | fix: remap musicbrainz artist_type to standard Person and Group values | Updated `musicbrainz.py` to insert `Person` and `Group` instead of Solo and Band to maintain database standardization. |

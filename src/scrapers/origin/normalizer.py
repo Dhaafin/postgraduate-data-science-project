@@ -56,7 +56,31 @@ class GeoNormalizer:
         self.updates = 0
 
     def normalize(self, city, province):
-        if not city: return None, province
+        # Handle cases where city is None or empty, but province is set
+        if not city:
+            if not province:
+                return None, None
+            prov_clean = province.strip()
+            if "Jakarta" in prov_clean:
+                return "Jakarta", "DKI Jakarta"
+            if "Yogyakarta" in prov_clean or "Jogja" in prov_clean:
+                return "Yogyakarta", "DI Yogyakarta"
+            
+            PROVINCE_ALIASES = {
+                "Bangka Belitung": "Kepulauan Bangka Belitung",
+                "Nanggroe Aceh Darussalam": "Aceh",
+                "Aceh Darussalam": "Aceh",
+                "Jogjakarta": "DI Yogyakarta",
+                "Jogja": "DI Yogyakarta",
+            }
+            for alias, target in PROVINCE_ALIASES.items():
+                if prov_clean.lower() == alias.lower():
+                    return None, target
+            for p in INDO_PROVINCES:
+                if prov_clean.lower() == p.lower():
+                    return None, p
+            return None, prov_clean
+
         months_pattern = r'(?:Januari|Februari|Maret|April|Mei|Juni|Juli|Agustus|September|Oktober|November|Desember|January|February|March|May|June|July|August|October|December)'
         date_pattern = rf'\b\d{{1,2}}\s+{months_pattern}\s+\d{{4}}\b'
         
@@ -146,7 +170,7 @@ class GeoNormalizer:
         if not sync_engine: return
 
         with sync_engine.begin() as conn:
-            query = text("SELECT id, origin_city, origin_province FROM staging.music_data_staging WHERE origin_city IS NOT NULL")
+            query = text("SELECT id, origin_city, origin_province FROM staging.music_data_staging WHERE origin_city IS NOT NULL OR origin_province IS NOT NULL")
             records = conn.execute(query).fetchall()
 
         print(f"Analyzing {len(records)} records for hierarchy standardization...\n")
@@ -156,7 +180,7 @@ class GeoNormalizer:
             new_city, new_prov = self.normalize(raw_city, raw_prov)
 
             if new_city != raw_city or new_prov != raw_prov:
-                print(f" [!] ID {db_id}: '{raw_city}' -> City: '{new_city}', Prov: '{new_prov}'")
+                print(f" [!] ID {db_id}: City: '{raw_city}', Prov: '{raw_prov}' -> City: '{new_city}', Prov: '{new_prov}'")
                 with sync_engine.begin() as conn:
                     conn.execute(
                         text("UPDATE staging.music_data_staging SET origin_city = :city, origin_province = :prov WHERE id = :id"),
