@@ -63,6 +63,7 @@ To scale the platform beyond the initial staging cohort, we will construct a sta
 
 ---
 
+| 2026-05-18 |   Dev   | fix: sanitize legacy artist_type database entries to Person and Group | Ran an SQL update to patch 90 legacy `Solo`/`Band` records into `Person`/`Group` for schema conformity. |
 | 2026-05-18 |   Dev   | fix: run deduplication check in discovery preview phase to skip existing artists | Extracted `check_artist_exists_sync` to explicitly drop already-ingested artists from the interactive preview list. |
 | 2026-05-18 |   Dev   | fix: remap musicbrainz artist_type to standard Person and Group values | Updated `musicbrainz.py` to insert `Person` and `Group` instead of Solo and Band to maintain database standardization. |
 | 2026-05-18 |   Dev   | feat: add location filter and interactive confirmation to musicbrainz ingestion CLI | Discard artists with no location data during discovery and enforce user manual confirmation in `main.py` before inserting. |
