@@ -24,6 +24,7 @@
 | M5  | Spatial Analytics  |  [Active]  | Genre mapping, static centroid lookups, and regional inequality calculations. |
 | M6  | Web Dashboard      | [Pending]  | Next.js / Express interactive spatial map.                         |
 | M7  | Deployment         | [Pending]  | Dockerization and Cloud Infrastructure setup.                      |
+| M8  | Refactoring & SOP  | [Complete] | Clean up outdated root files, centralize DB ops, and build a unified expansion CLI. |
 
 ---
 
@@ -62,6 +63,8 @@ To scale the platform beyond the initial staging cohort, we will construct a sta
 
 ---
 
+| 2026-05-18 |   Dev   | refactor: restructure pipeline architecture and unify DB operations | Centralized SQLAlchemy queries, standardized scraper modules, and built the end-to-end ingestion CLI. |
+| 2026-05-18 |   PM    | Strategic Pivot: Codebase Refactoring & Ingestion SOP | Proposed Milestone 8 to clean repository architecture, centralize SQL operations, fix legacy table bugs, and create a unified expansion CLI. |
 | 2026-05-18 |   Dev   | feat: create database deduplication and sanitation utility | Created `deduplicate_database.py` to clean duplicate artists and resolve scraper collisions. |
 | 2026-05-16 |   Dev   | feat: implement geo-normalization and hierarchy standardization | Created `geo_normalizer.py` to fix Jakarta hierarchy and Province-City mapping in staging. |
 | 2026-05-16 |   Dev   | feat: implement wikipedia artist-type classification sweep | Developed `02_wikipedia_type_sweep.py` to classify records as Person/Group using Wikipedia infoboxes. |
