@@ -26,7 +26,7 @@ def run_mapping(dry_run=True):
         updates = []
         
         # We will keep track of specific edge cases to print them for verification
-        target_artists = ["Tipe-X", "Souljah", "SHAGGY DOG", "Dhyo Haw", "Glenn Fredly", "Lyodra", "Stand Here Alone", "Superman Is Dead"]
+        target_artists = ["Tipe-X", "Souljah", "SHAGGY DOG", "Dhyo Haw", "Glenn Fredly", "Lyodra", "Rizky Febian", "Stand Here Alone", "Superman Is Dead"]
         resolved_targets = []
         
         for r in records:
