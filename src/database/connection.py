@@ -64,6 +64,7 @@ async def init_db():
                     artist_name TEXT,
                     profile_picture TEXT,
                     genre TEXT[],
+                    primary_genre TEXT,
                     followers INTEGER,
                     popularity INTEGER,
                     artist_type TEXT,
@@ -89,7 +90,7 @@ async def init_db():
             
             desired_order = [
                 "id", "needs_review", "spotify_id", "spotify_link", "artist_name", 
-                "profile_picture", "genre", "followers", "popularity", "artist_type",
+                "profile_picture", "genre", "primary_genre", "followers", "popularity", "artist_type",
                 "origin_city", "origin_province", "latitude", "longitude", "is_indonesian", "wikipedia_url"
             ]
             
@@ -110,6 +111,7 @@ async def init_db():
                         artist_name TEXT,
                         profile_picture TEXT,
                         genre TEXT[],
+                        primary_genre TEXT,
                         followers INTEGER,
                         popularity INTEGER,
                         artist_type TEXT,

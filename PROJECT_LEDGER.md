@@ -28,19 +28,30 @@
 
 ---
 
-## 🛠️ ACTIVE FEATURE: M4 - Multi-Source Geo-Enrichment (MusicBrainz Pivot)
+## 🛠️ ACTIVE FEATURE: M5 - Spatial Analytics & Genre Mapping
 
-> **Objective**: Identify "Origin City" using a Provenance-First model to quantify Jakarta-centric migration.
+> **Objective**: Implement genre mapping and static centroid lookups to calculate regional inequality and visualize Jakarta-centric concentration.
 
-- [x] **DB Schema Expansion**: Add `artist_type`, `origin_city`, `origin_province`, `latitude`, and `longitude` columns.
-- [x] **Nationality Validation**: Tier 1 (Spotify) & Tier 2 (Wiki Keywords) complete.
-- [x] **MusicBrainz Origin Scraper**: 
-    - [x] **Sprint 4.1 (API Spike)**: Validated MusicBrainz payload accuracy.
-    - [x] **Sprint 4.2 (Extraction Engine)**: Built `musicbrainz_enrichment.py` with 2s rate limit.
-    - [x] **Sprint 4.2.1 (City Validator)**: Implemented `geo_constants.py` and `refine_musicbrainz_reports.py` for semantic recovery.
-    - [x] **Sprint 4.3 (Execution & Manual Review)**: Built `01_wikipedia_origin_sweep.py` and `02_wikipedia_type_sweep.py` for automated enrichment.
-- [x] **Geocoding Implementation**: Pivoted to Static Centroid Lookup (bypassing Nominatim live API for hybrid choropleth visualization).
-- [x] **Target**: Reach 500+ "Clean" records for final spatial analysis.
+- [ ] **Genre Standardization**: Map 70+ raw Spotify tags into 11 clean Parent Genres using **Priority-Based Single Mapping**.
+- [ ] **Centroid Geocoding**: Resolve latitude/longitude using static provincial/city centroids for mapping.
+- [ ] **Inequality Calculations**: Run descriptive and Gini coefficient analysis on genre-location distributions.
+
+### Genre Hierarchy Specification (Priority Order)
+
+1. **Spiritual & Devotional**: `sholawat`, `worship`
+2. **J-Pop & ACG Subculture**: `j-pop`, `anime`, `vocaloid`
+3. **Reggae, Ska & Island Vibes**: `ska`, `reggae`
+4. **Regional Roots & Folk**: `lagu jawa`, `lagu timur`, `maluku`, `batak`, `sunda`, `minang`, `fújì`
+5. **Dangdut & Koplo**: `dangdut`, `koplo`, `hipdut`, `funkot`, `breakbeat`
+6. **Melayu Pop**: `malay`, `malay pop`, `malaysian pop`
+7. **Heavy & Underground**: `death metal`, `black metal`, `grindcore`, `metalcore`, `melodic death metal`, `progressive metal`, `drone metal`, `mathcore`, `punk`, `skate punk`, `pop punk`
+8. **Hip-Hop, Rap & Electronic Beats**: `indonesian hip hop`, `malay rap`, `j-rap`, `melodic house`, `moombahton`, `jazz house`
+9. **R&B, Soul & Urban Grooves**: `indonesian r&b`, `electro r&b`
+10. **Jazz & Blues Essentials**: `jazz`, `indonesian jazz`, `jazz fusion`, `indie jazz`, `bossa nova`, `christian jazz`, `experimental jazz`
+11. **Sophisticated & City Pop**: `pop kreatif`, `city pop`
+12. **Classic & Heritage Rock**: `indonesian rock`, `indorock`, `progressive rock`
+13. **Indie & Alternative**: `indonesian indie`, `indie`, `indonesian indie rock`, `post-rock`, `grunge`, `math rock`, `psychedelic rock`, `surf rock`, `experimental`, `ambient`, `electroacoustic`, `avant-garde`
+14. **Mainstream Pop & Ballad**: `indonesian pop`, `jazz pop`, `children's music` (Fallback)
 
 ---
 
@@ -63,6 +74,7 @@ To scale the platform beyond the initial staging cohort, we will construct a sta
 
 ---
 
+| 2026-05-19 |   PM    | Spec: Finalized Genre Mapping Hierarchy | Approved Opsi 1 (Priority-Based Single Mapping) with 11 Parent Genres including Religious and Ska & Reggae. |
 | 2026-05-18 |   Dev   | fix: upgrade GeoNormalizer to process records with null cities and resolve Jakarta/Yogyakarta subdivisions | Restructured `normalizer.py` SQL query and logic to standardize artists missing a city value but containing province info (e.g. Jakarta, Yogyakarta subdivisions). |
 | 2026-05-18 |   Dev   | fix: sanitize legacy artist_type database entries to Person and Group | Ran an SQL update to patch 90 legacy `Solo`/`Band` records into `Person`/`Group` for schema conformity. |
 | 2026-05-18 |   Dev   | fix: run deduplication check in discovery preview phase to skip existing artists | Extracted `check_artist_exists_sync` to explicitly drop already-ingested artists from the interactive preview list. |
