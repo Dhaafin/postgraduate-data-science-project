@@ -161,14 +161,20 @@ for level in RAW_GENRE_HIERARCHY:
     })
 
 
-def resolve_primary_genre(raw_genres):
+def resolve_primary_genre(raw_genres, popularity=None, artist_name=None):
     """
     Resolves a list of raw genre tags into a single Primary Parent Genre using a
     Weighted Scoring Classifier. Enforces exact-first scoring, falling back to 
     regex-safe word boundaries, and uses the hierarchy as a tie-breaker.
     
+    Includes a Popularity Threshold Override to reclassify mainstreamed indie 
+    acts (popularity >= 70) as Mainstream Pop & Ballad, with custom exclusions
+    for culturally alternative acts like Hindia.
+    
     Args:
         raw_genres (list[str] | str | None): The raw genres from Spotify.
+        popularity (int | None): The Spotify popularity score of the artist (0-100).
+        artist_name (str | None): The name of the artist to check for exclusions.
         
     Returns:
         str | None: The resolved Parent Genre name, or None if raw_genres is empty/None.
@@ -227,15 +233,24 @@ def resolve_primary_genre(raw_genres):
     max_score = max(genre_scores.values())
     
     if max_score <= 0.0:
-        return "Mainstream Pop & Ballad"
+        resolved = "Mainstream Pop & Ballad"
+    else:
+        # Find all genres that share the maximum score
+        candidates = [name for name, score in genre_scores.items() if score == max_score]
         
-    # Find all genres that share the maximum score
-    candidates = [name for name, score in genre_scores.items() if score == max_score]
-    
-    # Break ties by selecting the candidate higher up in the hierarchy (most specific)
-    for level in GENRE_HIERARCHY:
-        if level["name"] in candidates:
-            return level["name"]
+        # Break ties by selecting the candidate higher up in the hierarchy (most specific)
+        resolved = "Mainstream Pop & Ballad"
+        for level in GENRE_HIERARCHY:
+            if level["name"] in candidates:
+                resolved = level["name"]
+                break
+                
+    # Popularity Override: Reclassify mainstreamed indie acts (popularity >= 70) as Mainstream Pop
+    if resolved == "Indie & Alternative" and popularity is not None and popularity >= 70:
+        # Exclusion: Culturally/aesthetically indie acts are preserved in Indie & Alternative
+        if artist_name and artist_name.lower().strip() in {"hindia"}:
+            return resolved
+        return "Mainstream Pop & Ballad"
             
-    return "Mainstream Pop & Ballad"
+    return resolved
 

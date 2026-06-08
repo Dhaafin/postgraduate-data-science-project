@@ -16,8 +16,8 @@ def run_mapping(dry_run=True):
     print(f"\n--- [GENRE BACKFILL V2 PIPELINE {'(DRY RUN)' if dry_run else '(LIVE EXECUTION)'}] ---")
     
     with sync_engine.begin() as conn:
-        # Get all artists with genres
-        all_query = text("SELECT id, artist_name, genre FROM staging.music_data_staging ORDER BY id ASC")
+        # Get all artists with genres and popularity
+        all_query = text("SELECT id, artist_name, genre, popularity FROM staging.music_data_staging ORDER BY id ASC")
         records = conn.execute(all_query).fetchall()
         
         print(f"Loaded {len(records)} artists from database.")
@@ -26,15 +26,16 @@ def run_mapping(dry_run=True):
         updates = []
         
         # We will keep track of specific edge cases to print them for verification
-        target_artists = ["Tipe-X", "Souljah", "SHAGGY DOG", "Dhyo Haw", "Glenn Fredly", "Lyodra", "Rizky Febian", "Stand Here Alone", "Superman Is Dead"]
+        target_artists = ["Tipe-X", "Souljah", "SHAGGY DOG", "Dhyo Haw", "Glenn Fredly", "Lyodra", "Rizky Febian", "Juicy Luicy", "Hindia", "Stand Here Alone", "Superman Is Dead"]
         resolved_targets = []
         
         for r in records:
             db_id = r[0]
             artist_name = r[1]
             raw_genres = r[2]
+            popularity = r[3]
             
-            resolved = resolve_primary_genre(raw_genres)
+            resolved = resolve_primary_genre(raw_genres, popularity=popularity, artist_name=artist_name)
             
             # Keep counts
             status_label = resolved if resolved else "NULL (No Genre)"
@@ -42,20 +43,20 @@ def run_mapping(dry_run=True):
             
             # Check edge cases
             if artist_name in target_artists:
-                resolved_targets.append((artist_name, raw_genres, resolved))
+                resolved_targets.append((artist_name, raw_genres, popularity, resolved))
                 
             updates.append({"id": db_id, "primary_genre": resolved})
             
         # Display edge case verification
         print("\n--- EDGE CASE VERIFICATION ---")
-        print("-" * 110)
-        print(f"{'Artist Name':<25} | {'Raw Genre Tags':<50} | {'Primary Parent Genre':<30}")
-        print("-" * 110)
+        print("-" * 125)
+        print(f"{'Artist Name':<25} | {'Popularity':<10} | {'Raw Genre Tags':<50} | {'Primary Parent Genre':<30}")
+        print("-" * 125)
         for s in resolved_targets:
             raw_str = str(s[1])[:48] + '...' if len(str(s[1])) > 50 else str(s[1])
-            resolved_str = s[2] if s[2] else "NULL"
-            print(f"{s[0]:<25} | {raw_str:<50} | {resolved_str:<30}")
-        print("-" * 110)
+            resolved_str = s[3] if s[3] else "NULL"
+            print(f"{s[0]:<25} | {str(s[2]):<10} | {raw_str:<50} | {resolved_str:<30}")
+        print("-" * 125)
         
         # Display stats
         print("\n--- NEW GENRE DISTRIBUTION STATS ---")

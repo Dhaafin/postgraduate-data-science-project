@@ -72,6 +72,10 @@ class GeoNormalizer:
                 "Aceh Darussalam": "Aceh",
                 "Jogjakarta": "DI Yogyakarta",
                 "Jogja": "DI Yogyakarta",
+                "Yogyakarta": "DI Yogyakarta",
+                "Daerah Istimewa Yogyakarta": "DI Yogyakarta",
+                "DIY": "DI Yogyakarta",
+                "Daerah Khusus Ibukota Jakarta": "DKI Jakarta"
             }
             for alias, target in PROVINCE_ALIASES.items():
                 if prov_clean.lower() == alias.lower():
@@ -103,6 +107,10 @@ class GeoNormalizer:
             "Aceh Darussalam": "Aceh",
             "Jogjakarta": "DI Yogyakarta",
             "Jogja": "DI Yogyakarta",
+            "Yogyakarta": "DI Yogyakarta",
+            "Daerah Istimewa Yogyakarta": "DI Yogyakarta",
+            "DIY": "DI Yogyakarta",
+            "Daerah Khusus Ibukota Jakarta": "DKI Jakarta"
         }
 
         sorted_provinces = sorted(INDO_PROVINCES, key=len, reverse=True)
@@ -159,12 +167,25 @@ class GeoNormalizer:
                     mapped_prov = prov_val
                     break
 
+        # Normalize the final province name if it matches an alias
+        if mapped_prov:
+            prov_lookup = mapped_prov.strip()
+            for alias, target in PROVINCE_ALIASES.items():
+                if prov_lookup.lower() == alias.lower():
+                    mapped_prov = target
+                    break
+
+        # Enforce province-only aggregation for DKI Jakarta and DI Yogyakarta
+        # (Aggregates sparse metropolitan/district subdivisions to the provincial centroid)
+        if mapped_prov in ["DKI Jakarta", "DI Yogyakarta"]:
+            clean_city = None
+
         if not clean_city: return None, mapped_prov
         return clean_city, mapped_prov
 
-    def run(self):
+    def run(self, dry_run=True):
         print("\n" + "="*60)
-        print(" GEO-DATA NORMALIZATION PIPELINE")
+        print(f" GEO-DATA NORMALIZATION PIPELINE {'(DRY RUN)' if dry_run else '(LIVE EXECUTION)'}")
         print("="*60)
         
         if not sync_engine: return
@@ -181,16 +202,23 @@ class GeoNormalizer:
 
             if new_city != raw_city or new_prov != raw_prov:
                 print(f" [!] ID {db_id}: City: '{raw_city}', Prov: '{raw_prov}' -> City: '{new_city}', Prov: '{new_prov}'")
-                with sync_engine.begin() as conn:
-                    conn.execute(
-                        text("UPDATE staging.music_data_staging SET origin_city = :city, origin_province = :prov WHERE id = :id"),
-                        {"city": new_city, "prov": new_prov, "id": db_id}
-                    )
+                if not dry_run:
+                    with sync_engine.begin() as conn:
+                        conn.execute(
+                            text("UPDATE staging.music_data_staging SET origin_city = :city, origin_province = :prov WHERE id = :id"),
+                            {"city": new_city, "prov": new_prov, "id": db_id}
+                        )
                 self.updates += 1
 
         print("="*60)
-        print(f"Total Updated Records: {self.updates}")
+        print(f"Total Standardized Records: {self.updates}")
         print("="*60)
 
 if __name__ == "__main__":
-    GeoNormalizer().run()
+    import argparse
+    parser = argparse.ArgumentParser(description="Standardize geographical data in staging.")
+    parser.add_argument("--execute", action="store_true", help="Run the actual database updates (default is dry-run)")
+    args = parser.parse_args()
+    
+    GeoNormalizer().run(dry_run=not args.execute)
+
