@@ -20,24 +20,31 @@ CITY_TO_PROVINCE = {
     "Pasuruan": "Jawa Timur", "Mojokerto": "Jawa Timur", "Ngawi": "Jawa Timur",
     "Sidoarjo": "Jawa Timur", "Jember": "Jawa Timur", "Nganjuk": "Jawa Timur",
     "Pamekasan": "Jawa Timur", "Probolinggo": "Jawa Timur", "Lumajang": "Jawa Timur",
+    "Gresik": "Jawa Timur", "Banyuwangi": "Jawa Timur", "Lamongan": "Jawa Timur",
     "Semarang": "Jawa Tengah", "Solo": "Jawa Tengah", "Surakarta": "Jawa Tengah",
     "Blora": "Jawa Tengah", "Pemalang": "Jawa Tengah", "Banjarnegara": "Jawa Tengah",
     "Temanggung": "Jawa Tengah", "Pati": "Jawa Tengah", "Magelang": "Jawa Tengah",
     "Cilacap": "Jawa Tengah", "Banyumas": "Jawa Tengah", "Kebumen": "Jawa Tengah",
     "Klaten": "Jawa Tengah", "Wonogiri": "Jawa Tengah", "Yogyakarta": "DI Yogyakarta",
+    "Brebes": "Jawa Tengah", "Demak": "Jawa Tengah", "Boyolali": "Jawa Tengah",
+    "Sukoharjo": "Jawa Tengah", "Karanganyar": "Jawa Tengah", "Sragen": "Jawa Tengah",
+    "Grobogan": "Jawa Tengah", "Rembang": "Jawa Tengah", "Kudus": "Jawa Tengah",
+    "Jepara": "Jawa Tengah", "Kendal": "Jawa Tengah", "Batang": "Jawa Tengah",
+    "Purworejo": "Jawa Tengah", "Wonosobo": "Jawa Tengah",
     "Bandung": "Jawa Barat", "Cimahi": "Jawa Barat", "Sukabumi": "Jawa Barat",
     "Bogor": "Jawa Barat", "Depok": "Jawa Barat", "Bekasi": "Jawa Barat",
     "Cirebon": "Jawa Barat", "Tasikmalaya": "Jawa Barat", "Garut": "Jawa Barat",
-    "Majalengka": "Jawa Barat", "Indramayu": "Jawa Barat", "Tangerang": "Banten",
-    "South Tangerang": "Banten", "Serang": "Banten", "Ciputat": "Banten",
+    "Majalengka": "Jawa Barat", "Indramayu": "Jawa Barat", "Karawang": "Jawa Barat",
+    "Tangerang": "Banten", "South Tangerang": "Banten", "Serang": "Banten", "Ciputat": "Banten",
     "Denpasar": "Bali", "Gianyar": "Bali", "Mataram": "Nusa Tenggara Barat",
     "Lombok": "Nusa Tenggara Barat", "Kupang": "Nusa Tenggara Timur",
     "Atambua": "Nusa Tenggara Timur", "Alor": "Nusa Tenggara Timur",
     "Sikka": "Nusa Tenggara Timur", "Manggarai": "Nusa Tenggara Timur",
+    "West Sumba": "Nusa Tenggara Timur", "Sumba": "Nusa Tenggara Timur",
     "Medan": "Sumatera Utara", "Binjai": "Sumatera Utara",
     "Pematangsiantar": "Sumatera Utara", "Langkat": "Sumatera Utara",
-    "Dairi": "Sumatera Utara", "Padang": "Sumatera Barat", "Pekanbaru": "Riau",
-    "Dumai": "Riau", "Kampar": "Riau", "Batam": "Kepulauan Riau",
+    "Dairi": "Sumatera Utara", "Padang": "Sumatera Barat", "Padang Pariaman": "Sumatera Barat",
+    "Pekanbaru": "Riau", "Dumai": "Riau", "Kampar": "Riau", "Batam": "Kepulauan Riau",
     "Tanjungpinang": "Kepulauan Riau", "Jambi": "Jambi",
     "Palembang": "Sumatera Selatan", "Prabumulih": "Sumatera Selatan",
     "Bengkulu": "Bengkulu", "Bandar Lampung": "Lampung", "Banda Aceh": "Aceh",
@@ -61,10 +68,19 @@ class GeoNormalizer:
             if not province:
                 return None, None
             prov_clean = province.strip()
+            
+            # Clean common suffixes first so we can match them (e.g., "West Sumba Regency" -> "West Sumba")
+            prov_clean = re.sub(r' (Regency|City|Kabupaten|Kota)$', '', prov_clean, flags=re.I).strip()
+            
             if "Jakarta" in prov_clean:
                 return "Jakarta", "DKI Jakarta"
             if "Yogyakarta" in prov_clean or "Jogja" in prov_clean:
                 return "Yogyakarta", "DI Yogyakarta"
+            
+            # Check if this "province" is actually a known city/regency (checking longest keys first)
+            for city_key, prov_val in sorted(CITY_TO_PROVINCE.items(), key=lambda x: len(x[0]), reverse=True):
+                if city_key.lower() in prov_clean.lower():
+                    return city_key, prov_val
             
             PROVINCE_ALIASES = {
                 "Bangka Belitung": "Kepulauan Bangka Belitung",
@@ -162,7 +178,7 @@ class GeoNormalizer:
 
         mapped_prov = extracted_prov
         if not mapped_prov:
-            for city_key, prov_val in CITY_TO_PROVINCE.items():
+            for city_key, prov_val in sorted(CITY_TO_PROVINCE.items(), key=lambda x: len(x[0]), reverse=True):
                 if city_key.lower() in clean_city.lower():
                     mapped_prov = prov_val
                     break

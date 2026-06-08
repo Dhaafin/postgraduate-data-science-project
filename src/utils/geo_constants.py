@@ -24,7 +24,9 @@ INDO_CITIES = {
     "Pemalang", "Banyumas", "Cilacap", "Kebumen", "Purworejo", "Wonosobo",
     "Magelang", "Boyolali", "Klaten", "Sukoharjo", "Wonogiri", "Karanganyar",
     "Sragen", "Grobogan", "Blora", "Rembang", "Pati", "Kudus", "Jepara",
-    "Demak", "Temanggung", "Kendal", "Batang", "Banjarnegara"
+    "Demak", "Temanggung", "Kendal", "Batang", "Banjarnegara", "Gresik",
+    "Banyuwangi", "Lamongan", "Brebes", "West Sumba", "Karawang", "Garut",
+    "Padang Pariaman"
 }
 
 INDO_PROVINCES = {

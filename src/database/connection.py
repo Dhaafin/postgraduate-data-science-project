@@ -70,8 +70,6 @@ async def init_db():
                     artist_type TEXT,
                     origin_city TEXT,
                     origin_province TEXT,
-                    latitude DECIMAL,
-                    longitude DECIMAL,
                     is_indonesian BOOLEAN DEFAULT NULL,
                     wikipedia_url TEXT
                 );
@@ -91,7 +89,7 @@ async def init_db():
             desired_order = [
                 "id", "needs_review", "spotify_id", "spotify_link", "artist_name", 
                 "profile_picture", "genre", "primary_genre", "followers", "popularity", "artist_type",
-                "origin_city", "origin_province", "latitude", "longitude", "is_indonesian", "wikipedia_url"
+                "origin_city", "origin_province", "is_indonesian", "wikipedia_url"
             ]
             
             # Trigger refactor if columns are missing or out of order
@@ -117,8 +115,6 @@ async def init_db():
                         artist_type TEXT,
                         origin_city TEXT,
                         origin_province TEXT,
-                        latitude DECIMAL,
-                        longitude DECIMAL,
                         is_indonesian BOOLEAN DEFAULT NULL,
                         wikipedia_url TEXT
                     );

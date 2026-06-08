@@ -48,7 +48,7 @@ def run_ingestion_pipeline(artist_name):
     MusicBrainzEnrichment().run()
     
     print("\n[Step 5/5] Geo-Normalization...")
-    GeoNormalizer().run()
+    GeoNormalizer().run(dry_run=False)
     
     print("\n" + "="*60)
     print(f" PIPELINE COMPLETE FOR '{artist_name}'")
@@ -133,7 +133,7 @@ def main():
             WikipediaSweeper().run_type_sweep()
             MusicBrainzEnrichment().run()
         elif choice == '6':
-            GeoNormalizer().run()
+            GeoNormalizer().run(dry_run=False)
         elif choice == '7':
             if sys.platform == 'win32':
                 asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
@@ -142,7 +142,7 @@ def main():
             WikipediaSweeper().run_origin_sweep()
             WikipediaSweeper().run_type_sweep()
             MusicBrainzEnrichment().run()
-            GeoNormalizer().run()
+            GeoNormalizer().run(dry_run=False)
         else:
             print("Invalid choice. Please try again.")
 

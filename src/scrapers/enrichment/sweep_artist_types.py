@@ -9,7 +9,7 @@ import os
 import sys
 
 # Add project root to sys.path to ensure modules can be imported correctly
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../'))
 sys.path.append(project_root)
 
 from src.scrapers.origin.wikipedia import WikipediaSweeper
