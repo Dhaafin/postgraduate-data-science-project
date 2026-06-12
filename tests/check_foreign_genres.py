@@ -1,14 +1,15 @@
 import sys
 import os
-sys.path.append(os.path.abspath('.'))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from sqlalchemy import text
 from src.database.connection import sync_engine
 
 with sync_engine.begin() as conn:
-    # Check how many artists have indonesian/indo/jawa/dangdut etc in genres
     query = """
-    SELECT COUNT(*) FROM music_data 
-    WHERE array_to_string(genre, ',') ILIKE '%indonesian%'
+    SELECT unnest(genre) as g, count(*) 
+    FROM music_data 
+    WHERE NOT (
+       array_to_string(genre, ',') ILIKE '%indonesian%'
        OR array_to_string(genre, ',') ILIKE '%indo %'
        OR array_to_string(genre, ',') ILIKE '%jawa%'
        OR array_to_string(genre, ',') ILIKE '%dangdut%'
@@ -18,9 +19,9 @@ with sync_engine.begin() as conn:
        OR array_to_string(genre, ',') ILIKE '%batak%'
        OR array_to_string(genre, ',') ILIKE '%maluku%'
        OR array_to_string(genre, ',') ILIKE '%timur%'
+    )
+    GROUP BY g ORDER BY count(*) DESC LIMIT 20
     """
     result = conn.execute(text(query))
-    count = result.scalar()
-    
-    total = conn.execute(text("SELECT COUNT(*) FROM music_data")).scalar()
-    print(f"Artists with clear Indonesian genres: {count} out of {total}")
+    for row in result:
+        print(f'{row[0]}: {row[1]}')

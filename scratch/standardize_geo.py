@@ -1,7 +1,7 @@
 """
-Standardize Geographic Fields for Indonesian Music Platform.
-Aligns origin_city and origin_province in the Supabase staging database
-with the front-end recognized cities and mapped provinces.
+Standardize Geographic Fields for Indonesian Music Platform (v2).
+Cleans and normalizes origin_city and origin_province in the Supabase staging database
+to match recognized names, without nullifying unrecognized cities.
 """
 
 import os
@@ -187,15 +187,41 @@ PROVINCE_ALIASES = {
     "papua tengah": "Papua Tengah"
 }
 
-def clean_name(name_str):
-    if not name_str:
-        return ""
-    # Remove common geographic suffixes
-    clean = re.sub(r' (Regency|City|Kabupaten|Kota)$', '', name_str.strip(), flags=re.I).strip()
+def clean_city_name(city_str, province_str=None):
+    if not city_str:
+        return None
+    # 1. Strip whitespace
+    clean = city_str.strip()
     
-    # Fix typos
-    if clean.lower() == "tasimalaya":
+    # 2. Split by comma and take first part
+    if "," in clean:
+        clean = clean.split(",")[0].strip()
+        
+    # 3. Strip common suffixes
+    clean = re.sub(r' (Regency|City|Kabupaten|Kota)$', '', clean, flags=re.I).strip()
+    
+    # 4. Handle specific combination/typos
+    clean_lower = clean.lower()
+    if clean_lower in ["solo", "surakarta"]:
+        return "Surakarta (Solo)"
+    if clean_lower == "tasimalaya":
         return "Tasikmalaya"
+    
+    # Check Bandar Lampung / Banda Aceh
+    if clean_lower == "bandar" and province_str and province_str.strip().lower() == "lampung":
+        return "Bandar Lampung"
+    if clean_lower == "banda" and province_str and province_str.strip().lower() == "aceh":
+        return "Banda Aceh"
+        
+    # Standardize capitalization (Title Case)
+    words = clean.split()
+    capitalized_words = []
+    for w in words:
+        if w.upper() in ["A.K.A", "D.I", "DKI", "DI"]:
+            capitalized_words.append(w.upper())
+        else:
+            capitalized_words.append(w.capitalize())
+    clean = " ".join(capitalized_words)
     
     return clean
 
@@ -217,7 +243,7 @@ def match_province(prov_str):
 def match_city(city_str):
     if not city_str:
         return None
-    c_clean = clean_name(city_str)
+    c_clean = clean_city_name(city_str)
     
     # Handle specific combinations
     if c_clean.lower() == "solo" or c_clean.lower() == "surakarta":
@@ -260,34 +286,27 @@ def run_standardization(dry_run=True):
             target_prov = corr["province"]
         else:
             # 2. General Standardization
-            # Clean and match city
-            matched_c = match_city(city)
-            if matched_c:
-                target_city = matched_c
-                target_prov = CITY_TO_PROVINCE[matched_c]
+            # Standardize province first
+            matched_p = match_province(prov)
+            if matched_p:
+                target_prov = matched_p
             else:
-                # If city not recognized, check if we can reconstruct (e.g. city='Banda', prov='Aceh' -> Banda Aceh)
-                if city and prov:
-                    combined = f"{city} {prov}".strip()
-                    matched_c = match_city(combined)
-                    if matched_c:
-                        target_city = matched_c
-                        target_prov = CITY_TO_PROVINCE[matched_c]
-                
-                # If still no city matched, check province fallback
-                if not target_city:
-                    matched_p = match_province(prov)
+                if city:
+                    matched_p = match_province(city)
                     if matched_p:
                         target_prov = matched_p
-                        # Unrecognized cities are set to None/NULL in database
-                        target_city = None
-                    else:
-                        # Try to find province from city string if province is None
-                        if city and not prov:
-                            matched_p = match_province(city)
-                            if matched_p:
-                                target_prov = matched_p
-                                target_city = None
+            
+            # Clean and match city
+            if city:
+                cleaned_c = clean_city_name(city, target_prov or prov)
+                matched_c = match_city(cleaned_c)
+                if matched_c:
+                    target_city = matched_c
+                    target_prov = CITY_TO_PROVINCE[matched_c]
+                else:
+                    target_city = cleaned_c
+            else:
+                target_city = None
         
         # Check if updates are needed
         needs_update = False

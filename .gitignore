@@ -4,3 +4,6 @@ __pycache__/
 *.pyc
 .env
 response.json
+docs/
+data/
+scratch/
